@@ -1,10 +1,29 @@
 package com.xylugah.issuetracker.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="User")
 public class User {
+	
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(name="firstName", nullable=false)
 	private String firstName;
+	
+	@Column(name="lastName", nullable=false)
 	private String lastName;
+	
+	@Column(name="password", nullable=false)
 	private String password;
+	
+	@Column(name="emailAddress", nullable=false)
 	private String emailAddress;
+	
+	
 	private Role role;
 	
 	public User() {
@@ -64,8 +83,11 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
+				+ ", emailAddress=" + emailAddress + ", role=" + role + "]";
+	}
 	
 }
