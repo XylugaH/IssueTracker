@@ -16,6 +16,9 @@
 		<!-- Servlet -->
 		<servlet-version>2.5</servlet-version>
 		
+		<!-- Jslt -->
+		<jstl-version>1.2</jstl-version>
+		
 		<!-- log4j -->
 		<log4j-version>1.2.17</log4j-version>
 		
@@ -51,6 +54,13 @@
     		<groupId>javax.servlet</groupId>
     		<artifactId>servlet-api</artifactId>
     		<version>${servlet-version}</version>
+		</dependency>
+		
+		<!-- Jslt -->
+		<dependency>
+    		<groupId>javax.servlet</groupId>
+    		<artifactId>jstl</artifactId>
+    		<version>${jstl-version}</version>
 		</dependency>
 				
 		<!-- log4j -->
