@@ -7,6 +7,7 @@ import com.xylugah.issuetracker.entity.User;
 
 public interface UserService {
 	User getById(int id);
+	User getByEmail(String email);
 	List<User> getAll();
 	void add(User user);
 	void delete(int id);
