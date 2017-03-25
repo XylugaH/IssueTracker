@@ -12,6 +12,11 @@ CREATE TABLE `issuetrackerdb`.`user` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+INSERT INTO `issuetrackerdb`.`user`
+(`id`,`FirstName`,`LastName`,`Password`,`Email`,`Role_ID`)
+VALUES
+(1,"admin","admin","admin","admin@admin.com",3);
+
 
 CREATE TABLE `issuetrackerdb`.`role` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -50,6 +55,23 @@ INSERT INTO `issuetrackerdb`.`role`
 `priorityEdit`,`typeAdd`,`typeEdit`,`messageGet`,`commentAdd`,`fileAdd`)
 VALUES
 (1,"GUEST",1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+
+INSERT INTO `issuetrackerdb`.`role`
+(`id`,`name`,`issueView`,`issueEdit`,`issueClose`,`issueReopen`,`issueAssignment`,
+`issueFind`,`userAdd`,`userFind`,`userEdit`,`userViewAllData`,`userEditAllData`,
+`projectAdd`,`projectEdit`,`statustEdit`,`resolutionAdd`,`resolucinEdit`,`priorityAdd`,
+`priorityEdit`,`typeAdd`,`typeEdit`,`messageGet`,`commentAdd`,`fileAdd`)
+VALUES
+(2,"USER",1,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1);
+
+INSERT INTO `issuetrackerdb`.`role`
+(`id`,`name`,`issueView`,`issueEdit`,`issueClose`,`issueReopen`,`issueAssignment`,
+`issueFind`,`userAdd`,`userFind`,`userEdit`,`userViewAllData`,`userEditAllData`,
+`projectAdd`,`projectEdit`,`statustEdit`,`resolutionAdd`,`resolucinEdit`,`priorityAdd`,
+`priorityEdit`,`typeAdd`,`typeEdit`,`messageGet`,`commentAdd`,`fileAdd`)
+VALUES
+(3,"ADMINISTRATOR",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+
 
 CREATE TABLE `issuetrackerdb`.`status` (
   `id` INT NOT NULL AUTO_INCREMENT,
