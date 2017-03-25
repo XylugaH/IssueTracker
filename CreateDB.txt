@@ -42,3 +42,71 @@ CREATE TABLE `issuetrackerdb`.`role` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+
+CREATE TABLE `issuetrackerdb`.`status` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO `issuetrackerdb`.`status`
+(`id`,`name`)
+VALUES
+(0,"New");
+
+INSERT INTO `issuetrackerdb`.`status`
+(`id`,`name`)
+VALUES
+(1,"Assigned");
+
+INSERT INTO `issuetrackerdb`.`status`
+(`id`,`name`)
+VALUES
+(2,"In Progress");
+
+INSERT INTO `issuetrackerdb`.`status`
+(`id`,`name`)
+VALUES
+(3,"Resolved");
+
+INSERT INTO `issuetrackerdb`.`status`
+(`id`,`name`)
+VALUES
+(4,"Closed");
+
+INSERT INTO `issuetrackerdb`.`status`
+(`id`,`name`)
+VALUES
+(5,"Reopened");
+
+CREATE TABLE `issuetrackerdb`.`resolution` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+INSERT INTO `issuetrackerdb`.`resolution`
+(`id`,`name`)
+VALUES
+(0,"Fixed");
+
+INSERT INTO `issuetrackerdb`.`resolution`
+(`id`,`name`)
+VALUES
+(1,"Invalid");
+
+INSERT INTO `issuetrackerdb`.`resolution`
+(`id`,`name`)
+VALUES
+(2,"Wontfix");
+
+INSERT INTO `issuetrackerdb`.`resolution`
+(`id`,`name`)
+VALUES
+(3,"Worksforme");
+
+
+
