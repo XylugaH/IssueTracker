@@ -2,6 +2,9 @@ package com.xylugah.issuetracker.entity;
 
 import javax.persistence.*;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="User")
 public class User {
@@ -11,15 +14,19 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@NotEmpty
 	@Column(name="firstName", nullable=false)
 	private String firstName;
 	
+	@NotEmpty
 	@Column(name="lastName", nullable=false)
 	private String lastName;
 	
+	@NotEmpty
 	@Column(name="password", nullable=false)
 	private String password;
 	
+	@Email
 	@Column(name="email", nullable=false)
 	private String email;
 	
