@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -24,13 +25,15 @@ public class UserController {
 	@Resource(name ="UserService")
 	private UserService userService;
 	
+	private MessageSource messageSource;
+	
 	private static final Logger logger = Logger.getLogger(UserController.class);
 
 	@RequestMapping(value = "/listusers", method = RequestMethod.GET)
 	public String listUsers(ModelMap model){
 		List<User> listUsers = userService.getAll();
 		model.addAttribute("users", listUsers);
-		return "listusers";
+		return "/user/listusers";
 	}
 	
 	@RequestMapping(value = "/edituser/{id}", method = RequestMethod.GET)
@@ -38,7 +41,7 @@ public class UserController {
 		User user = userService.getById(id);
 		model.addAttribute("user", user);
 		model.addAttribute("edit", true);
-		return "registration";
+		return "/user/registration";
 	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -46,7 +49,7 @@ public class UserController {
 		User user = new User();
 		model.addAttribute("user", user);
 		model.addAttribute("edit", false);
-		return "registration";
+		return "/user/registration";
 	}
 	
 	@RequestMapping(value = { "/registration" }, method = RequestMethod.POST)
@@ -54,20 +57,19 @@ public class UserController {
 			ModelMap model) {
 
 		if (result.hasErrors()) {
-			return "registration";
+			return "/user/registration";
 		}
 
-		if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
-			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
+		if(userService.getByEmail(user.getEmail())!=null || userService.getById(user.getId())!=null){
+			FieldError ssoError =new FieldError("user","email",messageSource.getMessage("non.unique.ssoId", new String[]{user.getEmail()}, Locale.getDefault()));
 		    result.addError(ssoError);
-			return "registration";
+			return "/user/registration";
 		}
 		
-		userService.saveUser(user);
+		userService.add(user);
 
 		model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " registered successfully");
-		//return "success";
-		return "registrationsuccess";
+		return "/user/registrationsuccess";
 	}
 	
 	
