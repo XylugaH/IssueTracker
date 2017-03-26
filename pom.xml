@@ -19,8 +19,8 @@
 		<!-- Jslt -->
 		<jstl-version>1.2</jstl-version>
 		
-		<!-- log4j -->
-		<log4j-version>1.2.17</log4j-version>
+		<!-- slf4j -->
+		<slf4j-version>1.7.25</slf4j-version>
 		
 		<!-- Junit -->
 		<junit-version>4.12</junit-version>
@@ -65,11 +65,11 @@
     		<version>${jstl-version}</version>
 		</dependency>
 				
-		<!-- log4j -->
+		<!-- slf4j -->
 		<dependency>
-    		<groupId>log4j</groupId>
-    		<artifactId>log4j</artifactId>
-    		<version>${log4j-version}</version>
+    		<groupId>org.slf4j</groupId>
+    		<artifactId>slf4j-api</artifactId>
+    		<version>${slf4j-version}</version>
 		</dependency>
 		
 		<!-- Junit -->
@@ -90,17 +90,19 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate-version}</version>
 		</dependency>
+				
 		<dependency>
     		<groupId>org.hibernate</groupId>
     		<artifactId>hibernate-validator</artifactId>
     		<version>${hibernate-validator-version}</version>
 		</dependency>
+<!-- 
 		<dependency>
     		<groupId>org.hibernate</groupId>
     		<artifactId>hibernate-annotations</artifactId>
     		<version>${hibernate-annotations-version}</version>
 		</dependency>
-		
+		 -->
 		<!-- MySQL -->
 		<dependency>
     		<groupId>mysql</groupId>

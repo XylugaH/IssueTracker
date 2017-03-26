@@ -2,9 +2,12 @@ package com.xylugah.issuetracker.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.xylugah.issuetracker.entity.Issue;
 import com.xylugah.issuetracker.entity.User;
 
+@Service("IssueService")
 public class IssueServiceImpl implements IssueService{
 
 	@Override

@@ -6,7 +6,6 @@ import java.util.Locale;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,7 +26,7 @@ public class UserController {
 	
 	private MessageSource messageSource;
 	
-	private static final Logger logger = Logger.getLogger(UserController.class);
+	//private static final Logger logger = Logger.getLogger(UserController.class);
 
 	@RequestMapping(value = "/listusers", method = RequestMethod.GET)
 	public String listUsers(ModelMap model){

@@ -30,7 +30,8 @@ public class User extends AbstractEntity{
 	@Column(name="email", nullable=false)
 	private String email;
 	
-	
+	@OneToOne
+	@JoinColumn(name = "role_id")
 	private Role role;
 	
 	public User() {

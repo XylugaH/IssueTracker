@@ -1,19 +1,27 @@
 package com.xylugah.issuetracker.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 
-import com.xylugah.issuetracker.entity.Role;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.xylugah.issuetracker.dao.UserDAO;
 import com.xylugah.issuetracker.entity.User;
 
 @Service("UserService")
 public class UserServiceImpl implements UserService{
 
+	@Autowired
+	private UserDAO dao;
+	
 	@Override
-	public User getById(int id) {
-		return new User("Andrey","Olifenko","123","qwe@gmail.com",new Role());
+	@Transactional
+	public User getById(final int id) {
+		User user = dao.getById(id);
+		return user;
 	}
 
 	@Override
@@ -22,10 +30,9 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
+	@Transactional
 	public List<User> getAll() {
-		List<User> user = new ArrayList<>();
-		user.add(new User("Andrey","Olifenko","123","qwe@gmail.com",new Role()));
-		user.add(new User("Admin","Admin","123","admin@gmail.com",new Role()));
+		List<User> user = dao.getAll();
 		return user;
 	}
 

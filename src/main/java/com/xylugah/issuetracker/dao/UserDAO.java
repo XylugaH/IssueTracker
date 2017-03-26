@@ -5,7 +5,7 @@ import java.util.List;
 import com.xylugah.issuetracker.entity.User;
 
 public interface UserDAO {
-	User findById(int id);
+	User getById(int id);
 	
 	List<User> getAll();
 	

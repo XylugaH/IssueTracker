@@ -18,15 +18,6 @@
         </property>
         <property name="jta.UserTransaction">java:comp/UserTransaction</property>
 
-        <!-- mapping files -->
-        <mapping resource="org/hibernate/auction/Item.hbm.xml"/>
-        <mapping resource="org/hibernate/auction/Bid.hbm.xml"/>
-
-        <!-- cache settings -->
-        <class-cache class="org.hibernate.auction.Item" usage="read-write"/>
-        <class-cache class="org.hibernate.auction.Bid" usage="read-only"/>
-        <collection-cache collection="org.hibernate.auction.Item.bids" usage="read-write"/>
-
     </session-factory>
 
 </hibernate-configuration>

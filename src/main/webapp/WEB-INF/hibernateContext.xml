@@ -19,15 +19,14 @@
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
 		p:dataSource-ref="dataSource"
-		p:configLocation="${hibernate.config}"
-		p:packagesToScan="com.xylugah.issuetracker"/>
+		p:packagesToScan="com.xylugah.issuetracker.entity"/>
 		
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="${app.jdbc.driverClassName}"
 		p:url="${app.jdbc.url}"
 		p:username="${app.jdbc.username}"
 		p:password="${app.jdbc.password}"
-			
+	
 	/>
 
 	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"
