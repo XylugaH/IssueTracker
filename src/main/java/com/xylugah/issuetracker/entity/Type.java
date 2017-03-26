@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Type")
-public class Type {
+public class Type extends AbstractEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

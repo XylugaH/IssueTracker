@@ -1,6 +1,7 @@
 package com.xylugah.issuetracker.entity;
 
-public class Issue {
+public class Issue extends AbstractEntity{
+	
 	private int id;
 	
 	private String summary;

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Status")
-public class Status {
+public class Status extends AbstractEntity{
 	
 	@Id
 	@Column(name="id")

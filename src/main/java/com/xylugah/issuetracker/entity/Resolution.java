@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Resolution")
-public class Resolucion {
+public class Resolution extends AbstractEntity{
 	
 	@Id
 	@Column(name="id")
@@ -16,11 +16,11 @@ public class Resolucion {
 	@Column(name="name", nullable=false)
 	private String name;
 
-	public Resolucion() {
+	public Resolution() {
 
 	}
 
-	public Resolucion(String name) {
+	public Resolution(String name) {
 
 	}
 

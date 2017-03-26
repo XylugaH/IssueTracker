@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="User")
-public class User {
+public class User extends AbstractEntity{
 	
 	@Id
 	@Column(name="id")
