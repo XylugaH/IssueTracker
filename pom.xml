@@ -26,7 +26,9 @@
 		<junit-version>4.12</junit-version>
 		
 		<!-- Hibernate -->
-		<hibernate-version>4.3.5.Final</hibernate-version>
+		<hibernate-version>5.2.9.Final</hibernate-version>
+		<hibernate-annotations-version>3.5.6-Final</hibernate-annotations-version>
+		<hibernate-validator-version>5.3.4.Final</hibernate-validator-version>
 		
 		<!--MySQL-->
 		<MySQL-versin>6.0.5</MySQL-versin>
@@ -91,12 +93,12 @@
 		<dependency>
     		<groupId>org.hibernate</groupId>
     		<artifactId>hibernate-validator</artifactId>
-    		<version>5.3.4.Final</version>
+    		<version>${hibernate-validator-version}</version>
 		</dependency>
 		<dependency>
     		<groupId>org.hibernate</groupId>
     		<artifactId>hibernate-annotations</artifactId>
-    		<version>3.5.6-Final</version>
+    		<version>${hibernate-annotations-version}</version>
 		</dependency>
 		
 		<!-- MySQL -->
