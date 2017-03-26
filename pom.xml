@@ -32,7 +32,7 @@
 		<MySQL-versin>6.0.5</MySQL-versin>
 		
 		<!-- Spring -->
-		<spring-framework.version>4.3.2.RELEASE</spring-framework.version>
+		<spring-framework.version>4.3.4.RELEASE</spring-framework.version>
 	</properties>
   
   	<dependencyManagement>
@@ -93,6 +93,11 @@
     		<artifactId>hibernate-validator</artifactId>
     		<version>5.3.4.Final</version>
 		</dependency>
+		<dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-annotations</artifactId>
+    		<version>3.5.6-Final</version>
+		</dependency>
 		
 		<!-- MySQL -->
 		<dependency>
@@ -110,6 +115,11 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-orm</artifactId>
 		</dependency>
   	</dependencies>
   
