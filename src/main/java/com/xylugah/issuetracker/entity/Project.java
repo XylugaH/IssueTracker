@@ -27,6 +27,4 @@ public class Project extends AbstractEntity{
 	@JoinColumn(name = "manager_user_id")
 	private User manager;
 	
-	private List<Build> buildList;
-	
 }
