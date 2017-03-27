@@ -6,6 +6,8 @@ import com.xylugah.issuetracker.entity.Type;
 
 public interface TypeDAO {
 	Type getById(int id);
+	
 	List<Type> getAll();
+	
 	
 }
