@@ -1,6 +1,6 @@
 CREATE SCHEMA `issuetrackerdb` ;
 
-CREATE TABLE `issuetrackerdb`.`user` (
+CREATE TABLE  `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(45) NOT NULL,
   `LastName` VARCHAR(45) NOT NULL,
@@ -8,17 +8,17 @@ CREATE TABLE `issuetrackerdb`.`user` (
   `Email` VARCHAR(45) NOT NULL,
   `Role_ID` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC));
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO `issuetrackerdb`.`user`
+INSERT INTO  `user`
 (`id`,`FirstName`,`LastName`,`Password`,`Email`,`Role_ID`)
 VALUES
 (1,"admin","admin","admin","admin@admin.com",3);
 
 
-CREATE TABLE `issuetrackerdb`.`role` (
+CREATE TABLE  `role` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `issueView` TINYINT(1) NULL DEFAULT 0,
@@ -48,7 +48,7 @@ CREATE TABLE `issuetrackerdb`.`role` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO `issuetrackerdb`.`role`
+INSERT INTO  `role`
 (`id`,`name`,`issueView`,`issueEdit`,`issueClose`,`issueReopen`,`issueAssignment`,
 `issueFind`,`userAdd`,`userFind`,`userEdit`,`userViewAllData`,`userEditAllData`,
 `projectAdd`,`projectEdit`,`statustEdit`,`resolutionAdd`,`resolucinEdit`,`priorityAdd`,
@@ -56,7 +56,7 @@ INSERT INTO `issuetrackerdb`.`role`
 VALUES
 (1,"GUEST",1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
 
-INSERT INTO `issuetrackerdb`.`role`
+INSERT INTO  `role`
 (`id`,`name`,`issueView`,`issueEdit`,`issueClose`,`issueReopen`,`issueAssignment`,
 `issueFind`,`userAdd`,`userFind`,`userEdit`,`userViewAllData`,`userEditAllData`,
 `projectAdd`,`projectEdit`,`statustEdit`,`resolutionAdd`,`resolucinEdit`,`priorityAdd`,
@@ -64,7 +64,7 @@ INSERT INTO `issuetrackerdb`.`role`
 VALUES
 (2,"USER",1,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1);
 
-INSERT INTO `issuetrackerdb`.`role`
+INSERT INTO  `role`
 (`id`,`name`,`issueView`,`issueEdit`,`issueClose`,`issueReopen`,`issueAssignment`,
 `issueFind`,`userAdd`,`userFind`,`userEdit`,`userViewAllData`,`userEditAllData`,
 `projectAdd`,`projectEdit`,`statustEdit`,`resolutionAdd`,`resolucinEdit`,`priorityAdd`,
@@ -73,99 +73,99 @@ VALUES
 (3,"ADMINISTRATOR",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
 
 
-CREATE TABLE `issuetrackerdb`.`status` (
+CREATE TABLE  `status` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO `issuetrackerdb`.`status`
+INSERT INTO  `status`
 (`id`,`name`)
 VALUES
 (1,"New");
 
-INSERT INTO `issuetrackerdb`.`status`
+INSERT INTO  `status`
 (`id`,`name`)
 VALUES
 (2,"Assigned");
 
-INSERT INTO `issuetrackerdb`.`status`
+INSERT INTO  `status`
 (`id`,`name`)
 VALUES
 (3,"In Progress");
 
-INSERT INTO `issuetrackerdb`.`status`
+INSERT INTO  `status`
 (`id`,`name`)
 VALUES
 (4,"Resolved");
 
-INSERT INTO `issuetrackerdb`.`status`
+INSERT INTO  `status`
 (`id`,`name`)
 VALUES
 (5,"Closed");
 
-INSERT INTO `issuetrackerdb`.`status`
+INSERT INTO  `status`
 (`id`,`name`)
 VALUES
 (6,"Reopened");
 
-CREATE TABLE `issuetrackerdb`.`resolution` (
+CREATE TABLE  `resolution` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO `issuetrackerdb`.`resolution`
+INSERT INTO  `resolution`
 (`id`,`name`)
 VALUES
 (1,"Fixed");
 
-INSERT INTO `issuetrackerdb`.`resolution`
+INSERT INTO  `resolution`
 (`id`,`name`)
 VALUES
 (2,"Invalid");
 
-INSERT INTO `issuetrackerdb`.`resolution`
+INSERT INTO  `resolution`
 (`id`,`name`)
 VALUES
 (3,"Wontfix");
 
-INSERT INTO `issuetrackerdb`.`resolution`
+INSERT INTO  `resolution`
 (`id`,`name`)
 VALUES
 (4,"Worksforme");
 
-CREATE TABLE `issuetrackerdb`.`priority` (
+CREATE TABLE  `priority` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO `issuetrackerdb`.`priority`
+INSERT INTO  `priority`
 (`id`,`name`)
 VALUES
 (1,"Critical");
 
-INSERT INTO `issuetrackerdb`.`priority`
+INSERT INTO  `priority`
 (`id`,`name`)
 VALUES
 (2,"Major");
 
-INSERT INTO `issuetrackerdb`.`priority`
+INSERT INTO  `priority`
 (`id`,`name`)
 VALUES
 (3,"Important");
 
-INSERT INTO `issuetrackerdb`.`priority`
+INSERT INTO  `priority`
 (`id`,`name`)
 VALUES
 (4,"Minor");
 
 
-CREATE TABLE `issuetrackerdb`.`type` (
+CREATE TABLE  `type` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
@@ -173,22 +173,22 @@ CREATE TABLE `issuetrackerdb`.`type` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO `issuetrackerdb`.`type`
+INSERT INTO  `type`
 (`id`,`name`)
 VALUES
 (1,"Cosmetic");
 
-INSERT INTO `issuetrackerdb`.`type`
+INSERT INTO  `type`
 (`id`,`name`)
 VALUES
 (2,"Bug");
 
-INSERT INTO `issuetrackerdb`.`type`
+INSERT INTO  `type`
 (`id`,`name`)
 VALUES
 (3,"Feature");
 
-INSERT INTO `issuetrackerdb`.`type`
+INSERT INTO  `type`
 (`id`,`name`)
 VALUES
 (4,"Performance");
