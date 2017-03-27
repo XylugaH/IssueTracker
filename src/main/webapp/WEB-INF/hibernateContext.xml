@@ -12,9 +12,7 @@
 			http://www.springframework.org/schema/context
 			http://www.springframework.org/schema/context/spring-context-4.3.xsd
 	   		">
-
-	<context:property-placeholder location="/WEB-INF/app.properties" />
-    
+   
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
@@ -31,5 +29,5 @@
 
 	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"
 		p:sessionFactory-ref="sessionFactory" />
-  
+  	<context:property-placeholder location="/WEB-INF/app.properties"/>
 </beans>
