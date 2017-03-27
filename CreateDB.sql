@@ -17,6 +17,11 @@ INSERT INTO  `user`
 VALUES
 (1,"admin","admin","admin","admin@admin.com",3);
 
+INSERT INTO `user`
+(`id`,`FirstName`,`LastName`,`Password`,`Email`,`Role_ID`)
+VALUES
+(2,"guest","guest","","",1);
+
 
 CREATE TABLE  `role` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -192,3 +197,22 @@ INSERT INTO  `type`
 (`id`,`name`)
 VALUES
 (4,"Performance");
+
+CREATE TABLE `issuetrackerdb`.`issue` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `createDate` DATE NOT NULL COMMENT '',
+  `create_user_id` INT NOT NULL COMMENT '',
+  `modifyDate` DATE NOT NULL COMMENT '',
+  `modify_user_id` INT NOT NULL COMMENT '',
+  `summary` CHAR(100) NOT NULL COMMENT '',
+  `description` LONGTEXT NULL COMMENT '',
+  `status_id` INT NULL COMMENT '',
+  `type_id` INT NULL COMMENT '',
+  `priority_id` INT NULL COMMENT '',
+  `project_id` INT NULL COMMENT '',
+  `assignee_user_id` INT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
