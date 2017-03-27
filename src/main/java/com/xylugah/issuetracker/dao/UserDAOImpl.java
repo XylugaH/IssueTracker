@@ -2,6 +2,8 @@ package com.xylugah.issuetracker.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.xylugah.issuetracker.entity.User;
@@ -20,6 +22,14 @@ public class UserDAOImpl extends AbstractDAO<Integer,User> implements UserDAO{
 	public List<User> getAll() {
 		List<User> userList = getSession().createCriteria(User.class).list();
 		return userList;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public User getByEmail(String email) {
+		Criteria criteria = getSession().createCriteria(User.class);
+		User user = (User) criteria.add(Restrictions.eq("email", email)).uniqueResult();
+		return user;
 	}
 	
 	

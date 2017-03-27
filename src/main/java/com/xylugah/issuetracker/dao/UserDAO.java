@@ -9,4 +9,6 @@ public interface UserDAO {
 	
 	List<User> getAll();
 	
+	User getByEmail(String email);
+	
 }
