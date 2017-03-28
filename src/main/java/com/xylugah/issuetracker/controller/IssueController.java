@@ -18,10 +18,8 @@ public class IssueController {
 	@Resource(name ="IssueService")
 	private IssueService issueService;
 	
-	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String issueList(ModelMap model){
-		List<Issue> issueList = issueService.getAll();
-		model.addAttribute("issueList", issueList);
-		return "issueList";
+		return "index";
 	}
 }

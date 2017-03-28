@@ -28,11 +28,17 @@ public class UserController {
 	
 	//private static final Logger logger = Logger.getLogger(UserController.class);
 
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(ModelMap model){
+		System.out.println("111111");
+		return "menu";
+	}
+	
 	@RequestMapping(value = "/listusers", method = RequestMethod.GET)
 	public String listUsers(ModelMap model){
 		List<User> listUsers = userService.getAll();
 		model.addAttribute("users", listUsers);
-		return "/user/listusers";
+		return "listusers";
 	}
 	
 	@RequestMapping(value = "/edituser/{id}", method = RequestMethod.GET)
@@ -40,7 +46,7 @@ public class UserController {
 		User user = userService.getById(id);
 		model.addAttribute("user", user);
 		model.addAttribute("edit", true);
-		return "/user/registration";
+		return "registration";
 	}
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
@@ -48,7 +54,7 @@ public class UserController {
 		User user = new User();
 		model.addAttribute("user", user);
 		model.addAttribute("edit", false);
-		return "/user/registration";
+		return "registration";
 	}
 	
 	@RequestMapping(value = { "/registration" }, method = RequestMethod.POST)
@@ -56,19 +62,19 @@ public class UserController {
 			ModelMap model) {
 
 		if (result.hasErrors()) {
-			return "/user/registration";
+			return "registration";
 		}
 
 		if(userService.getByEmail(user.getEmail())!=null || userService.getById(user.getId())!=null){
 			FieldError ssoError =new FieldError("user","email",messageSource.getMessage("non.unique.ssoId", new String[]{user.getEmail()}, Locale.getDefault()));
 		    result.addError(ssoError);
-			return "/user/registration";
+			return "registration";
 		}
 		
 		userService.add(user);
 
 		model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " registered successfully");
-		return "/user/registrationsuccess";
+		return "registrationsuccess";
 	}
 	
 	
