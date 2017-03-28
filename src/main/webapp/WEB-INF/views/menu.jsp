@@ -22,8 +22,8 @@
 
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="#section1">Home</a></li>
-        <li><a href="/liststatus">List of statuses</a></li>
-        <li><a href="#section3">Family</a></li>
+        <li><a href="${pageContext.request.contextPath}/liststatus">List of statuses</a></li>
+        <li><a href="${pageContext.request.contextPath}/listtypes">Family</a></li>
         <li><a href="#section3">Photos</a></li>
       </ul><br>
 </body>

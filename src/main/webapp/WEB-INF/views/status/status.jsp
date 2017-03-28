@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page isELIgnored="true"%>
 <html>
 
 <head>
@@ -13,7 +14,7 @@
     <div class="panel panel-primary">
       <div class="panel-heading"><h4>Edit status</h4></div>
     </div>
-	<form:form method="POST" action="/IssueTracker/savestatus" modelAttribute="status" class="form-horizontal">
+	<form:form method="POST" action="${pageContext.request.contextPath}/savestatus" modelAttribute="status" class="form-horizontal">
 	
 		<form:input type="hidden" path="id" id="id"/>
 		
