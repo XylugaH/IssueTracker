@@ -21,8 +21,6 @@ public class UserServiceImpl implements UserService{
 	@Transactional
 	public User getById(final int id) {
 		User user = dao.getById(id);
-		
-		System.out.print(user);
 		return user;
 	}
 
