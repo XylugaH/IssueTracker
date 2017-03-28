@@ -13,13 +13,13 @@
     <div class="panel panel-primary">
       <div class="panel-heading"><h4>Edit status</h4></div>
     </div>
-	<form:form method="POST" action="/IssueTracker/savetype" modelAttribute="type" class="form-horizontal">
+	<form:form method="POST" action="${pageContext.request.contextPath}/savetype" modelAttribute="type" class="form-horizontal">
 	
 		<form:input type="hidden" path="id" id="id"/>
 		
 		<div class="row">
 			<div class="form-group col-md-12">
-				<label class="col-md-3 control-lable" for="name">First Name</label>
+				<label class="col-md-3 control-lable" for="name">Name</label>
 				<div class="col-md-7">
 					<form:input type="text" path="name" id="name" class="form-control input-sm"/>
 					<div class="has-error">

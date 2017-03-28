@@ -4,7 +4,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Statuses List</title>
+	<title>Types List</title>
 	<link href="<c:url value='/resources/css/bootstrap.min.css' />" rel="stylesheet"></link>
 </head>
 
@@ -21,10 +21,10 @@
 					</tr>
 		    	</thead>
 	    		<tbody>
-				<c:forEach items="${listTypes}" var="listTypes">
+				<c:forEach items="${listtypes}" var="listtypes">
 					<tr>
-						<td>${listStatus.name}</td>
-						<td><a href="<c:url value='/edittype/${listTypes.id}' />" class="btn btn-success custom-width">edit</a></td>
+						<td>${listtypes.name}</td>
+						<td><a href="<c:url value='/edittype/${listtypes.id}' />" class="btn btn-success custom-width">edit</a></td>
 					</tr>
 				</c:forEach>
 	    		</tbody>
