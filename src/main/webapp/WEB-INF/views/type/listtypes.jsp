@@ -10,7 +10,7 @@
 
 <body>
     <div class="panel panel-primary">
-      <div class="panel-heading"><h4>List of statuses</h4></div>
+      <div class="panel-heading"><h4>List of types</h4></div>
     </div>
 		  	
 			<table class="table table-hover">
@@ -21,10 +21,10 @@
 					</tr>
 		    	</thead>
 	    		<tbody>
-				<c:forEach items="${listStatus}" var="listStatus">
+				<c:forEach items="${listTypes}" var="listTypes">
 					<tr>
 						<td>${listStatus.name}</td>
-						<td><a href="<c:url value='/editstatus/${listStatus.id}' />" class="btn btn-success custom-width">edit</a></td>
+						<td><a href="<c:url value='/edittype/${listTypes.id}' />" class="btn btn-success custom-width">edit</a></td>
 					</tr>
 				</c:forEach>
 	    		</tbody>

@@ -19,4 +19,17 @@
 	<definition name="listStatus" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/status/liststatus.jsp" />
 	</definition>
+	
+	<definition name="status" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/status/status.jsp" />
+	</definition>
+	
+	<definition name="listtypes" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/type/listtypes.jsp" />
+	</definition>
+	
+	<definition name="type" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/type/type.jsp" />
+	</definition>
+	
 </tiles-definitions>
