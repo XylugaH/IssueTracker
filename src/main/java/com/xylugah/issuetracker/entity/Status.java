@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name="Status")
 public class Status extends AbstractEntity{
@@ -16,6 +18,7 @@ public class Status extends AbstractEntity{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@NotEmpty
 	@Column(name="name", nullable=false)
 	private String name;
 	
