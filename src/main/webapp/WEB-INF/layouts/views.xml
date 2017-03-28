@@ -12,7 +12,11 @@
 	    <put-attribute name="body"	value="/WEB-INF/views/user/registration.jsp" />
 	</definition>
 	
-		<definition name="index" extends="DefaultTemplate">
+	<definition name="index" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/index.jsp" />
+	</definition>
+	
+	<definition name="listStatus" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/status/liststatus.jsp" />
 	</definition>
 </tiles-definitions>
