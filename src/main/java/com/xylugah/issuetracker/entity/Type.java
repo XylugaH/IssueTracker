@@ -46,8 +46,4 @@ public class Type extends AbstractEntity{
 		return "Type [name=" + name + "]";
 	}
 	
-	
-	
-	
-	
 }
