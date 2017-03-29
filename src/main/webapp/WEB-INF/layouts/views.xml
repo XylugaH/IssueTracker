@@ -32,4 +32,20 @@
 	    <put-attribute name="body"	value="/WEB-INF/views/type/type.jsp" />
 	</definition>
 	
+	<definition name="listresolutions" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/resolution/listresolutions.jsp" />
+	</definition>
+	
+	<definition name="resolution" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/resolution/resolution.jsp" />
+	</definition>
+	
+	<definition name="listpriorities" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/priority/listpriorities.jsp" />
+	</definition>
+	
+	<definition name="priority" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/priority/priority.jsp" />
+	</definition>
+	
 </tiles-definitions>
