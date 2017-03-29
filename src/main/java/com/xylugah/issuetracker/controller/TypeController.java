@@ -36,6 +36,12 @@ public class TypeController {
 		return "type";
 	}
 	
+	@RequestMapping(value = "/addtype", method = RequestMethod.GET)
+	public String addType(ModelMap model) {
+		Type type = new Type();
+		model.addAttribute("type", type);
+		return "type";
+	}
 	
 	@RequestMapping(value = { "/savetype" }, method = RequestMethod.POST)
 	public String saveStatus(@Valid Type type, BindingResult result,
@@ -45,7 +51,7 @@ public class TypeController {
 			return "type";
 		}
 		
-		typeService.edit(type);
+		typeService.add(type);
 		List<Type> listTypes = typeService.getAll();
 		model.addAttribute("listtypes", listTypes);
 		
