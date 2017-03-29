@@ -43,7 +43,8 @@
       <ul class="nav nav-pills nav-stacked">
         <li><a href="${pageContext.request.contextPath}/liststatus">List of statuses</a></li>
         <li><a href="${pageContext.request.contextPath}/listtypes">List of types</a></li>
-        <li><a href="${pageContext.request.contextPath}/listtypes">List of types</a></li>
+        <li><a href="${pageContext.request.contextPath}/listresolutions">List of resolutions</a></li>
+        <li><a href="${pageContext.request.contextPath}/listpriorities">List of priorities</a></li>
       </ul><br>
 </body>
 </html>
