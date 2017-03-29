@@ -2,8 +2,11 @@ package com.xylugah.issuetracker.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.xylugah.issuetracker.entity.Priority;
 
+@Repository("PriorityDAO")
 public class PriorityDAOImpl extends AbstractDAO<Integer, Priority> implements PriorityDAO{
 
 	@Override
