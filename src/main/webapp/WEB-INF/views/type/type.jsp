@@ -5,18 +5,17 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Status</title>
+	<title>Type</title>
 	<link href="<c:url value='/resources/css/bootstrap.min.css' />" rel="stylesheet"></link>
 </head>
 
 <body>
     <div class="panel panel-primary">
-      <div class="panel-heading"><h4>Edit status</h4></div>
+      <div class="panel-heading"><h4>Edit type</h4></div>
     </div>
 	<form:form method="POST" action="${pageContext.request.contextPath}/savetype" modelAttribute="type" class="form-horizontal">
 	
 		<form:input type="hidden" path="id" id="id"/>
-		
 		<div class="row">
 			<div class="form-group col-md-12">
 				<label class="col-md-3 control-lable" for="name">Name</label>
@@ -29,8 +28,8 @@
 			</div>
 		</div>
 		
-		<div class="form-actions floatRight">
-			<input type="submit" value="Update" class="btn btn-success"/>
+		<div style="text-align: right;">
+			<input type="submit" value="Save" class="btn btn-success"/>
 			<a href="<c:url value='/listtypes' />" class="btn btn-danger">Cancel</a>
 		</div>
 
