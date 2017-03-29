@@ -13,21 +13,27 @@
       <div class="panel-heading"><h4>List of types</h4></div>
     </div>
 		  	
-			<table class="table table-hover">
-	    		<thead>
-		      		<tr>
-				        <th>Name</th>
-				        <th width="100"></th>
-					</tr>
-		    	</thead>
-	    		<tbody>
-				<c:forEach items="${listtypes}" var="listtypes">
-					<tr>
-						<td>${listtypes.name}</td>
-						<td><a href="<c:url value='/edittype/${listtypes.id}' />" class="btn btn-success custom-width">edit</a></td>
-					</tr>
-				</c:forEach>
-	    		</tbody>
-	    	</table>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th width="100"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${listtypes}" var="listtypes">
+				<tr>
+					<td>${listtypes.name}</td>
+					<td><a href="<c:url value='/edittype/${listtypes.id}' />" class="btn btn-success">edit</a></td>
+				</tr>
+			</c:forEach>
+			<tr>
+				<td/>
+				<td><a href="<c:url value='/addtype' />" class="btn btn-success">+Add</a></td>
+			</tr>
+		</tbody>
+	</table>
+	
+
 </body>
 </html>
