@@ -46,6 +46,7 @@
         <li><a href="${pageContext.request.contextPath}/listresolutions">List of resolutions</a></li>
         <li><a href="${pageContext.request.contextPath}/listpriorities">List of priorities</a></li>
         <li><a href="${pageContext.request.contextPath}/listprojects">List of projects</a></li>
+        <li><a href="${pageContext.request.contextPath}/listusers">List of users</a></li>
       </ul><br>
 </body>
 </html>

@@ -34,11 +34,9 @@
 		
 		<div class="input-group">
     		<span class="input-group-addon">Manager</span>
-			<select class="form-control" id="manager_user_id">
-			<c:forEach items="${userList}" var="userList">
-				<option value="${userList.id}">${userList.firstName}</option>
-			</c:forEach>
-      		</select>
+			<form:select path="userList">
+    			<form:options items="${userList.firstName}" />
+			</form:select>
       	</div>
       	
 		<div style="text-align: right;">

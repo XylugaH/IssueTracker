@@ -66,19 +66,9 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="form-actions floatRight">
-				<c:choose>
-					<c:when test="${edit}">
-						<input type="submit" value="Update" class="btn btn-primary btn-sm"/> 
-						<a href="<c:url value='/listusers' />" class="btn-warning">Cancel</a>
-					</c:when>
-					<c:otherwise>
-						<input type="submit" value="Register" class="btn btn-primary btn-sm"/>
-						<a href="<c:url value='/listusers' />" class="btn-warning">Cancel</a>
-					</c:otherwise>
-				</c:choose>
-			</div>
+		<div style="text-align: right;">
+			<input type="submit" value="Save" class="btn btn-success"/>
+			<a href="<c:url value='/listusers' />" class="btn btn-danger">Cancel</a>
 		</div>
 	</form:form>
 	</div>
