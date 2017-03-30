@@ -1,11 +1,11 @@
-package com.xylugah.issuetracker.dao;
+package com.xylugah.issuetracker.service;
 
 import java.util.List;
 
 import com.xylugah.issuetracker.entity.Project;
 
-public interface ProjectDAO {
-	
+public interface ProjectService {
+
 	Project getById(int id);
 	
 	List<Project> getAll();

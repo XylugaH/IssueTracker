@@ -216,3 +216,24 @@ CREATE TABLE `issuetrackerdb`.`issue` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
+
+CREATE TABLE `project` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `name` VARCHAR(45) NOT NULL COMMENT '',
+  `description` VARCHAR(100) NULL COMMENT '',
+  `manager_user_id` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+INSERT INTO `issuetrackerdb`.`project`
+(`id`,
+`name`,
+`description`,
+`manager_user_id`)
+VALUES
+(1,
+"testProject",
+"It is the first test project",
+2);

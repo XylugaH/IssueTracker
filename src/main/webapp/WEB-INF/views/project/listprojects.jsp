@@ -4,32 +4,38 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Priorities List</title>
+	<title>Projects List</title>
 	<link href="<c:url value='/resources/css/bootstrap.min.css' />" rel="stylesheet"></link>
 </head>
 
 <body>
     <div class="panel panel-primary">
-      <div class="panel-heading"><h4>List of priorities</h4></div>
+      <div class="panel-heading"><h4>List of projects</h4></div>
     </div>
 		  	
 	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Name</th>
+				<th>Manager</th>
+				<th>Description</th>
 				<th width="100"></th>
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${listpriorities}" var="listpriorities">
+			<c:forEach items="${listprojects}" var="listprojects">
 				<tr>
-					<td>${listpriorities.name}</td>
-					<td><a href="<c:url value='/editpriority/${listpriorities.id}' />" class="btn btn-success">edit</a></td>
+					<td>${listprojects.name}</td>
+					<td>${listprojects.manager.firstName}</td>
+					<td>${listprojects.description}</td>
+					<td><a href="<c:url value='/edittype/${listprojects.id}' />" class="btn btn-success">edit</a></td>
 				</tr>
 			</c:forEach>
 			<tr>
 				<td/>
-				<td><a href="<c:url value='/addpriority' />" class="btn btn-success">+Add</a></td>
+				<td/>
+				<td/>
+				<td><a href="<c:url value='/addproject' />" class="btn btn-success">+Add</a></td>
 			</tr>
 		</tbody>
 	</table>

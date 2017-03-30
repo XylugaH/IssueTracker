@@ -5,15 +5,15 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Priority</title>
+	<title>Project</title>
 	<link href="<c:url value='/resources/css/bootstrap.min.css' />" rel="stylesheet"></link>
 </head>
 
 <body>
     <div class="panel panel-primary">
-      <div class="panel-heading"><h4>Edit priority</h4></div>
+      <div class="panel-heading"><h4>Edit project</h4></div>
     </div>
-	<form:form method="POST" action="${pageContext.request.contextPath}/savepriority" modelAttribute="priority" class="form-horizontal">
+	<form:form method="POST" action="${pageContext.request.contextPath}/saveproject" modelAttribute="project" class="form-horizontal">
 	
 		<form:input type="hidden" path="id" id="id"/>
 		<div class="input-group">
@@ -24,9 +24,26 @@
 			<form:errors path="name" class="help-inline"/>
 		</div>
 		
+		<div class="input-group">
+    		<span class="input-group-addon">Description</span>
+    		<form:input type="text" path="description" id="description" class="form-control" placeholder="Enter the description"/>
+  		</div>
+  		<div class="has-error">
+			<form:errors path="description" class="help-inline"/>
+		</div>
+		
+		<div class="input-group">
+    		<span class="input-group-addon">Manager</span>
+			<select class="form-control" id="manager_user_id">
+			<c:forEach items="${userList}" var="userList">
+				<option value="${userList.id}">${userList.firstName}</option>
+			</c:forEach>
+      		</select>
+      	</div>
+      	
 		<div style="text-align: right;">
 			<input type="submit" value="Save" class="btn btn-success"/>
-			<a href="<c:url value='/listpriorities' />" class="btn btn-danger">Cancel</a>
+			<a href="<c:url value='/listprojects' />" class="btn btn-danger">Cancel</a>
 		</div>
 
 	</form:form>
