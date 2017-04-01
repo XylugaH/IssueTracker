@@ -16,17 +16,14 @@
 	<form:form method="POST" action="${pageContext.request.contextPath}/saveresolution" modelAttribute="resolution" class="form-horizontal">
 	
 		<form:input type="hidden" path="id" id="id"/>
-		<div class="row">
-			<div class="form-group col-md-12">
-				<label class="col-md-3 control-lable" for="name">Name</label>
-				<div class="col-md-7">
-					<form:input type="text" path="name" id="name" class="form-control input-sm"/>
-					<div class="has-error">
+		<div class="input-group">
+    		<span class="input-group-addon">Name</span>
+    		<form:input type="text" path="name" id="name" class="form-control" placeholder="Enter the name"/>
+  		</div>
+  							<div class="has-error">
 						<form:errors path="name" class="help-inline"/>
 					</div>
-				</div>
-			</div>
-		</div>
+
 		
 		<div style="text-align: right;">
 			<input type="submit" value="Save" class="btn btn-success"/>

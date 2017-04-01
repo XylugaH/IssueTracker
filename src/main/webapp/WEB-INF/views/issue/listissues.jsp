@@ -4,14 +4,14 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Issues List</title>
-	<link href="<c:url value='/resources/css/bootstrap.css' />" rel="stylesheet"></link>
-	<link href="<c:url value='/resources/css/app.css' />" rel="stylesheet"></link>
+	<title>Issues</title>
+	<link href="<c:url value='/resources/css/bootstrap.min.css' />" rel="stylesheet"></link>
 </head>
 
 <body>
     <div class="panel panel-primary">
       <div class="panel-heading"><h4>Issues</h4></div>
     </div>
+		  	
 </body>
 </html>

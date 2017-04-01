@@ -16,6 +16,7 @@
 	<form:form method="POST" action="${pageContext.request.contextPath}/savepriority" modelAttribute="priority" class="form-horizontal">
 	
 		<form:input type="hidden" path="id" id="id"/>
+		
 		<div class="input-group">
     		<span class="input-group-addon">Name</span>
     		<form:input type="text" path="name" id="name" class="form-control" placeholder="Enter the name"/>

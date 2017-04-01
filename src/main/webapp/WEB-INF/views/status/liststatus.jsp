@@ -4,13 +4,13 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Statuses List</title>
+	<title>Statuses</title>
 	<link href="<c:url value='/resources/css/bootstrap.min.css' />" rel="stylesheet"></link>
 </head>
 
 <body>
     <div class="panel panel-primary">
-      <div class="panel-heading"><h4>List of statuses</h4></div>
+      <div class="panel-heading"><h4>Statuses</h4></div>
     </div>
 		  	
 			<table class="table table-hover">
