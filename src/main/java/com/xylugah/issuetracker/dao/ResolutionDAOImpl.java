@@ -41,5 +41,4 @@ public class ResolutionDAOImpl extends AbstractDAO<Integer, Resolution> implemen
 		return resolution;
 	}
 
-	
 }

@@ -37,7 +37,7 @@ public class ProjectController {
 		Project project = new Project();
 		List<User> userList = userService.getAll();
 		model.addAttribute("project", project);
-		model.addAttribute("userList", userList);
+		model.addAttribute("users", userList);
 		return "project";
 	}
 	
@@ -46,6 +46,8 @@ public class ProjectController {
 			ModelMap model) {
 
 		if (result.hasErrors()) {
+			List<User> userList = userService.getAll();
+			model.addAttribute("users", userList);
 			return "project";
 		}
 		

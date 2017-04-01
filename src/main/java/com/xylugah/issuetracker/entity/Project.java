@@ -1,7 +1,12 @@
 package com.xylugah.issuetracker.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,14 +31,16 @@ public class Project extends AbstractEntity{
 	@Column(name="name", nullable=false)
 	private String name;
 	
+	@NotEmpty
 	@Size(max=100)
 	@Column(name="description", nullable=false)
 	private String description;
 	
 	@OneToOne
 	@JoinColumn(name = "manager_user_id")
-	private User manager;
+	private User manager = new User();
 
+		
 	public int getId() {
 		return id;
 	}
@@ -64,6 +71,11 @@ public class Project extends AbstractEntity{
 
 	public void setManager(User manager) {
 		this.manager = manager;
+	}
+
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", name=" + name + ", description=" + description + ", manager=" + manager + "]";
 	}
 	
 	

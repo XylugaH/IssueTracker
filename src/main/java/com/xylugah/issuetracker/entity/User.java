@@ -1,6 +1,7 @@
 package com.xylugah.issuetracker.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -15,16 +16,24 @@ public class User extends AbstractEntity{
 	private int id;
 	
 	@NotEmpty
+	@Size(min=3, max=45)
 	@Column(name="firstName", nullable=false)
 	private String firstName;
 	
 	@NotEmpty
+	@Size(min=3, max=45)
 	@Column(name="lastName", nullable=false)
 	private String lastName;
 	
 	@NotEmpty
+	@Size(min=3, max=45)
 	@Column(name="password", nullable=false)
 	private String password;
+	
+	@NotEmpty
+	@Size(min=3, max=45)
+	@Transient
+	private String passwordConfirm;
 	
 	@Email
 	@Column(name="email", nullable=false)
@@ -52,8 +61,6 @@ public class User extends AbstractEntity{
 		this.role = role;
 	}
 
-	
-	
 	public int getId() {
 		return id;
 	}
@@ -86,6 +93,13 @@ public class User extends AbstractEntity{
 		this.password = password;
 	}
 
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
 
 	public String getEmail() {
 		return email;
@@ -102,12 +116,12 @@ public class User extends AbstractEntity{
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
-				+ ", emailAddress=" + email + ", role=" + role + "]";
-	}
+				+ ", passwordConfirm=" + passwordConfirm + ", email=" + email + ", role=" + role + "]";
+	}	
+	
 	
 }
