@@ -20,6 +20,6 @@ public class IssueController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String issueList(ModelMap model){
-		return "index";
+		return "listissues";
 	}
 }

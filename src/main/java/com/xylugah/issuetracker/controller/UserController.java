@@ -24,6 +24,7 @@ public class UserController {
 	@Resource(name ="UserService")
 	private UserService userService;
 	
+	
 	private MessageSource messageSource;
 	
 	//private static final Logger logger = Logger.getLogger(UserController.class);
@@ -52,6 +53,7 @@ public class UserController {
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String newUser(ModelMap model) {
 		User user = new User();
+		
 		model.addAttribute("user", user);
 		model.addAttribute("edit", false);
 		return "registration";
