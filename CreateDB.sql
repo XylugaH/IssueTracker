@@ -1,5 +1,7 @@
-CREATE SCHEMA `issuetrackerdb` ;
+CREATE SCHEMA IF NOT EXISTS `issuetrackerdb` ;
+USE `issuetrackerdb`;
 
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE  `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `FirstName` VARCHAR(45) NOT NULL,
@@ -23,6 +25,7 @@ VALUES
 (2,"guest","guest","","",1);
 
 
+DROP TABLE IF EXISTS `role`;
 CREATE TABLE  `role` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
@@ -77,7 +80,7 @@ INSERT INTO  `role`
 VALUES
 (3,"ADMINISTRATOR",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
 
-
+DROP TABLE IF EXISTS `status`;
 CREATE TABLE  `status` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
@@ -115,6 +118,7 @@ INSERT INTO  `status`
 VALUES
 (6,"Reopened");
 
+DROP TABLE IF EXISTS `resolution`;
 CREATE TABLE  `resolution` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
@@ -142,6 +146,7 @@ INSERT INTO  `resolution`
 VALUES
 (4,"Worksforme");
 
+DROP TABLE IF EXISTS `priority`;
 CREATE TABLE  `priority` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
@@ -169,7 +174,7 @@ INSERT INTO  `priority`
 VALUES
 (4,"Minor");
 
-
+DROP TABLE IF EXISTS `type`;
 CREATE TABLE  `type` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
@@ -198,7 +203,8 @@ INSERT INTO  `type`
 VALUES
 (4,"Performance");
 
-CREATE TABLE `issuetrackerdb`.`issue` (
+DROP TABLE IF EXISTS `issue`;
+CREATE TABLE `issue` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `createDate` DATE NOT NULL COMMENT '',
   `create_user_id` INT NOT NULL COMMENT '',
@@ -217,6 +223,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
+DROP TABLE IF EXISTS `project`;
 CREATE TABLE `project` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(45) NOT NULL COMMENT '',
@@ -228,12 +235,6 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 INSERT INTO `issuetrackerdb`.`project`
-(`id`,
-`name`,
-`description`,
-`manager_user_id`)
+(`id`,`name`,`description`,`manager_user_id`)
 VALUES
-(1,
-"testProject",
-"It is the first test project",
-2);
+(1,"testProject","It is the first test project",2);
