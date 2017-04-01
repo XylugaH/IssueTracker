@@ -18,6 +18,16 @@
 	<mvc:annotation-driven/>
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 
+  	<mvc:annotation-driven conversion-service="conversionService" />
+
+  	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" >
+	    <property name="converters">
+	        <list>
+	            <bean class="com.xylugah.issuetracker.converter.UserIdToUserConverter" />
+	        </list>
+		</property>
+	</bean>
+
 	<import resource="hibernateContext.xml"/>
 
 	
