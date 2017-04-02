@@ -14,34 +14,29 @@
     </div>
 
 	<h3></h3>
-	<hr color="red">
+	<hr color="red" size="10">
 	<form:form method="POST" action="${pageContext.request.contextPath}/login" class="form-horizontal">
 
-		<div class="row content">
-
-			<div class="col-sm-3 sidenav">
-				<label for="usr">E-mail:</label>
-			</div>
-			<div class="col-sm-9">
-				<input type="text" class="form-control" id="usr">
-			</div>
-		</div>
-
-		<div class="row content">
-			<div class="col-sm-3 sidenav">
-				<label for="pwd">Password:</label>
-			</div>
-			<div class="col-sm-9">
-				<input type="password" class="form-control" id="pwd">
-			</div>
-		</div>
+		<div class="form-group">
+    			<label class="col-sm-4 control-label">E-mail:</label>
+    			<div class="col-sm-8">
+      				<input type="text" class="form-control" id="usr" placeholder="Enter the E-mail">
+    			</div>
+  			</div>
+    		
+		<div class="form-group">
+    			<label class="col-sm-4 control-label">Password:</label>
+    			<div class="col-sm-8">
+      				<input type="password" class="form-control" id="usr" placeholder="Enter the password">
+    			</div>
+  			</div>
 
 		<div style="text-align: right;">
 			<input type="submit" value="Sign in" class="btn btn-success"/>
-			</div>
+		</div>
 
 	</form:form>
-		<hr>
+		<hr size="10">
 	<h4></h4>
 
       <ul class="nav nav-pills nav-stacked">

@@ -15,33 +15,35 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.xylugah.issuetracker.entity.Role;
 import com.xylugah.issuetracker.entity.User;
+import com.xylugah.issuetracker.service.RoleService;
 import com.xylugah.issuetracker.service.UserService;
 
 @Controller
 public class UserController {
 
-	@Resource(name ="UserService")
+	@Resource(name = "UserService")
 	private UserService userService;
-	
-	
+
+	@Resource(name = "RoleService")
+	private RoleService roleService;
+
 	private MessageSource messageSource;
-	
-	//private static final Logger logger = Logger.getLogger(UserController.class);
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(ModelMap model){
+	public String login(ModelMap model) {
 		System.out.println("111111");
 		return "menu";
 	}
-	
+
 	@RequestMapping(value = "/listusers", method = RequestMethod.GET)
-	public String listUsers(ModelMap model){
+	public String listUsers(ModelMap model) {
 		List<User> listUsers = userService.getAll();
 		model.addAttribute("users", listUsers);
 		return "listusers";
 	}
-	
+
 	@RequestMapping(value = "/edituser/{id}", method = RequestMethod.GET)
 	public String editUser(@PathVariable int id, ModelMap model) {
 		User user = userService.getById(id);
@@ -49,36 +51,38 @@ public class UserController {
 		model.addAttribute("edit", true);
 		return "registration";
 	}
-	
+
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String newUser(ModelMap model) {
 		User user = new User();
-		
+		List<Role> roleList = roleService.getAll();
 		model.addAttribute("user", user);
+		model.addAttribute("roles", roleList);
 		model.addAttribute("edit", false);
 		return "registration";
 	}
-	
+
 	@RequestMapping(value = { "/registration" }, method = RequestMethod.POST)
-	public String saveUser(@Valid User user, BindingResult result,
-			ModelMap model) {
+	public String saveUser(@Valid User user, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
+			List<Role> roleList = roleService.getAll();
+			model.addAttribute("roles", roleList);
 			return "registration";
 		}
 
-		if(userService.getByEmail(user.getEmail())!=null || userService.getById(user.getId())!=null){
-			FieldError ssoError =new FieldError("user","email",messageSource.getMessage("non.unique.ssoId", new String[]{user.getEmail()}, Locale.getDefault()));
-		    result.addError(ssoError);
+		if (userService.getByEmail(user.getEmail()) != null || userService.getById(user.getId()) != null) {
+			FieldError ssoError = new FieldError("user", "email", messageSource.getMessage("non.unique.ssoId",
+					new String[] { user.getEmail() }, Locale.getDefault()));
+			result.addError(ssoError);
 			return "registration";
 		}
-		
+
 		userService.add(user);
 
-		model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " registered successfully");
+		model.addAttribute("success",
+				"User " + user.getFirstName() + " " + user.getLastName() + " registered successfully");
 		return "registrationsuccess";
 	}
-	
-	
 
 }

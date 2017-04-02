@@ -6,8 +6,11 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.xylugah.issuetracker.validator.FieldEquals;
+
 @Entity
 @Table(name="User")
+@FieldEquals( field="password", equalsTo="passwordConfirm" )
 public class User extends AbstractEntity{
 	
 	@Id

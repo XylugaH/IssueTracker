@@ -12,12 +12,17 @@
     <div class="panel panel-primary">
       <div class="panel-heading"><h4>Types</h4></div>
     </div>
-		  	
+    
+    <div style="text-align: right;">
+		<a href="<c:url value='/addtype' />" class="btn btn-success">New type</a>
+	</div>
+	
 	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Name</th>
 				<th width="100"></th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -27,10 +32,7 @@
 					<td><a href="<c:url value='/edittype/${listtypes.id}' />" class="btn btn-success">edit</a></td>
 				</tr>
 			</c:forEach>
-			<tr>
-				<td/>
-				<td><a href="<c:url value='/addtype' />" class="btn btn-success">+Add</a></td>
-			</tr>
+			
 		</tbody>
 	</table>
 	

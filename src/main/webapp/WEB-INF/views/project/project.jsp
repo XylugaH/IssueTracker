@@ -60,17 +60,7 @@
 				<form:errors path="manager" class="help-inline"/>
 			</div>
 		</div>
-  <!-- 		<div class="form-group">
-    		<label class="col-sm-2 control-label">Manager</label>
-    		<div class="col-sm-6">
 
-    		<form:select class="form-control" path="manager" items="${users}" />
-      			<div class="has-error">
-					<form:errors path="manager" class="help-inline"/>
-				</div>
-    		</div>
-  		</div>
-      	-->
 		<div style="text-align: right;">
 			<input type="submit" value="Save" class="btn btn-success"/>
 			<a href="<c:url value='/listprojects' />" class="btn btn-danger">Cancel</a>

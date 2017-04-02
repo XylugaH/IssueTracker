@@ -25,8 +25,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional
 	public User getByEmail(String email) {
-		return null;
+		User user = dao.getByEmail(email);
+		return user;
 	}
 	
 	@Override
@@ -37,18 +39,21 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional
 	public void add(User user) {
-		
+		dao.add(user);
 	}
 
 	@Override
+	@Transactional
 	public void delete(int id) {
-	
+		dao.delete(id);
 	}
 
 	@Override
+	@Transactional
 	public User edit(User user) {
-		return null;
+		return dao.edit(user);
 	}
 
 }

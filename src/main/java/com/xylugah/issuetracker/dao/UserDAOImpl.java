@@ -31,6 +31,25 @@ public class UserDAOImpl extends AbstractDAO<Integer,User> implements UserDAO{
 		User user = (User) criteria.add(Restrictions.eq("email", email)).uniqueResult();
 		return user;
 	}
+
+	@Override
+	public void add(User user) {
+		getSession().saveOrUpdate(user);		
+	}
+
+	@Override
+	public void delete(int id) {
+		User user = getById(id);
+		if (user!=null){
+			getSession().delete(user);
+		}		
+	}
+
+	@Override
+	public User edit(User user) {
+		getSession().update(user);
+		return user;
+	}
 	
 	
 
