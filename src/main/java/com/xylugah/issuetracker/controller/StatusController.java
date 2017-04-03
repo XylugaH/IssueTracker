@@ -32,7 +32,6 @@ public class StatusController {
 	@RequestMapping(value = "/editstatus/{id}", method = RequestMethod.GET)
 	public String editStatus(@PathVariable int id, ModelMap model) {
 		Status status = statusService.getById(id);
-		System.out.println(status);
 		model.addAttribute("status", status);
 		return "status";
 	}
