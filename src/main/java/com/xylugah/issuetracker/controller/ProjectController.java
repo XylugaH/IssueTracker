@@ -46,6 +46,7 @@ public class ProjectController {
 	public String editProject(@PathVariable int id, ModelMap model) {
 		Project project = projectService.getById(id);
 		List<User> userList = userService.getAll();
+		System.out.println(project.getBuilds());
 		model.addAttribute("project", project);
 		model.addAttribute("users", userList);
 		return "project";

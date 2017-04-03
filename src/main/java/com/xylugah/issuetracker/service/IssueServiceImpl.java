@@ -2,42 +2,48 @@ package com.xylugah.issuetracker.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.xylugah.issuetracker.dao.IssueDAO;
 import com.xylugah.issuetracker.entity.Issue;
-import com.xylugah.issuetracker.entity.User;
 
 @Service("IssueService")
 public class IssueServiceImpl implements IssueService{
+	
+	@Autowired
+	private IssueDAO dao;
 
+	@Transactional
 	@Override
 	public Issue getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Issue issue = dao.getById(id);
+		return issue;
 	}
 
+	@Transactional
 	@Override
 	public List<Issue> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Issue> issueList = dao.getAll();
+		return issueList;
 	}
 
+	@Transactional
 	@Override
 	public void add(Issue issue) {
-		// TODO Auto-generated method stub
-		
+		dao.add(issue);
 	}
 
+	@Transactional
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-		
+		dao.delete(id);		
 	}
 
+	@Transactional
 	@Override
-	public User edit(Issue issue) {
-		// TODO Auto-generated method stub
-		return null;
+	public Issue edit(Issue issue) {
+		return dao.edit(issue);
 	}
-
 }

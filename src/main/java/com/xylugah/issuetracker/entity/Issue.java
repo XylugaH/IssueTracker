@@ -49,6 +49,10 @@ public class Issue extends AbstractEntity{
 	private Status status;
 	
 	@OneToOne
+	@JoinColumn(name = "resolution_id")
+	private Resolution resolution;
+
+	@OneToOne
 	@JoinColumn(name = "type_id")
 	private Type type;
 	
@@ -63,5 +67,110 @@ public class Issue extends AbstractEntity{
 	@OneToOne
 	@JoinColumn(name = "assignee_user_id")
 	private User assignee;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public User getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(User createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getModifyDate() {
+		return modifyDate;
+	}
+
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
+	public User getModifiedBy() {
+		return modifiedBy;
+	}
+
+	public void setModifiedBy(User modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public Resolution getResolution() {
+		return resolution;
+	}
+
+	public void setResolution(Resolution resolution) {
+		this.resolution = resolution;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public Priority getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Priority priority) {
+		this.priority = priority;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public User getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(User assignee) {
+		this.assignee = assignee;
+	}
+	
 	
 }

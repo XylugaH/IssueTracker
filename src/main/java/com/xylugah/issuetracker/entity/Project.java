@@ -1,12 +1,18 @@
 package com.xylugah.issuetracker.entity;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -31,6 +37,9 @@ public class Project extends AbstractEntity{
 	@Size(max=100)
 	@Column(name="description", nullable=false)
 	private String description;
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
+	private Set<Build> builds= new HashSet<Build>(0);
 	
 	@OneToOne
 	@JoinColumn(name = "manager_user_id")
@@ -59,6 +68,14 @@ public class Project extends AbstractEntity{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public Set<Build> getBuilds() {
+		return builds;
+	}
+
+	public void setBuilds(Set<Build> builds) {
+		this.builds = builds;
 	}
 
 	public User getManager() {

@@ -35,11 +35,10 @@
 				<tr>
 					<td>${issue.id}</td>
 					<td>${issue.priority.name}</td>
-					<td>${issue.assignee.firstName}</td>
+					<td>${issue.assignee.name}</td>
 					<td>${issue.type.name}</td>
 					<td>${issue.status.name}</td>
 					<td>${issue.summary}</td>
-					<td align="right"><a href="<c:url value='/editissue/${issue.id}' />" class="btn btn-success">edit</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

@@ -213,6 +213,7 @@ CREATE TABLE `issue` (
   `summary` CHAR(100) NOT NULL COMMENT '',
   `description` LONGTEXT NULL COMMENT '',
   `status_id` INT NULL COMMENT '',
+  `resolution_id` INT NULL COMMENT '',
   `type_id` INT NULL COMMENT '',
   `priority_id` INT NULL COMMENT '',
   `project_id` INT NULL COMMENT '',
@@ -238,3 +239,23 @@ INSERT INTO `issuetrackerdb`.`project`
 (`id`,`name`,`description`,`manager_user_id`)
 VALUES
 (1,"testProject","It is the first test project",2);
+
+DROP TABLE IF EXISTS `build`;
+CREATE TABLE `build` (
+  `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `name` VARCHAR(45) NOT NULL COMMENT '',
+  `project_id` VARCHAR(45) NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+INSERT INTO `build`
+(`id`,`name`,`project_id`)
+VALUES
+(1,"1.0v",1);
+
+INSERT INTO `issuetrackerdb`.`build`
+(`id`,`name`,`project_id`)
+VALUES
+(2,"1.12v",1);

@@ -2,7 +2,10 @@ package com.xylugah.issuetracker.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -22,6 +25,10 @@ public class Build extends AbstractEntity{
 	@Column(name="name", nullable=false)
 	private String name;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "project_id", nullable = false)
+	private Project project;
+	
 	public Build() {
 
 	}
@@ -45,6 +52,14 @@ public class Build extends AbstractEntity{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	@Override
