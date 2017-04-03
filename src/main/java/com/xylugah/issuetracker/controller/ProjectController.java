@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -33,7 +34,7 @@ public class ProjectController {
 	}
 	
 	@RequestMapping(value = "/addproject", method = RequestMethod.GET)
-	public String addResolution(ModelMap model) {
+	public String addProject(ModelMap model) {
 		Project project = new Project();
 		List<User> userList = userService.getAll();
 		model.addAttribute("project", project);
@@ -41,8 +42,17 @@ public class ProjectController {
 		return "project";
 	}
 	
+	@RequestMapping(value = "/editproject/{id}", method = RequestMethod.GET)
+	public String editProject(@PathVariable int id, ModelMap model) {
+		Project project = projectService.getById(id);
+		List<User> userList = userService.getAll();
+		model.addAttribute("project", project);
+		model.addAttribute("users", userList);
+		return "project";
+	}
+	
 	@RequestMapping(value = { "/saveproject" }, method = RequestMethod.POST)
-	public String saveStatus(@Valid Project project, BindingResult result,
+	public String saveProject(@Valid Project project, BindingResult result,
 			ModelMap model) {
 
 		if (result.hasErrors()) {
