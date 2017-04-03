@@ -47,6 +47,8 @@ public class UserController {
 	@RequestMapping(value = "/edituser/{id}", method = RequestMethod.GET)
 	public String editUser(@PathVariable int id, ModelMap model) {
 		User user = userService.getById(id);
+		List<Role> roleList = roleService.getAll();
+		model.addAttribute("roles", roleList);
 		model.addAttribute("user", user);
 		model.addAttribute("edit", true);
 		return "registration";
