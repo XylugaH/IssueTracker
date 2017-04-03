@@ -21,7 +21,7 @@
 				<th>Name</th>
 				<th>Manager</th>
 				<th>Description</th>
-				<th><a href="<c:url value='/addproject' />" class="btn btn-success">New project</a></th>
+				<th width="100"><a href="<c:url value='/addproject' />" class="btn btn-success">New project</a></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -30,7 +30,7 @@
 					<td>${listprojects.name}</td>
 					<td>${listprojects.manager.firstName}</td>
 					<td>${listprojects.description}</td>
-					<td><a href="<c:url value='/editproject/${listprojects.id}' />" class="btn btn-success">edit</a></td>
+					<td align="right"><a href="<c:url value='/editproject/${listprojects.id}' />" class="btn btn-success">edit</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

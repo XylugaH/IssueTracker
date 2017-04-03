@@ -14,7 +14,9 @@
 </head>
 
 <body>
-	<form:form method="POST" modelAttribute="user" class="form-horizontal">
+	<form:form method="POST"
+		action="${pageContext.request.contextPath}/registration"
+		modelAttribute="user" class="form-horizontal">
 		<div class="generic-container">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -29,7 +31,7 @@
 				<div class="col-sm-6">
 					<form:input type="text" path="firstName" id="firstName"
 						class="form-control" placeholder="Enter the first name" />
-					<div>
+					<div style="color:red">
 						<form:errors path="firstName" class="error" />
 					</div>
 				</div>
@@ -40,7 +42,7 @@
 				<div class="col-sm-6">
 					<form:input type="text" path="lastName" id="lastName"
 						class="form-control" placeholder="Enter the last name" />
-					<div>
+					<div style="color:red">
 						<form:errors path="lastName" class="help-inline" />
 					</div>
 				</div>
@@ -51,7 +53,7 @@
 				<div class="col-sm-6">
 					<form:input type="text" path="email" id="email"
 						class="form-control" placeholder="Enter the E-mail" />
-					<div>
+					<div style="color:red">
 						<form:errors path="email" class="help-inline" />
 					</div>
 				</div>
@@ -62,7 +64,7 @@
 				<div class="col-sm-6">
 					<form:input type="password" path="password" id="password"
 						class="form-control" placeholder="Enter the password" />
-					<div>
+					<div style="color:red">
 						<form:errors path="password" class="help-inline" />
 					</div>
 				</div>
@@ -74,7 +76,7 @@
 					<form:input type="password" path="passwordConfirm"
 						id="passwordConfirm" class="form-control"
 						placeholder="Confirm the password" />
-					<div>
+					<div style="color:red">
 						<form:errors path="passwordConfirm" class="error" />
 					</div>
 				</div>
@@ -85,19 +87,18 @@
 				<div class="col-sm-6">
 					<form:select path="role" class="form-control" id="role">
 						<c:forEach items="${roles}" var="role">
-							<option value="${role.id}">${role.name}</option>
+							<option ${role.id == user.role.id ? 'selected' : ''} value="${role.id}">${role.name}</option>
 						</c:forEach>
 					</form:select>
-					<div>
+					<div style="color:red">
 						<form:errors path="role" class="help-inline" />
 					</div>
 				</div>
-
 			</div>
 
-			<div style="text-align: right;">
-				<input type="submit" value="Save" class="btn btn-success" /> <a
-					href="<c:url value='/listusers' />" class="btn btn-danger">Cancel</a>
+			<div class="text-right">
+				<input type="submit" value="Save" class="btn btn-success" /> 
+				<a href="<c:url value='/listusers' />" class="btn btn-danger">Cancel</a>
 			</div>
 		</div>
 	</form:form>

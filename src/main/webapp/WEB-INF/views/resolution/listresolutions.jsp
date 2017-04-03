@@ -17,20 +17,16 @@
 		<thead>
 			<tr>
 				<th>Name</th>
-				<th width="100"></th>
+				<th width="100"><a href="<c:url value='/addresolution' />" class="btn btn-success">New resolution</a></th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${listresolutions}" var="listresolutions">
 				<tr>
 					<td>${listresolutions.name}</td>
-					<td><a href="<c:url value='/editresolution/${listresolutions.id}' />" class="btn btn-success">edit</a></td>
+					<td align="right"><a href="<c:url value='/editresolution/${listresolutions.id}' />" class="btn btn-success">edit</a></td>
 				</tr>
 			</c:forEach>
-			<tr>
-				<td/>
-				<td><a href="<c:url value='/addresolution' />" class="btn btn-success">+Add</a></td>
-			</tr>
 		</tbody>
 	</table>
 	
