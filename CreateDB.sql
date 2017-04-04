@@ -223,6 +223,34 @@ CREATE TABLE `issue` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
+INSERT INTO `issuetrackerdb`.`issue`
+(`id`,
+`createDate`,
+`create_user_id`,
+`modifyDate`,
+`modify_user_id`,
+`summary`,
+`description`,
+`status_id`,
+`resolution_id`,
+`type_id`,
+`priority_id`,
+`project_id`,
+`assignee_user_id`)
+VALUES
+(1,
+"04.04.2017",
+1,
+"04.04.2017",
+2,
+"testsum",
+"test description",
+2,
+3,
+2,
+3,
+1,
+1);
 
 DROP TABLE IF EXISTS `project`;
 CREATE TABLE `project` (
@@ -244,8 +272,10 @@ DROP TABLE IF EXISTS `build`;
 CREATE TABLE `build` (
   `id` INT NOT NULL AUTO_INCREMENT COMMENT '',
   `name` VARCHAR(45) NOT NULL COMMENT '',
-  `project_id` VARCHAR(45) NOT NULL COMMENT '',
-  PRIMARY KEY (`id`)  COMMENT '')
+  `project_id` INT NOT NULL COMMENT '',
+  PRIMARY KEY (`id`)  COMMENT '',
+  KEY `fk_project` (`project_id`),
+  CONSTRAINT `fk_project` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;

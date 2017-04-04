@@ -72,4 +72,9 @@
 	    <put-attribute name="body"	value="/WEB-INF/views/project/project.jsp" />
 	    <put-attribute name="current" value="project"/>
 	</definition>
+	
+	<definition name="newproject" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/project/newproject.jsp" />
+	    <put-attribute name="current" value="project"/>
+	</definition>
 </tiles-definitions>

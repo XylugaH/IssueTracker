@@ -2,7 +2,6 @@ package com.xylugah.issuetracker.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,8 +24,8 @@ public class Build extends AbstractEntity{
 	@Column(name="name", nullable=false)
 	private String name;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "project_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "project_id")
 	private Project project;
 	
 	public Build() {

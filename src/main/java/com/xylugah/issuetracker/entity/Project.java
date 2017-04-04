@@ -2,6 +2,7 @@ package com.xylugah.issuetracker.entity;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -38,8 +39,8 @@ public class Project extends AbstractEntity{
 	@Column(name="description", nullable=false)
 	private String description;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
-	private Set<Build> builds= new HashSet<Build>(0);
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
+	private List<Build> builds;
 	
 	@OneToOne
 	@JoinColumn(name = "manager_user_id")
@@ -70,11 +71,11 @@ public class Project extends AbstractEntity{
 		this.description = description;
 	}
 	
-	public Set<Build> getBuilds() {
+	public List<Build> getBuilds() {
 		return builds;
 	}
 
-	public void setBuilds(Set<Build> builds) {
+	public void setBuilds(List<Build> builds) {
 		this.builds = builds;
 	}
 
@@ -88,8 +89,10 @@ public class Project extends AbstractEntity{
 
 	@Override
 	public String toString() {
-		return "Project [id=" + id + ", name=" + name + ", description=" + description + ", manager=" + manager + "]";
+		return "Project [id=" + id + ", name=" + name + ", description=" + description + ", builds=" + builds
+				+ ", manager=" + manager + "]";
 	}
-	
+
+
 	
 }

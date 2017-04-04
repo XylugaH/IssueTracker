@@ -12,7 +12,7 @@
 <body>
 	<form:form method="POST" action="${pageContext.request.contextPath}/saveproject" modelAttribute="project" class="form-horizontal">
     	<div class="panel panel-primary">
-      		<div class="panel-heading"><h4>Edit project</h4></div>
+      		<div class="panel-heading"><h4>New project</h4></div>
     	</div>
 	
 		<form:input type="hidden" path="id" id="id"/>
