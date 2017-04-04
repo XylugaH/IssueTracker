@@ -15,10 +15,11 @@ public class IssueDAOImpl extends AbstractDAO<Integer, Issue> implements IssueDA
 		return issue;
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "unchecked"})
 	@Override
 	public List<Issue> getAll() {
-		List<Issue> issueList = getSession().createCriteria(Issue.class).list();
+		//List<Issue> issueList = getSession().createCriteria(Issue.class).list();
+		List<Issue> issueList = (List<Issue>)getSession().createQuery("from Issue").list();
 		return issueList;
 	}
 

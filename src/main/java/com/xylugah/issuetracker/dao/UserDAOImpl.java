@@ -14,7 +14,9 @@ public class UserDAOImpl extends AbstractDAO<Integer,User> implements UserDAO{
 	@Override
 	public User getById(int id) {
 		User user = (User) getSession().get(User.class, id);
-		user.setPasswordConfirm(user.getPassword());
+		if (user!=null){
+			user.setPasswordConfirm(user.getPassword());	
+		}
 		return user;
 	}
 

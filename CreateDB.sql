@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS `issuetrackerdb` ;
+CREATE DATABASE IF NOT EXISTS `issuetrackerdb` ;
 USE `issuetrackerdb`;
 
 DROP TABLE IF EXISTS `user`;

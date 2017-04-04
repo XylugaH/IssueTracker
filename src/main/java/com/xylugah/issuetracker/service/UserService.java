@@ -19,4 +19,6 @@ public interface UserService {
 	
 	User edit(User user);
 	
+	User getEmptyUser();
+	
 }

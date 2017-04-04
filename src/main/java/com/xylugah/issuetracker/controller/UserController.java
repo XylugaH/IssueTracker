@@ -56,7 +56,7 @@ public class UserController {
 
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String newUser(ModelMap model) {
-		User user = new User();
+		User user = userService.getEmptyUser();
 		List<Role> roleList = roleService.getAll();
 		model.addAttribute("user", user);
 		model.addAttribute("roles", roleList);

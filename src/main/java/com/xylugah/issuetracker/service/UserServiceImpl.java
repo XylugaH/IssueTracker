@@ -56,4 +56,11 @@ public class UserServiceImpl implements UserService{
 		return dao.edit(user);
 	}
 
+	@Override
+	public User getEmptyUser() {
+		User user = new User();
+		return user;
+	}
+
+	
 }

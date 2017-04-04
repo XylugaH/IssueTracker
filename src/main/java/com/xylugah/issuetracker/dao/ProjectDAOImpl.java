@@ -15,7 +15,7 @@ public class ProjectDAOImpl extends AbstractDAO<Integer, Project> implements Pro
 		return project;
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	public List<Project> getAll() {
 		//List<Project> projectList = getSession().createCriteria(Project.class).list();

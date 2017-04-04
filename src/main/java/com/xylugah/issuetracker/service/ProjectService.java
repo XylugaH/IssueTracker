@@ -16,4 +16,6 @@ public interface ProjectService {
 	
 	Project edit(Project project);
 	
+	Project getEmptyProject();
+	
 }
