@@ -4,18 +4,24 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xylugah.issuetracker.entity.Role;
 import com.xylugah.issuetracker.entity.User;
@@ -35,11 +41,25 @@ public class UserController {
 	private MessageSource messageSource;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@ModelAttribute EmailPassword emailPassword, ModelMap model,
-			HttpSession httpSession) {
-		//httpSession.setAttribute("currentUser", userService.getById(2));
-		System.out.println("zzzz"+emailPassword.getEmail());
-		System.out.println("xxx"+emailPassword.getPassword());
+	public String login(@RequestParam("password") String password, @RequestParam("email") String email,
+			ModelMap model) {
+		String errorMessage="Incorrect email or password";
+		if (password.isEmpty() || email.isEmpty()) {
+			model.addAttribute("errorOut", errorMessage);
+			return "listissues";
+		}
+		User user = userService.getByEmail(email);
+		
+		if (user == null){
+			model.addAttribute("errorOut", errorMessage+"1");
+			return "listissues";
+		}
+		
+		if (user.getPassword()!=password){
+			model.addAttribute("errorOut", errorMessage+"2");
+			return "listissues";
+		}
+
 		return "listissues";
 	}
 
