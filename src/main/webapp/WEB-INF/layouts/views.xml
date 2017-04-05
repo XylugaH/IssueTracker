@@ -5,76 +5,76 @@
 <tiles-definitions>
 
     <definition name="DefaultTemplate" template="/WEB-INF/views/Dashboard.jsp">
-    	<put-attribute name="current" value="issue"/>
+    	<put-attribute name="menu"	value="/WEB-INF/views/menu.jsp" />
 	</definition>
 	
 	<definition name="listissues" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/issue/listissues.jsp" />
-	    <put-attribute name="current" value="issue"/>
+	    <put-attribute name="current" value="issue" cascade="true"/>
 	</definition>
 	
 	<definition name="listusers" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/user/listusers.jsp" />
-	    <put-attribute name="current" value="user"/>
+	    <put-attribute name="current" value="user" cascade="true"/>
 	</definition>
 
 	<definition name="registration" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/user/registration.jsp" />
-	    <put-attribute name="current" value="user"/>
+	    <put-attribute name="current" value="user" cascade="true"/>
 	</definition>	
 	
 	<definition name="listStatus" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/status/liststatus.jsp" />
-	    <put-attribute name="current" value="status"/>
+	    <put-attribute name="current" value="status" cascade="true"/>
 	</definition>
 	
 	<definition name="status" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/status/status.jsp" />
-	    <put-attribute name="current" value="status"/>
+	    <put-attribute name="current" value="status" cascade="true"/>
 	</definition>
 	
 	<definition name="listtypes" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/type/listtypes.jsp" />
-	    <put-attribute name="current" value="type"/>
+	    <put-attribute name="current" value="type" cascade="true"/>
 	</definition>
 	
 	<definition name="type" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/type/type.jsp" />
-	    <put-attribute name="current" value="type"/>
+	    <put-attribute name="current" value="type" cascade="true"/>
 	</definition>
 	
 	<definition name="listresolutions" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/resolution/listresolutions.jsp" />
-	    <put-attribute name="current" value="resolution"/>
+	    <put-attribute name="current" value="resolution" cascade="true"/>
 	</definition>
 	
 	<definition name="resolution" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/resolution/resolution.jsp" />
-	    <put-attribute name="current" value="resolution"/>
+	    <put-attribute name="current" value="resolution" cascade="true"/>
 	</definition>
 	
 	<definition name="listpriorities" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/priority/listpriorities.jsp" />
-	    <put-attribute name="current" value="priority"/>
+	    <put-attribute name="current" value="priority" cascade="true"/>
 	</definition>
 	
 	<definition name="priority" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/priority/priority.jsp" />
-	    <put-attribute name="current" value="priority"/>
+	    <put-attribute name="current" value="priority" cascade="true"/>
 	</definition>
 	
 	<definition name="listprojects" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/project/listprojects.jsp" />
-	    <put-attribute name="current" value="project"/>
+	    <put-attribute name="current" value="project" cascade="true"/>
 	</definition>
 	
 	<definition name="project" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/project/project.jsp" />
-	    <put-attribute name="current" value="project"/>
+	    <put-attribute name="current" value="project" cascade="true"/>
 	</definition>
 	
 	<definition name="newproject" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/project/newproject.jsp" />
-	    <put-attribute name="current" value="project"/>
+	    <put-attribute name="current" value="project" cascade="true"/>
 	</definition>
 </tiles-definitions>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.context.MessageSource;
@@ -11,12 +12,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.xylugah.issuetracker.entity.Role;
 import com.xylugah.issuetracker.entity.User;
+import com.xylugah.issuetracker.entity.util.EmailPassword;
 import com.xylugah.issuetracker.service.RoleService;
 import com.xylugah.issuetracker.service.UserService;
 
@@ -32,9 +35,12 @@ public class UserController {
 	private MessageSource messageSource;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(ModelMap model) {
-		System.out.println("111111");
-		return "menu";
+	public String login(@ModelAttribute EmailPassword emailPassword, ModelMap model,
+			HttpSession httpSession) {
+		//httpSession.setAttribute("currentUser", userService.getById(2));
+		System.out.println("zzzz"+emailPassword.getEmail());
+		System.out.println("xxx"+emailPassword.getPassword());
+		return "listissues";
 	}
 
 	@RequestMapping(value = "/listusers", method = RequestMethod.GET)
