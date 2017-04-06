@@ -16,4 +16,6 @@ public interface StatusService {
 	
 	Status edit(Status status);
 	
+	Status getEmptyStatus();
+	
 }

@@ -16,4 +16,6 @@ public interface TypeService {
 	
 	Type edit(Type type);
 	
+	Type getEmptyType();
+	
 }

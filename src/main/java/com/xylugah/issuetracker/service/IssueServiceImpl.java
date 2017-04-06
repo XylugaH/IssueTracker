@@ -46,4 +46,10 @@ public class IssueServiceImpl implements IssueService{
 	public Issue edit(Issue issue) {
 		return dao.edit(issue);
 	}
+
+	@Override
+	public Issue getEmptyIssue() {
+		Issue issue = new Issue();
+		return issue;
+	}
 }

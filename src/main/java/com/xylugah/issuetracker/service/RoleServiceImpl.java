@@ -47,4 +47,10 @@ public class RoleServiceImpl implements RoleService{
 		return dao.edit(role);
 	}
 
+	@Override
+	public Role getEmptyRole() {
+		Role role = new Role();
+		return role;
+	}
+	
 }

@@ -48,4 +48,12 @@ public class StatusServiceImpl implements StatusService{
 	public Status edit(Status status) {
 		return dao.edit(status);
 	}
+
+	@Override
+	public Status getEmptyStatus() {
+		Status status = new Status();
+		return status;
+	}
+	
+	
 }

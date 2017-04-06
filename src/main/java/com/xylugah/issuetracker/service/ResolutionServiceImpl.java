@@ -46,4 +46,10 @@ public class ResolutionServiceImpl implements ResolutionService{
 	public Resolution edit(Resolution resolution) {
 		return dao.edit(resolution);
 	}
+
+	@Override
+	public Resolution getEmptyResolution() {
+		Resolution resolution = new Resolution();
+		return resolution;
+	}
 }

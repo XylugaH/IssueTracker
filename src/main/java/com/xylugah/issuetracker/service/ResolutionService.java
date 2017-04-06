@@ -16,4 +16,6 @@ public interface ResolutionService {
 	
 	Resolution edit(Resolution resolution);
 	
+	Resolution getEmptyResolution(); 
+	
 }

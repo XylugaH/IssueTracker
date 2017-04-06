@@ -16,4 +16,6 @@ public interface IssueService {
 	
 	Issue edit(Issue issue);
 	
+	Issue getEmptyIssue();
+	
 }

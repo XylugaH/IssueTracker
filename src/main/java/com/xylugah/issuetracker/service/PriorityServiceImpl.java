@@ -46,4 +46,10 @@ public class PriorityServiceImpl implements PriorityService{
 	public Priority edit(Priority priority) {
 		return dao.edit(priority);
 	}
+
+	@Override
+	public Priority getEmptyPriority() {
+		Priority priority = new Priority();
+		return priority;
+	}
 }

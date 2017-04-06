@@ -16,4 +16,6 @@ public interface RoleService {
 	
 	Role edit(Role role);
 	
+	Role getEmptyRole();
+	
 }

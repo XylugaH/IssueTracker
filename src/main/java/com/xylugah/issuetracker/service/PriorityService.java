@@ -16,4 +16,6 @@ public interface PriorityService {
 	
 	Priority edit(Priority priority);
 	
+	Priority getEmptyPriority();
+	
 }

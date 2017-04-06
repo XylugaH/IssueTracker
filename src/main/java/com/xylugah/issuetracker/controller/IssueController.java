@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.xylugah.issuetracker.entity.Issue;
 import com.xylugah.issuetracker.entity.Role;
 import com.xylugah.issuetracker.entity.User;
-import com.xylugah.issuetracker.entity.util.EmailPassword;
 import com.xylugah.issuetracker.service.IssueService;
 
 @Controller
@@ -29,7 +28,6 @@ public class IssueController {
 		httpSession.setAttribute("currentUser", new User("Andry","Dff","123","wew@email.com",new Role()));
 		List<Issue> issueList = issueService.getAll();
 		model.addAttribute("issues", issueList);
-		model.addAttribute("emailPassword", new EmailPassword());
 		return "listissues";
 	}
 }

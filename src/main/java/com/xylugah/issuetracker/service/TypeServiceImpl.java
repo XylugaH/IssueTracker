@@ -46,4 +46,12 @@ public class TypeServiceImpl implements TypeService{
 	public Type edit(Type type) {
 		return dao.edit(type);
 	}
+
+	@Override
+	public Type getEmptyType() {
+		Type type = new Type();
+		return type;
+	}
+	
+	
 }
