@@ -1,6 +1,7 @@
 package com.xylugah.issuetracker.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -42,7 +43,7 @@ public class User extends AbstractEntity{
 	@Column(name="email", nullable=false)
 	private String email;
 	
-	@NotEmpty
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "role_id")
 	private Role role;

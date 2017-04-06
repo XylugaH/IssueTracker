@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -51,27 +52,27 @@ public class Issue extends AbstractEntity{
 	@Column(name="description", nullable=false)
 	private String description;
 	
-	@NotEmpty
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "status_id")
 	private Status status;
 	
-	@NotEmpty
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "resolution_id")
 	private Resolution resolution;
 
-	@NotEmpty
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "type_id")
 	private Type type;
 	
-	@NotEmpty
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "priority_id")
 	private Priority priority;
 	
-	@NotEmpty
+	@NotNull
 	@OneToOne
 	@JoinColumn(name = "project_id")
 	private Project project;
@@ -80,122 +81,160 @@ public class Issue extends AbstractEntity{
 	@JoinColumn(name = "assignee_user_id")
 	private User assignee;
 
-	
-	
-	public Issue() {
-		createdBy = new User();
-		modifiedBy = new User();
-		status = new Status();
-		resolution = new Resolution();
-		type = new Type();
-		priority = new Priority();
-		project = new Project();
-		assignee = new User();
-	}
 
 	public int getId() {
 		return id;
 	}
 
+
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
+
 
 	public Date getCreateDate() {
 		return createDate;
 	}
 
+
+
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+
+
 
 	public User getCreatedBy() {
 		return createdBy;
 	}
 
+
+
 	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
 	}
+
+
 
 	public Date getModifyDate() {
 		return modifyDate;
 	}
 
+
+
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
+
+
 
 	public User getModifiedBy() {
 		return modifiedBy;
 	}
 
+
+
 	public void setModifiedBy(User modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
+
+
 
 	public String getSummary() {
 		return summary;
 	}
 
+
+
 	public void setSummary(String summary) {
 		this.summary = summary;
 	}
+
+
 
 	public String getDescription() {
 		return description;
 	}
 
+
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+
 
 	public Status getStatus() {
 		return status;
 	}
 
+
+
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+
+
 
 	public Resolution getResolution() {
 		return resolution;
 	}
 
+
+
 	public void setResolution(Resolution resolution) {
 		this.resolution = resolution;
 	}
+
+
 
 	public Type getType() {
 		return type;
 	}
 
+
+
 	public void setType(Type type) {
 		this.type = type;
 	}
+
+
 
 	public Priority getPriority() {
 		return priority;
 	}
 
+
+
 	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
+
+
 
 	public Project getProject() {
 		return project;
 	}
 
+
+
 	public void setProject(Project project) {
 		this.project = project;
 	}
+
+
 
 	public User getAssignee() {
 		return assignee;
 	}
 
+
+
 	public void setAssignee(User assignee) {
 		this.assignee = assignee;
 	}
-	
-	
+
+		
 }

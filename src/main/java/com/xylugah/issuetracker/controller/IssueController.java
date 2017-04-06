@@ -71,7 +71,7 @@ public class IssueController {
 			return "addissue";
 		}
 		
-		issueService.add(issue);
+		//issueService.add(issue);
 
 		return "redirect:/listissues";
 	}

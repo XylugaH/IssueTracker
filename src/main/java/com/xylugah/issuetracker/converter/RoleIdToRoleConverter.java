@@ -17,6 +17,7 @@ public class RoleIdToRoleConverter implements Converter<String, Role>{
 		try {
 			Integer roleId = Integer.valueOf(id);
 			return roleService.getById(roleId);
+			
 		} catch (NumberFormatException e) {
 			return null;
 		}

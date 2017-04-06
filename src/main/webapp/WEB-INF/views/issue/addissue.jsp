@@ -31,7 +31,7 @@
     		<label class="col-sm-2 control-label">Description</label>
     		<div class="col-sm-6">
       			<form:textarea path="description" id="description" class="form-control" placeholder="Enter the description" rows="3"/>
-      			<div class="has-error">
+      			<div style="color: red">
 					<form:errors path="description" class="help-inline"/>
 				</div>
     		</div>
@@ -62,7 +62,7 @@
 					</c:forEach>
 				</form:select>
 				<div style="color: red">
-					<form:errors path="status" class="help-inline" />
+					<form:errors path="type" class="help-inline" />
 				</div>
 			</div>
 		</div>
