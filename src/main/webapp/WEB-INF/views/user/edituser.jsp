@@ -14,7 +14,9 @@
 		</div>
 
 		<form:input type="hidden" path="id" id="id" />
-
+		<form:input type="hidden" path="password" id="password" />
+		<form:input type="hidden" path="passwordConfirm" id="passwordConfirm" />
+		
 		<div class="form-group">
 			<label class="col-sm-2 control-label">First Name</label>
 			<div class="col-sm-6">
@@ -44,29 +46,6 @@
 					placeholder="Enter the E-mail" />
 				<div style="color: red">
 					<form:errors path="email" class="help-inline" />
-				</div>
-			</div>
-		</div>
-
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Password</label>
-			<div class="col-sm-6">
-				<form:input type="password" path="password" id="password"
-					class="form-control" placeholder="Enter the password" />
-				<div style="color: red">
-					<form:errors path="password" class="help-inline" />
-				</div>
-			</div>
-		</div>
-
-		<div class="form-group">
-			<label class="col-sm-2 control-label">Password confirm</label>
-			<div class="col-sm-6">
-				<form:input type="password" path="passwordConfirm"
-					id="passwordConfirm" class="form-control"
-					placeholder="Confirm the password" />
-				<div style="color: red">
-					<form:errors path="passwordConfirm" class="error" />
 				</div>
 			</div>
 		</div>

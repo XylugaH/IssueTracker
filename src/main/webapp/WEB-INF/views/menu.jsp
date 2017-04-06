@@ -13,7 +13,7 @@
 		<h4>Issue Tracker</h4>
 	</div>
 </div>
-
+${currentUser}
 <h3></h3>
 <hr color="red" size="10">
 
