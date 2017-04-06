@@ -25,13 +25,18 @@
 			<list>
 				<bean class="com.xylugah.issuetracker.converter.UserIdToUserConverter" />
 				<bean class="com.xylugah.issuetracker.converter.RoleIdToRoleConverter" />
+				<bean class="com.xylugah.issuetracker.converter.PriorityIdToPriorityConverter" />
+				<bean class="com.xylugah.issuetracker.converter.ProjectIdToProjectConverter" />
+				<bean class="com.xylugah.issuetracker.converter.ResolutionIdToResolutionConverter" />
+				<bean class="com.xylugah.issuetracker.converter.StatusIdToStatusConverter" />
 			</list>
 		</property>
 	</bean>
-<bean id="localeResolver"
-	class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-	<property name="defaultLocale" value="en" />
-</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
 
 	<import resource="hibernateContext.xml" />
 
