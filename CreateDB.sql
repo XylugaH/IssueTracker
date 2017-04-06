@@ -14,15 +14,17 @@ CREATE TABLE  `user` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO  `user`
-(`id`,`FirstName`,`LastName`,`Password`,`Email`,`Role_ID`)
-VALUES
-(1,"admin","admin","admin","admin@admin.com",3);
-
 INSERT INTO `user`
 (`id`,`FirstName`,`LastName`,`Password`,`Email`,`Role_ID`)
 VALUES
-(2,"guest","guest","","",1);
+(1,"guest","guest","","",1);
+
+INSERT INTO  `user`
+(`id`,`FirstName`,`LastName`,`Password`,`Email`,`Role_ID`)
+VALUES
+(2,"admin","admin","admin","admin@admin.com",3);
+
+
 
 
 DROP TABLE IF EXISTS `role`;
