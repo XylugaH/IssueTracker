@@ -1,12 +1,10 @@
 package com.xylugah.issuetracker.controller;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -30,7 +28,6 @@ public class UserController {
 	@Resource(name = "RoleService")
 	private RoleService roleService;
 
-	private MessageSource messageSource;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam("password") String password, @RequestParam("email") String email,
@@ -68,40 +65,51 @@ public class UserController {
 		model.addAttribute("roles", roleList);
 		model.addAttribute("user", user);
 		model.addAttribute("edit", true);
-		return "registration";
+		return "edituser";
 	}
 
-	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	@RequestMapping(value = "/adduser", method = RequestMethod.GET)
 	public String newUser(ModelMap model) {
 		User user = userService.getEmptyUser();
 		List<Role> roleList = roleService.getAll();
 		model.addAttribute("user", user);
 		model.addAttribute("roles", roleList);
 		model.addAttribute("edit", false);
-		return "registration";
+		return "adduser";
 	}
 
-	@RequestMapping(value = { "/registration" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/saveuser" }, method = RequestMethod.POST)
 	public String saveUser(@Valid User user, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
 			List<Role> roleList = roleService.getAll();
 			model.addAttribute("roles", roleList);
-			return "registration";
+			return "adduser";
 		}
-
+		
 		if (userService.getByEmail(user.getEmail()) != null || userService.getById(user.getId()) != null) {
-			FieldError ssoError = new FieldError("user", "email", messageSource.getMessage("non.unique.ssoId",
-					new String[] { user.getEmail() }, Locale.getDefault()));
-			result.addError(ssoError);
-			return "registration";
+			FieldError addError = new FieldError("user", "email", "Not unique email or Id");
+			result.addError(addError);
+			return "adduser";
 		}
 
 		userService.add(user);
 
-		model.addAttribute("success",
-				"User " + user.getFirstName() + " " + user.getLastName() + " registered successfully");
-		return "registrationsuccess";
+		return "redirect:/listusers";
 	}
+	
+	@RequestMapping(value = { "/updateuser" }, method = RequestMethod.POST)
+	public String updateUser(@Valid User user, BindingResult result, ModelMap model) {
 
+		if (result.hasErrors()) {
+			List<Role> roleList = roleService.getAll();
+			model.addAttribute("roles", roleList);
+			return "edituser";
+		}
+
+		userService.edit(user);
+
+		return "redirect:/listusers";
+	}
+	
 }

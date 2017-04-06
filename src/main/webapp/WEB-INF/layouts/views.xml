@@ -18,8 +18,13 @@
 	    <put-attribute name="current" value="user" cascade="true"/>
 	</definition>
 
-	<definition name="registration" extends="DefaultTemplate">
-	    <put-attribute name="body"	value="/WEB-INF/views/user/registration.jsp" />
+	<definition name="adduser" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/user/adduser.jsp" />
+	    <put-attribute name="current" value="user" cascade="true"/>
+	</definition>	
+	
+	<definition name="edituser" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/user/edituser.jsp" />
 	    <put-attribute name="current" value="user" cascade="true"/>
 	</definition>	
 	
