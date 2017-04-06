@@ -13,6 +13,12 @@
 	    <put-attribute name="current" value="issue" cascade="true"/>
 	</definition>
 	
+	<definition name="addissue" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/issue/addissue.jsp" />
+	    <put-attribute name="current" value="issue" cascade="true"/>
+	</definition>
+	
+	
 	<definition name="listusers" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/user/listusers.jsp" />
 	    <put-attribute name="current" value="user" cascade="true"/>
@@ -25,6 +31,11 @@
 	
 	<definition name="edituser" extends="DefaultTemplate">
 	    <put-attribute name="body"	value="/WEB-INF/views/user/edituser.jsp" />
+	    <put-attribute name="current" value="user" cascade="true"/>
+	</definition>	
+	
+	<definition name="changepassword" extends="DefaultTemplate">
+	    <put-attribute name="body"	value="/WEB-INF/views/user/changepassword.jsp" />
 	    <put-attribute name="current" value="user" cascade="true"/>
 	</definition>	
 	

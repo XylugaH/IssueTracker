@@ -12,6 +12,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="Issue")
@@ -28,7 +31,7 @@ public class Issue extends AbstractEntity{
 	
 	@OneToOne
 	@JoinColumn(name = "create_user_id")
-	private User createdBy;
+	private User createdBy = new User();
 	
 	@Column(name="modifyDate")
 	@Temporal(TemporalType.DATE)
@@ -36,30 +39,39 @@ public class Issue extends AbstractEntity{
 	
 	@OneToOne
 	@JoinColumn(name = "modify_user_id")
-	private User modifiedBy;
+	private User modifiedBy = new User();
 	
+	@NotEmpty
+	@Size(min=3, max=45)
 	@Column(name="summary", nullable=false)
 	private String summary;
 	
+	@NotEmpty
+	@Size(min=3, max=100)
 	@Column(name="description", nullable=false)
 	private String description;
 	
+	@NotEmpty
 	@OneToOne
 	@JoinColumn(name = "status_id")
 	private Status status;
 	
+	@NotEmpty
 	@OneToOne
 	@JoinColumn(name = "resolution_id")
 	private Resolution resolution;
 
+	@NotEmpty
 	@OneToOne
 	@JoinColumn(name = "type_id")
 	private Type type;
 	
+	@NotEmpty
 	@OneToOne
 	@JoinColumn(name = "priority_id")
 	private Priority priority;
 	
+	@NotEmpty
 	@OneToOne
 	@JoinColumn(name = "project_id")
 	private Project project;
@@ -67,6 +79,19 @@ public class Issue extends AbstractEntity{
 	@OneToOne
 	@JoinColumn(name = "assignee_user_id")
 	private User assignee;
+
+	
+	
+	public Issue() {
+		createdBy = new User();
+		modifiedBy = new User();
+		status = new Status();
+		resolution = new Resolution();
+		type = new Type();
+		priority = new Priority();
+		project = new Project();
+		assignee = new User();
+	}
 
 	public int getId() {
 		return id;

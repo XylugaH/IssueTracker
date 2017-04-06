@@ -13,41 +13,54 @@
 		<h4>Issue Tracker</h4>
 	</div>
 </div>
-${currentUser}
-<h3></h3>
-<hr color="red" size="10">
 
-<form method="POST" action="${pageContext.request.contextPath}/login"
-	class="form-horizontal">
+<c:choose>
+	<c:when test="${currentUser.role.id == 1}">
+		<h3></h3>
+		<hr color="red" size="10">
 
-	<div class="form-group">
-		<label class="col-sm-4 control-label">E-mail:</label>
-		<div class="col-sm-8">
-			<input type="text" name='email' id="email" class="form-control"
-				placeholder="Enter the E-mail" />
-		</div>
-	</div>
+		<form method="POST" action="${pageContext.request.contextPath}/login"
+			class="form-horizontal">
 
-	<div class="form-group">
-		<label class="col-sm-4 control-label">Password:</label>
-		<div class="col-sm-8">
-			<input type="password" name='password' id="password"
-				class="form-control" placeholder="Enter the E-mail" />
-		</div>
-	</div>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">E-mail:</label>
+				<div class="col-sm-8">
+					<input type="text" name='email' id="email" class="form-control"
+						placeholder="Enter the E-mail" />
+				</div>
+			</div>
 
-	<div style="color:red; text-align: center;">${errorOut}</div>
-	
-	<div style="text-align: right;">
-		<input type="submit" value="Sign in" class="btn btn-success" />
-	</div>
-</form>
-<hr size="10">
-<h4></h4>
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Password:</label>
+				<div class="col-sm-8">
+					<input type="password" name='password' id="password"
+						class="form-control" placeholder="Enter the E-mail" />
+				</div>
+			</div>
+
+			<div style="color: red; text-align: center;">${errorOut}</div>
+
+			<div style="text-align: right;">
+				<input type="submit" value="Sign in" class="btn btn-success" />
+			</div>
+		</form>
+		<hr size="10">
+		<h4></h4>
+	</c:when>
+	<c:otherwise>
+        <form method="POST" action="${pageContext.request.contextPath}/logout"
+			class="form-horizontal">
+
+			<div style="text-align: right;">
+				<input type="submit" value="Sign out" class="btn btn-success" />
+			</div>
+		</form>
+    </c:otherwise>
+</c:choose>
 
 <ul class="nav nav-pills nav-stacked">
 	<li class="${current == 'issue' ? 'active' : ''}"><a
-		href="${pageContext.request.contextPath}/">Issues</a></li>
+		href="${pageContext.request.contextPath}/listissues">Issues</a></li>
 	<li class="${current == 'status' ? 'active' : ''}"><a
 		href="${pageContext.request.contextPath}/liststatus">Statuses</a></li>
 	<li class="${current == 'type' ? 'active' : ''}"><a

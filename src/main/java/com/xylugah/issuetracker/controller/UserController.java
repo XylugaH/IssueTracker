@@ -3,6 +3,7 @@ package com.xylugah.issuetracker.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.xylugah.issuetracker.entity.Role;
 import com.xylugah.issuetracker.entity.User;
@@ -20,6 +23,7 @@ import com.xylugah.issuetracker.service.RoleService;
 import com.xylugah.issuetracker.service.UserService;
 
 @Controller
+@SessionAttributes("currentUser")
 public class UserController {
 
 	@Resource(name = "UserService")
@@ -35,22 +39,30 @@ public class UserController {
 		String errorMessage="Incorrect email or password";
 		if (password.isEmpty() || email.isEmpty()) {
 			model.addAttribute("errorOut", errorMessage);
-			return "listissues";
+			return "redirect:/listissues";
 		}
 		User user = userService.getByEmail(email);
 		if (user == null){
 			model.addAttribute("errorOut", errorMessage+"1");
-			return "listissues";
+			return "redirect:/listissues";
 		}
 		
 		if (!user.getPassword().equals(password)){
 			model.addAttribute("errorOut", errorMessage+"2");
-			return "listissues";
+			return "redirect:/listissues";
 		}
-
-		return "listissues";
+		model.addAttribute("currentUser", user);
+		return "redirect:/listissues";
 	}
 
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public String logout(SessionStatus status, HttpSession httpSession) {
+		status.setComplete();
+		User user = userService.getGuestUser();
+		httpSession.setAttribute("currentUser", user);
+		return "redirect:/listissues";
+	}
+	
 	@RequestMapping(value = "/listusers", method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
 		List<User> listUsers = userService.getAll();
@@ -64,17 +76,16 @@ public class UserController {
 		List<Role> roleList = roleService.getAll();
 		model.addAttribute("roles", roleList);
 		model.addAttribute("user", user);
-		model.addAttribute("edit", true);
 		return "edituser";
 	}
 
+	
 	@RequestMapping(value = "/adduser", method = RequestMethod.GET)
 	public String newUser(ModelMap model) {
 		User user = userService.getEmptyUser();
 		List<Role> roleList = roleService.getAll();
 		model.addAttribute("user", user);
 		model.addAttribute("roles", roleList);
-		model.addAttribute("edit", false);
 		return "adduser";
 	}
 
@@ -111,5 +122,18 @@ public class UserController {
 
 		return "redirect:/listusers";
 	}
+
+	@RequestMapping(value = "/changePassword/{id}", method = RequestMethod.GET)
+	public String changePassword(@PathVariable int id, ModelMap model) {
+		User user = userService.getById(id);
+		model.addAttribute("user", user);
+		return "changepassword";
+	}
 	
+	@RequestMapping(value = "/savepassword", method = RequestMethod.GET)
+	public String savePassword(@PathVariable int id, ModelMap model) {
+		User user = userService.getById(id);
+		model.addAttribute("user", user);
+		return "changepassword";
+	}
 }
