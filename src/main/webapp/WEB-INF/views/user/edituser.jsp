@@ -3,14 +3,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
 <form:form method="POST"
-	action="${pageContext.request.contextPath}/saveuser"
+	action="${pageContext.request.contextPath}/updateuser"
 	modelAttribute="user" class="form-horizontal">
 	<div class="generic-container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h4>User Registration Form</h4>
+				<h4>Edit user ${user.email}</h4>
 			</div>
 		</div>
 

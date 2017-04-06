@@ -20,7 +20,7 @@
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Email</th>
-				<th width="100"><a href="<c:url value='/registration' />" class="btn btn-success">New user</a></th>
+				<th width="100"><a href="<c:url value='/adduser' />" class="btn btn-success">New user</a></th>
 			</tr>
 		</thead>
 		<tbody>
