@@ -28,6 +28,7 @@
 				<bean class="com.xylugah.issuetracker.converter.RoleIdToRoleConverter" />
 				<bean class="com.xylugah.issuetracker.converter.StatusIdToStatusConverter" />
 				<bean class="com.xylugah.issuetracker.converter.UserIdToUserConverter" />
+				<bean class="com.xylugah.issuetracker.converter.TypeIdToTypeConverter" />
 			</list>
 		</property>
 	</bean>
