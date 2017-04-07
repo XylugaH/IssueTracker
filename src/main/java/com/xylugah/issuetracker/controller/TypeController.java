@@ -32,30 +32,44 @@ public class TypeController {
 	@RequestMapping(value = "/edittype/{id}", method = RequestMethod.GET)
 	public String editType(@PathVariable int id, ModelMap model) {
 		Type type = typeService.getById(id);
+		if (type == null){
+			return "redirect:/listtypes";
+		}
 		model.addAttribute("type", type);
-		return "type";
+		return "edittype";
 	}
 	
 	@RequestMapping(value = "/addtype", method = RequestMethod.GET)
 	public String addType(ModelMap model) {
 		Type type = new Type();
 		model.addAttribute("type", type);
-		return "type";
+		return "addtype";
 	}
 	
 	@RequestMapping(value = { "/savetype" }, method = RequestMethod.POST)
-	public String saveStatus(@Valid Type type, BindingResult result,
+	public String saveType(@Valid Type type, BindingResult result,
 			ModelMap model) {
 
 		if (result.hasErrors()) {
-			return "type";
+			return "addtype";
 		}
 		
 		typeService.add(type);
-		List<Type> listTypes = typeService.getAll();
-		model.addAttribute("listtypes", listTypes);
 		
-		return "listtypes";
+		return "redirect:/listtypes";
+	}
+	
+	@RequestMapping(value = { "/updatetype" }, method = RequestMethod.POST)
+	public String updateType(@Valid Type type, BindingResult result,
+			ModelMap model) {
+
+		if (result.hasErrors()) {
+			return "edittype";
+		}
+		
+		typeService.edit(type);
+		
+		return "redirect:/listtypes";
 	}
 	
 }

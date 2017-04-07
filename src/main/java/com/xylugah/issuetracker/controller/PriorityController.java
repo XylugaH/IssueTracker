@@ -15,48 +15,58 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.xylugah.issuetracker.entity.Priority;
 import com.xylugah.issuetracker.service.PriorityService;
 
-
 @Controller
 public class PriorityController {
 
-	@Resource(name ="PriorityService")
+	@Resource(name = "PriorityService")
 	private PriorityService priorityService;
-	
-	
+
 	@RequestMapping(value = "/listpriorities", method = RequestMethod.GET)
-	public String listPriorityes(ModelMap model){
+	public String listPriorityes(ModelMap model) {
 		List<Priority> listPriorities = priorityService.getAll();
 		model.addAttribute("listpriorities", listPriorities);
 		return "listpriorities";
 	}
-	
-	@RequestMapping(value = "/editpriority/{id}", method = RequestMethod.GET)
-	public String editPriority(@PathVariable int id, ModelMap model) {
-		Priority priority = priorityService.getById(id);
-		model.addAttribute("priority", priority);
-		return "priority";
-	}
-	
+
 	@RequestMapping(value = "/addpriority", method = RequestMethod.GET)
 	public String addPriority(ModelMap model) {
 		Priority priority = new Priority();
 		model.addAttribute("priority", priority);
-		return "priority";
+		return "addpriority";
 	}
-	
+
 	@RequestMapping(value = { "/savepriority" }, method = RequestMethod.POST)
-	public String saveStatus(@Valid Priority priority, BindingResult result,
-			ModelMap model) {
+	public String savePriority(@Valid Priority priority, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
-			return "priority";
+			return "addpriority";
 		}
-		
+
 		priorityService.add(priority);
-		List<Priority> listPriorityes = priorityService.getAll();
-		model.addAttribute("listpriorities", listPriorityes);
-		
-		return "listpriorities";
+
+		return "redirect:/listpriorities";
 	}
-	
+
+	@RequestMapping(value = "/editpriority/{id}", method = RequestMethod.GET)
+	public String editPriority(@PathVariable int id, ModelMap model) {
+		Priority priority = priorityService.getById(id);
+		if (priority == null) {
+			return "redirect:/listpriorities";
+		}
+		model.addAttribute("priority", priority);
+		return "editpriority";
+	}
+
+	@RequestMapping(value = { "/updatepriority" }, method = RequestMethod.POST)
+	public String updatePriority(@Valid Priority priority, BindingResult result, ModelMap model) {
+
+		if (result.hasErrors()) {
+			return "editpriority";
+		}
+
+		priorityService.edit(priority);
+
+		return "redirect:/listpriorities";
+	}
+
 }

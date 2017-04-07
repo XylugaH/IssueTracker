@@ -66,8 +66,7 @@ public class Build extends AbstractEntity{
 
 	@Override
 	public String toString() {
-		return "Build [id=" + id + ", name=" + name + "]";
+		return "Build [id=" + id + ", name=" + name + ", project=" + project + "]";
 	}
-	
 	
 }

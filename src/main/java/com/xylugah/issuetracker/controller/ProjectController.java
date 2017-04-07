@@ -19,29 +19,43 @@ import com.xylugah.issuetracker.service.UserService;
 
 @Controller
 public class ProjectController {
-	
-	@Resource(name ="ProjectService")
+
+	@Resource(name = "ProjectService")
 	private ProjectService projectService;
-	
-	@Resource(name ="UserService")
+
+	@Resource(name = "UserService")
 	private UserService userService;
-	
+
 	@RequestMapping(value = "/listprojects", method = RequestMethod.GET)
-	public String listProjects(ModelMap model){
+	public String listProjects(ModelMap model) {
 		List<Project> listProjects = projectService.getAll();
 		model.addAttribute("listprojects", listProjects);
 		return "listprojects";
 	}
-	
+
 	@RequestMapping(value = "/addproject", method = RequestMethod.GET)
 	public String addProject(ModelMap model) {
 		Project project = projectService.getEmptyProject();
 		List<User> userList = userService.getAll();
 		model.addAttribute("project", project);
 		model.addAttribute("users", userList);
-		return "newproject";
+		return "addproject";
 	}
-	
+
+	@RequestMapping(value = { "/saveproject" }, method = RequestMethod.POST)
+	public String saveProject(@Valid Project project, BindingResult result, ModelMap model) {
+		System.out.println(project);
+		if (result.hasErrors()) {
+			List<User> userList = userService.getAll();
+			model.addAttribute("users", userList);
+			return "addproject";
+		}
+		project.getBuilds().get(0).setProject(project);
+		projectService.add(project);
+
+		return "redirect:/listprojects";
+	}
+
 	@RequestMapping(value = "/editproject/{id}", method = RequestMethod.GET)
 	public String editProject(@PathVariable int id, ModelMap model) {
 		Project project = projectService.getById(id);
@@ -51,22 +65,5 @@ public class ProjectController {
 		model.addAttribute("users", userList);
 		return "project";
 	}
-	
-	@RequestMapping(value = { "/saveproject" }, method = RequestMethod.POST)
-	public String saveProject(@Valid Project project, BindingResult result,
-			ModelMap model) {
-		System.out.println(project);
-		if (result.hasErrors()) {
-			List<User> userList = userService.getAll();
-			model.addAttribute("users", userList);
-			return "project";
-		}
-		
-		projectService.add(project);
-		
-		List<Project> listProjects = projectService.getAll();
-		model.addAttribute("listprojects", listProjects);
-		return "listprojects";
-	}
-	
+
 }
