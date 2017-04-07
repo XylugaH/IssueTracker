@@ -5,14 +5,15 @@
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		<h4>New type</h4>
+		<h4>Edit status ${status.name}</h4>
 	</div>
 </div>
 <form:form method="POST"
-	action="${pageContext.request.contextPath}/savetype"
-	modelAttribute="type" class="form-horizontal">
+	action="${pageContext.request.contextPath}/updatestatus"
+	modelAttribute="status" class="form-horizontal">
 
 	<form:input type="hidden" path="id" id="id" />
+
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Name</label>
 		<div class="col-sm-6">
@@ -24,9 +25,9 @@
 		</div>
 	</div>
 
-
 	<div class="text-right">
 		<input type="submit" value="Save" class="btn btn-success" /> <a
-			href="<c:url value='/listtypes' />" class="btn btn-danger">Cancel</a>
+			href="<c:url value='/liststatus' />" class="btn btn-danger">Cancel</a>
 	</div>
+
 </form:form>

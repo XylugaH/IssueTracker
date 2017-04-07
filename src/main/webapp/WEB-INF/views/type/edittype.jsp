@@ -5,11 +5,11 @@
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		<h4>New type</h4>
+		<h4>Edit type ${type.name}</h4>
 	</div>
 </div>
 <form:form method="POST"
-	action="${pageContext.request.contextPath}/savetype"
+	action="${pageContext.request.contextPath}/updatetype"
 	modelAttribute="type" class="form-horizontal">
 
 	<form:input type="hidden" path="id" id="id" />
