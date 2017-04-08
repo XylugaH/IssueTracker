@@ -3,11 +3,12 @@ package com.xylugah.issuetracker.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,10 +16,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.Priority;
 import com.xylugah.issuetracker.service.PriorityService;
+import com.xylugah.issuetracker.validator.PriorityValidator;
 
 @Controller
 @SessionAttributes("currentUser")
 public class PriorityController {
+
+	@Autowired
+	private PriorityValidator priorityValidator;
 
 	@Resource(name = "PriorityService")
 	private PriorityService priorityService;
@@ -38,8 +43,14 @@ public class PriorityController {
 	}
 
 	@RequestMapping(value = { "/savepriority" }, method = RequestMethod.POST)
-	public String savePriority(@Valid Priority priority, BindingResult result, ModelMap model) {
+	public String savePriority(@ModelAttribute("priority") Priority priority, BindingResult result, ModelMap model) {
 
+		priorityValidator.validate(priority, result);
+
+		if (priorityService.getByName(priority.getName()) != null
+				|| priorityService.getById(priority.getId()) != null) {
+			result.rejectValue("name", "Duplicate.priority");
+		}
 		if (result.hasErrors()) {
 			return "addpriority";
 		}
@@ -60,7 +71,17 @@ public class PriorityController {
 	}
 
 	@RequestMapping(value = { "/updatepriority" }, method = RequestMethod.POST)
-	public String updatePriority(@Valid Priority priority, BindingResult result, ModelMap model) {
+	public String updatePriority(@ModelAttribute("priority") Priority priority, BindingResult result, ModelMap model) {
+
+		priorityValidator.validate(priority, result);
+
+		if (priorityService.getByName(priority.getName()) != null) {
+			result.rejectValue("name", "Duplicate.priority");
+		}
+
+		if (priorityService.getById(priority.getId()) == null) {
+			result.rejectValue("name", "NotFound.priority");
+		}
 
 		if (result.hasErrors()) {
 			return "editpriority";

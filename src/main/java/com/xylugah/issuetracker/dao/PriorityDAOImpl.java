@@ -2,6 +2,8 @@ package com.xylugah.issuetracker.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.xylugah.issuetracker.entity.Priority;
@@ -15,6 +17,14 @@ public class PriorityDAOImpl extends AbstractDAO<Integer, Priority> implements P
 		return priority;
 	}
 
+	@SuppressWarnings("deprecation")
+	@Override
+	public Priority getByName(String name){
+		Criteria criteria = getSession().createCriteria(Priority.class);
+		Priority priority = (Priority) criteria.add(Restrictions.eq("name", name)).uniqueResult();
+		return priority;
+	}
+	
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<Priority> getAll() {

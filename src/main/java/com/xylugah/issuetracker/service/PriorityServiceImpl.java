@@ -24,6 +24,13 @@ public class PriorityServiceImpl implements PriorityService{
 
 	@Transactional
 	@Override
+	public Priority getByName(String name){
+		Priority priority = dao.getByName(name);
+		return priority;
+	}
+	
+	@Transactional
+	@Override
 	public List<Priority> getAll() {
 		List<Priority> priorityList = dao.getAll();
 		return priorityList;

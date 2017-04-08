@@ -8,6 +8,8 @@ public interface PriorityService {
 
 	Priority getById(int id);
 	
+	Priority getByName(String name);
+	
 	List<Priority> getAll();
 	
 	void add(Priority priority);
