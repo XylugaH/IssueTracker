@@ -2,6 +2,8 @@ package com.xylugah.issuetracker.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.xylugah.issuetracker.entity.Resolution;
@@ -15,6 +17,15 @@ public class ResolutionDAOImpl extends AbstractDAO<Integer, Resolution> implemen
 		return resolution;
 	}
 
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public Resolution getByName(String name){
+		Criteria criteria = getSession().createCriteria(Resolution.class);
+		Resolution resolution = (Resolution) criteria.add(Restrictions.eq("name", name)).uniqueResult(); 
+		return resolution;
+	}
+	
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<Resolution> getAll() {

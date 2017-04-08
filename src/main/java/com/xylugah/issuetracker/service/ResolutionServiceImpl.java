@@ -24,6 +24,13 @@ public class ResolutionServiceImpl implements ResolutionService{
 
 	@Transactional
 	@Override
+	public Resolution getByName(String name) {
+		Resolution resolution = dao.getByName(name);
+		return resolution;
+	}
+	
+	@Transactional
+	@Override
 	public List<Resolution> getAll() {
 		List<Resolution> resolutionList = dao.getAll();
 		return resolutionList;

@@ -8,6 +8,8 @@ public interface ResolutionDAO {
 	
 	Resolution getById(int id);
 	
+	Resolution getByName(String name);
+	
 	List<Resolution> getAll();
 	
 	void add(Resolution resolution);
