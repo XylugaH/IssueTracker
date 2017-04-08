@@ -18,7 +18,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/issue/addissue.jsp" />
 		<put-attribute name="current" value="issue" cascade="true" />
 	</definition>
-
+	
+	<definition name="editissue" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/issue/editissue.jsp" />
+		<put-attribute name="current" value="issue" cascade="true" />
+	</definition>
 
 	<definition name="listusers" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/user/listusers.jsp" />
