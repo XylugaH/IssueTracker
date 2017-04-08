@@ -8,9 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 
 @Entity
@@ -22,8 +19,6 @@ public class Build extends AbstractEntity{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@NotEmpty
-	@Size(min=3, max=45)
 	@Column(name="name", nullable=false)
 	private String name;
 

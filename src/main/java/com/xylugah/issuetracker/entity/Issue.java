@@ -12,10 +12,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="Issue")
@@ -42,17 +38,12 @@ public class Issue extends AbstractEntity{
 	@JoinColumn(name = "modify_user_id")
 	private User modifiedBy = new User();
 	
-	@NotEmpty
-	@Size(min=3, max=45)
 	@Column(name="summary", nullable=false)
 	private String summary;
 	
-	@NotEmpty
-	@Size(min=3, max=100)
 	@Column(name="description", nullable=false)
 	private String description;
 	
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "status_id")
 	private Status status;
@@ -61,17 +52,14 @@ public class Issue extends AbstractEntity{
 	@JoinColumn(name = "resolution_id")
 	private Resolution resolution;
 
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "type_id")
 	private Type type;
 	
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "priority_id")
 	private Priority priority;
 	
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "project_id")
 	private Project project;

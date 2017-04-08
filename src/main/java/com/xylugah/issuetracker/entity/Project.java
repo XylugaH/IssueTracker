@@ -13,10 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="Project")
@@ -27,20 +23,15 @@ public class Project extends AbstractEntity{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@NotEmpty
-	@Size(min=3, max=45)
 	@Column(name="name", nullable=false)
 	private String name;
 	
-	@NotEmpty
-	@Size(max=100)
 	@Column(name="description", nullable=false)
 	private String description;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
 	private List<Build> builds;
 	
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "manager_user_id")
 	private User manager;

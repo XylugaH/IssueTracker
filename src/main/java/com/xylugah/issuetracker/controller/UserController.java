@@ -115,7 +115,9 @@ public class UserController {
 	
 	@RequestMapping(value = { "/updateuser" }, method = RequestMethod.POST)
 	public String updateUser(@ModelAttribute("user") User user, BindingResult result, ModelMap model) {
-
+		
+		userValidator.validate(user, result);
+		
 		if (result.hasErrors()) {
 			List<Role> roleList = roleService.getAll();
 			model.addAttribute("roles", roleList);
