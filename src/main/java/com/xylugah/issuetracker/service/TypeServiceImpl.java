@@ -24,6 +24,13 @@ public class TypeServiceImpl implements TypeService{
 
 	@Transactional
 	@Override
+	public Type getByName(String name){
+		Type type = dao.getByName(name);
+		return type;
+	}
+	
+	@Transactional
+	@Override
 	public List<Type> getAll() {
 		List<Type> typeList = dao.getAll();
 		return typeList;

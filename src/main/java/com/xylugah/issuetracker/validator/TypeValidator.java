@@ -1,11 +1,13 @@
 package com.xylugah.issuetracker.validator;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.xylugah.issuetracker.entity.Type;
 
+@Component
 public class TypeValidator implements Validator {
 
 	@Override

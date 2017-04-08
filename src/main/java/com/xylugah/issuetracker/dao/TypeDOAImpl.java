@@ -2,6 +2,8 @@ package com.xylugah.issuetracker.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.xylugah.issuetracker.entity.Type;
@@ -14,7 +16,15 @@ public class TypeDOAImpl extends AbstractDAO<Integer, Type> implements TypeDAO{
 		Type type = (Type) getSession().get(Type.class, id);
 		return type;
 	}
-
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public Type getByName(String name){
+		Criteria criteria = getSession().createCriteria(Type.class);
+		Type type = (Type) criteria.add(Restrictions.eq("name", name)).uniqueResult();
+		return type;
+	}
+	
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<Type> getAll() {

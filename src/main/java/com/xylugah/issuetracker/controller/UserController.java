@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,17 +97,17 @@ public class UserController {
 	public String saveUser(@ModelAttribute("user") User user, BindingResult result, ModelMap model) {
 		userValidator.validate(user, result);
 		
+		if (userService.getByEmail(user.getEmail()) != null || userService.getById(user.getId()) != null) {
+			result.rejectValue("email", "Duplicate.user.email");
+		}
+		
 		if (result.hasErrors()) {
 			List<Role> roleList = roleService.getAll();
 			model.addAttribute("roles", roleList);
 			return "adduser";
 		}
 		
-		if (userService.getByEmail(user.getEmail()) != null || userService.getById(user.getId()) != null) {
-			FieldError addError = new FieldError("user", "email", "Duplicate.user.email");
-			result.addError(addError);
-			return "adduser";
-		}
+
 		userService.add(user);
 
 		return "redirect:/listusers";

@@ -22,11 +22,11 @@ import com.xylugah.issuetracker.validator.TypeValidator;
 @SessionAttributes("currentUser")
 public class TypeController {
 
-	@Resource(name ="TypeService")
-	private TypeService typeService;
-	
 	@Autowired
     private TypeValidator typeValidator;
+
+	@Resource(name ="TypeService")
+	private TypeService typeService;
 	
 	@RequestMapping(value = "/listtypes", method = RequestMethod.GET)
 	public String listTypes(ModelMap model){
@@ -58,6 +58,10 @@ public class TypeController {
 		
 		typeValidator.validate(type, result);
 		
+		if (typeService.getByName(type.getName()) != null || typeService.getById(type.getId()) != null) {
+			result.rejectValue("name", "Duplicate.type");
+		}
+		
 		if (result.hasErrors()) {
 			return "addtype";
 		}
@@ -72,6 +76,10 @@ public class TypeController {
 			ModelMap model) {
 
 		typeValidator.validate(type, result);
+		
+		if (typeService.getByName(type.getName()) != null) {
+			result.rejectValue("name", "Duplicate.type");
+		}
 		
 		if (result.hasErrors()) {
 			return "edittype";
