@@ -3,11 +3,12 @@ package com.xylugah.issuetracker.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.Type;
 import com.xylugah.issuetracker.service.TypeService;
+import com.xylugah.issuetracker.validator.TypeValidator;
 
 @Controller
 @SessionAttributes("currentUser")
@@ -23,6 +25,8 @@ public class TypeController {
 	@Resource(name ="TypeService")
 	private TypeService typeService;
 	
+	@Autowired
+    private TypeValidator typeValidator;
 	
 	@RequestMapping(value = "/listtypes", method = RequestMethod.GET)
 	public String listTypes(ModelMap model){
@@ -49,9 +53,11 @@ public class TypeController {
 	}
 	
 	@RequestMapping(value = { "/savetype" }, method = RequestMethod.POST)
-	public String saveType(@Valid Type type, BindingResult result,
+	public String saveType(@ModelAttribute("type") Type type, BindingResult result,
 			ModelMap model) {
-
+		
+		typeValidator.validate(type, result);
+		
 		if (result.hasErrors()) {
 			return "addtype";
 		}
@@ -62,9 +68,11 @@ public class TypeController {
 	}
 	
 	@RequestMapping(value = { "/updatetype" }, method = RequestMethod.POST)
-	public String updateType(@Valid Type type, BindingResult result,
+	public String updateType(@ModelAttribute("type") Type type, BindingResult result,
 			ModelMap model) {
 
+		typeValidator.validate(type, result);
+		
 		if (result.hasErrors()) {
 			return "edittype";
 		}
