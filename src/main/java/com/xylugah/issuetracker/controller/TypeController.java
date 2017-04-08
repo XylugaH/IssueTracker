@@ -81,6 +81,10 @@ public class TypeController {
 			result.rejectValue("name", "Duplicate.type");
 		}
 		
+		if (typeService.getById(type.getId()) == null) {
+			result.rejectValue("name", "NotFound.type");
+		}
+		
 		if (result.hasErrors()) {
 			return "edittype";
 		}

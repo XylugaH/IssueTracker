@@ -22,7 +22,8 @@ public class StatusServiceImpl implements StatusService {
 		Status status = dao.getById(id);
 		return status;
 	}
-
+	
+	@Transactional
 	@Override
 	public Status getByName(String name) {
 		Status status = dao.getByName(name);
