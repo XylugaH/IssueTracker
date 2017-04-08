@@ -11,11 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.Type;
 import com.xylugah.issuetracker.service.TypeService;
 
 @Controller
+@SessionAttributes("currentUser")
 public class TypeController {
 
 	@Resource(name ="TypeService")

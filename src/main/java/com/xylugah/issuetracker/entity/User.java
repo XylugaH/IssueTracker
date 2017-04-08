@@ -1,17 +1,9 @@
 package com.xylugah.issuetracker.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.xylugah.issuetracker.validator.FieldEquals;
 
 @Entity
 @Table(name="User")
-@FieldEquals( field="password", equalsTo="passwordConfirm" )
 public class User extends AbstractEntity{
 	
 	@Id
@@ -19,31 +11,21 @@ public class User extends AbstractEntity{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@NotEmpty
-	@Size(min=3, max=45)
 	@Column(name="firstName", nullable=false)
 	private String firstName;
 	
-	@NotEmpty
-	@Size(min=3, max=45)
 	@Column(name="lastName", nullable=false)
 	private String lastName;
 	
-	@NotEmpty
-	@Size(min=3, max=45)
 	@Column(name="password", nullable=false)
 	private String password;
 	
-	@NotEmpty
-	@Size(min=3, max=45)
 	@Transient
 	private String passwordConfirm;
 	
-	@Email
 	@Column(name="email", nullable=false)
 	private String email;
 	
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "role_id")
 	private Role role;

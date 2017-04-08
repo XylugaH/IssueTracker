@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,9 @@ public class UserServiceImpl implements UserService{
 
 	@Autowired
 	private UserDAO dao;
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
 	@Transactional
@@ -41,6 +45,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public void add(User user) {
+		//user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		dao.add(user);
 	}
 

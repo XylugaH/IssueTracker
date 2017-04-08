@@ -12,11 +12,13 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.Status;
 import com.xylugah.issuetracker.service.StatusService;
 
 @Controller
+@SessionAttributes("currentUser")
 public class StatusController {
 
 	@Resource(name = "StatusService")

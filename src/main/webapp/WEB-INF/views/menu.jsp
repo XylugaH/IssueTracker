@@ -5,7 +5,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles-extras"
 	prefix="tilesx"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-
+<%@ page session="true" %>
 <tilesx:useAttribute name="current" />
 
 <div class="panel panel-primary">
@@ -14,6 +14,7 @@
 	</div>
 </div>
 
+<c:out value="${sessionScope.currentUser}"/>
 <c:choose>
 	<c:when test="${currentUser.role.id == 1}">
 		<h3></h3>

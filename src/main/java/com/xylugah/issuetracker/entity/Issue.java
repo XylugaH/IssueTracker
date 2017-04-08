@@ -57,7 +57,6 @@ public class Issue extends AbstractEntity{
 	@JoinColumn(name = "status_id")
 	private Status status;
 	
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "resolution_id")
 	private Resolution resolution;
@@ -236,5 +235,16 @@ public class Issue extends AbstractEntity{
 		this.assignee = assignee;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "Issue [id=" + id + ", createDate=" + createDate + ", createdBy=" + createdBy + ", modifyDate="
+				+ modifyDate + ", modifiedBy=" + modifiedBy + ", summary=" + summary + ", description=" + description
+				+ ", status=" + status + ", resolution=" + resolution + ", type=" + type + ", priority=" + priority
+				+ ", project=" + project + ", assignee=" + assignee + "]";
+	}
+
+	
 		
 }

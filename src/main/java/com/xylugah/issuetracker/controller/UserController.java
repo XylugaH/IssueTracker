@@ -3,13 +3,13 @@ package com.xylugah.issuetracker.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +21,7 @@ import com.xylugah.issuetracker.entity.Role;
 import com.xylugah.issuetracker.entity.User;
 import com.xylugah.issuetracker.service.RoleService;
 import com.xylugah.issuetracker.service.UserService;
+import com.xylugah.issuetracker.validator.UserValidator;
 
 @Controller
 @SessionAttributes("currentUser")
@@ -32,6 +33,8 @@ public class UserController {
 	@Resource(name = "RoleService")
 	private RoleService roleService;
 
+	@Autowired
+    private UserValidator userValidator;
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam("password") String password, @RequestParam("email") String email,
@@ -51,15 +54,17 @@ public class UserController {
 			model.addAttribute("errorOut", errorMessage+"2");
 			return "redirect:/listissues";
 		}
+
 		model.addAttribute("currentUser", user);
+		
 		return "redirect:/listissues";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public String logout(SessionStatus status, HttpSession httpSession) {
+	public String logout(SessionStatus status, ModelMap model) {
 		status.setComplete();
-		User user = userService.getGuestUser();
-		httpSession.setAttribute("currentUser", user);
+		
+		model.addAttribute("currentUser", userService.getGuestUser());
 		return "redirect:/listissues";
 	}
 	
@@ -90,8 +95,9 @@ public class UserController {
 	}
 
 	@RequestMapping(value = { "/saveuser" }, method = RequestMethod.POST)
-	public String saveUser(@Valid User user, BindingResult result, ModelMap model) {
-
+	public String saveUser(@ModelAttribute("user") User user, BindingResult result, ModelMap model) {
+		userValidator.validate(user, result);
+		
 		if (result.hasErrors()) {
 			List<Role> roleList = roleService.getAll();
 			model.addAttribute("roles", roleList);
@@ -99,18 +105,17 @@ public class UserController {
 		}
 		
 		if (userService.getByEmail(user.getEmail()) != null || userService.getById(user.getId()) != null) {
-			FieldError addError = new FieldError("user", "email", "Not unique email or Id");
+			FieldError addError = new FieldError("user", "email", "Duplicate.user.email");
 			result.addError(addError);
 			return "adduser";
 		}
-
 		userService.add(user);
 
 		return "redirect:/listusers";
 	}
 	
 	@RequestMapping(value = { "/updateuser" }, method = RequestMethod.POST)
-	public String updateUser(@Valid User user, BindingResult result, ModelMap model) {
+	public String updateUser(@ModelAttribute("user") User user, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
 			List<Role> roleList = roleService.getAll();

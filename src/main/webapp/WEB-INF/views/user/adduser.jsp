@@ -78,7 +78,8 @@
 				<form:select path="role" class="form-control" id="role">
 					<option selected="selected" disabled>Select the role</option>
 					<c:forEach items="${roles}" var="role">
-						<option value="${role.id}">${role.name}</option>
+						<option ${role.id == user.role.id ? 'selected' : ''}
+							value="${role.id}">${role.name}</option>
 					</c:forEach>
 				</form:select>
 				<div style="color: red">

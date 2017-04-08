@@ -1,5 +1,6 @@
 package com.xylugah.issuetracker.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,10 @@ public class IssueServiceImpl implements IssueService{
 	@Transactional
 	@Override
 	public void add(Issue issue) {
+		Date date = new Date();
+		issue.setCreateDate(date);
+		issue.setModifyDate(date);
+		System.out.println(issue);
 		dao.add(issue);
 	}
 

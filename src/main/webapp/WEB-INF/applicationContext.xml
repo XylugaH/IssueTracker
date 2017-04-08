@@ -33,13 +33,20 @@
 		</property>
 	</bean>
 
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>classpath:validation</value>
+            </list>
+        </property>
+    </bean>
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
 		<property name="defaultLocale" value="en" />
 	</bean>
 
 	<import resource="hibernateContext.xml" />
-
+	<import resource="secureContext.xml" />
 
 	<context:annotation-config />
 </beans>
