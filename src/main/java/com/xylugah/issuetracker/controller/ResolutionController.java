@@ -3,11 +3,12 @@ package com.xylugah.issuetracker.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,10 +16,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.Resolution;
 import com.xylugah.issuetracker.service.ResolutionService;
+import com.xylugah.issuetracker.validator.ResolutionValidator;
 
 @Controller
 @SessionAttributes("currentUser")
 public class ResolutionController {
+
+	@Autowired
+	private ResolutionValidator resolutionValidator;
 
 	@Resource(name = "ResolutionService")
 	private ResolutionService resolutionService;
@@ -48,7 +53,15 @@ public class ResolutionController {
 	}
 
 	@RequestMapping(value = { "/saveresolution" }, method = RequestMethod.POST)
-	public String saveResolution(@Valid Resolution resolution, BindingResult result, ModelMap model) {
+	public String saveResolution(@ModelAttribute("resolution") Resolution resolution, BindingResult result,
+			ModelMap model) {
+
+		resolutionValidator.validate(resolution, result);
+
+		if (resolutionService.getByName(resolution.getName()) != null
+				|| resolutionService.getById(resolution.getId()) != null) {
+			result.rejectValue("name", "Duplicate.resolution");
+		}
 
 		if (result.hasErrors()) {
 			return "addresolution";
@@ -60,7 +73,18 @@ public class ResolutionController {
 	}
 
 	@RequestMapping(value = { "/updateresolution" }, method = RequestMethod.POST)
-	public String updateResolution(@Valid Resolution resolution, BindingResult result, ModelMap model) {
+	public String updateResolution(@ModelAttribute("resolution") Resolution resolution, BindingResult result,
+			ModelMap model) {
+
+		resolutionValidator.validate(resolution, result);
+
+		if (resolutionService.getByName(resolution.getName()) != null) {
+			result.rejectValue("name", "Duplicate.resolution");
+		}
+
+		if (resolutionService.getById(resolution.getId()) == null) {
+			result.rejectValue("name", "NotFound.resolution");
+		}
 
 		if (result.hasErrors()) {
 			return "editresolution";
