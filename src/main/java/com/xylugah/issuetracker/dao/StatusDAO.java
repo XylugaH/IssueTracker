@@ -8,6 +8,8 @@ public interface StatusDAO {
 	
 	Status getById(int id);
 	
+	Status getByName(String name);
+	
 	List<Status> getAll();
 	
 	void add(Status status);

@@ -11,9 +11,8 @@ import com.xylugah.issuetracker.dao.StatusDAO;
 import com.xylugah.issuetracker.entity.Status;
 
 @Service("StatusService")
-public class StatusServiceImpl implements StatusService{
+public class StatusServiceImpl implements StatusService {
 
-	
 	@Autowired
 	private StatusDAO dao;
 
@@ -24,6 +23,12 @@ public class StatusServiceImpl implements StatusService{
 		return status;
 	}
 
+	@Override
+	public Status getByName(String name) {
+		Status status = dao.getByName(name);
+		return status;
+	}
+	
 	@Transactional
 	@Override
 	public List<Status> getAll() {
@@ -40,7 +45,7 @@ public class StatusServiceImpl implements StatusService{
 	@Transactional
 	@Override
 	public void delete(int id) {
-		dao.delete(id);		
+		dao.delete(id);
 	}
 
 	@Transactional
@@ -54,6 +59,5 @@ public class StatusServiceImpl implements StatusService{
 		Status status = new Status();
 		return status;
 	}
-	
-	
+
 }
