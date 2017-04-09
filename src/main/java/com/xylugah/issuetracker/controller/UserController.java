@@ -19,6 +19,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.xylugah.issuetracker.entity.Role;
 import com.xylugah.issuetracker.entity.User;
 import com.xylugah.issuetracker.service.RoleService;
+import com.xylugah.issuetracker.service.SecurityService;
 import com.xylugah.issuetracker.service.UserService;
 import com.xylugah.issuetracker.validator.UserValidator;
 
@@ -34,8 +35,18 @@ public class UserController {
 
 	@Autowired
     private UserValidator userValidator;
+	
+	@Autowired
+    private SecurityService securityService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(ModelMap model) {
+		System.out.println("weeew");
+		
+		return "redirect:/listissues";
+	}
+	
+/*	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam("password") String password, @RequestParam("email") String email,
 			ModelMap model) {
 		String errorMessage="Incorrect email or password";
@@ -57,7 +68,7 @@ public class UserController {
 		model.addAttribute("currentUser", user);
 		
 		return "redirect:/listissues";
-	}
+	}*/
 
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public String logout(SessionStatus status, ModelMap model) {

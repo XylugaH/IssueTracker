@@ -15,7 +15,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 INSERT INTO user VALUES (1,"guest","guest","guest","guest",1);
-INSERT INTO  user VALUES (2,"admin","admin","admin","admin@admin.com",3);
+INSERT INTO  user VALUES (2,"admin","admin","$2a$11$MmNXphksqwYLE.eMGXW60eQgUnxlc6BtrvLeSYhrK42BkwJpJXcWC","admin@admin.com",3);
 
 CREATE TABLE  role (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
