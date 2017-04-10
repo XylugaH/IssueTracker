@@ -21,10 +21,12 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.xylugah.issuetracker.entity.Role;
 import com.xylugah.issuetracker.entity.User;
 import com.xylugah.issuetracker.entity.util.Password;
+import com.xylugah.issuetracker.entity.util.UserProfile;
 import com.xylugah.issuetracker.service.RoleService;
 import com.xylugah.issuetracker.service.SecurityService;
 import com.xylugah.issuetracker.service.UserService;
 import com.xylugah.issuetracker.validator.PasswordValidator;
+import com.xylugah.issuetracker.validator.UserProfileValidator;
 import com.xylugah.issuetracker.validator.UserValidator;
 
 @Controller
@@ -39,6 +41,9 @@ public class UserController {
 
 	@Autowired
     private UserValidator userValidator;
+	
+	@Autowired
+    private UserProfileValidator userProfileValidator;
 	
 	@Autowired
     private PasswordValidator passwordValidator;
@@ -142,6 +147,7 @@ public class UserController {
 		return "redirect:/listusers";
 	}
 
+	
 	@RequestMapping(value = "/changepassword", method = RequestMethod.GET)
 	public String changePassword(ModelMap model) {
 		Password password = new Password();
@@ -165,4 +171,36 @@ public class UserController {
 		
 		return "redirect:/listissues";
 	}
+	
+	@RequestMapping(value = "/editprofile", method = RequestMethod.GET)
+	public String editProfile(ModelMap model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.getByEmail(auth.getName());
+		UserProfile userProfile = new UserProfile();
+		userProfile.setFirstName(user.getFirstName());
+		userProfile.setLastName(user.getLastName());
+		userProfile.setEmail(user.getEmail());
+		model.addAttribute("userprofile", userProfile);
+		return "editprofile";
+	}
+	
+	@RequestMapping(value = "/saveprofile", method = RequestMethod.POST)
+	public String saveProfile(@ModelAttribute("userprofile") UserProfile userProfile, BindingResult result, ModelMap model) {
+		userProfileValidator.validate(userProfile, result);
+		
+		if (result.hasErrors()) {
+			return "editprofile";
+		}
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.getByEmail(auth.getName());
+		user.setFirstName(userProfile.getFirstName());
+		user.setLastName(userProfile.getLastName());
+		user.setEmail(userProfile.getEmail());
+		
+		userService.edit(user);
+		
+		return "redirect:/listissues";
+	}
+	
 }

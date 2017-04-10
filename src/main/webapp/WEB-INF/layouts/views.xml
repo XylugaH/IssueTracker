@@ -45,6 +45,12 @@
 		<put-attribute name="current" value="changepassword" cascade="true" />
 	</definition>
 
+	<definition name="editprofile" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/user/editprofile.jsp" />
+		<put-attribute name="current" value="editprofile" cascade="true" />
+	</definition>
+	
 	<definition name="listStatus" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/status/liststatus.jsp" />

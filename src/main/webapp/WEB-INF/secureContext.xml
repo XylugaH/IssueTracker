@@ -13,7 +13,9 @@
 		<intercept-url pattern="/listissues" access="permitAll" />
 
 		<intercept-url pattern="/editprofile" access="isAuthenticated()" />
+		<intercept-url pattern="/saveprofile" access="isAuthenticated()" />
 		<intercept-url pattern="/changepassword" access="isAuthenticated()" />
+		<intercept-url pattern="/savepassword" access="isAuthenticated()" />
 		<intercept-url pattern="/logout" access="isAuthenticated()" />
 		
 		
