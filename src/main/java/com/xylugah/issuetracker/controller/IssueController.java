@@ -89,6 +89,7 @@ public class IssueController {
 			model.addAttribute("users", users);
 			return "addissue";
 		}
+
 		issue.setCreatedBy(userService.getById(1));
 		issue.setModifiedBy(userService.getById(1));
 		issueService.add(issue);
@@ -136,7 +137,7 @@ public class IssueController {
 			model.addAttribute("priorities", priorities);
 			model.addAttribute("projects", projects);
 			model.addAttribute("users", users);
-			return "editissueissue";
+			return "editissue";
 		}
 
 		issueService.edit(issue);

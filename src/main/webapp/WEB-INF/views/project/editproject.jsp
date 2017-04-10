@@ -4,11 +4,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <form:form method="POST"
-	action="${pageContext.request.contextPath}/saveproject"
+	action="${pageContext.request.contextPath}/updateproject"
 	modelAttribute="project" class="form-horizontal">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<h4>Edit project</h4>
+			<h4>Edit project ${project.name}</h4>
 		</div>
 	</div>
 
@@ -37,13 +37,13 @@
 	</div>
 
 	<div class="form-group">
-		<label class="col-sm-2 control-label">Build</label>
+		<label class="col-sm-2 control-label">Builds</label>
 		<div class="col-sm-6">
-			<form:input type="text" path="builds[0].name" id="builds[0].name"
-				class="form-control" placeholder="Enter the description" rows="3" />
-			<div style="color: red">
-				<form:errors path="builds[0].name" class="help-inline" />
-			</div>
+			<form:select path="builds" class="form-control" id="builds">
+				<c:forEach items="${project.builds}" var="build">
+					<option value="${build.id}" disabled>${build.name}</option>
+				</c:forEach>
+			</form:select>
 		</div>
 	</div>
 
@@ -51,14 +51,14 @@
 		<label class="col-sm-2 control-label">Manager</label>
 		<div class="col-sm-6">
 			<form:select path="manager" class="form-control" id="manager">
-				<option selected="selected" disabled>Select the manager</option>
 				<c:forEach items="${users}" var="user">
-					<option value="${user.id}">${user.firstName}</option>
+					<option ${user.id == project.manager.id ? 'selected' : ''}
+						value="${user.id}">${user.firstName}</option>
 				</c:forEach>
 			</form:select>
-		</div>
-		<div style="color: red">
-			<form:errors path="manager" class="help-inline" />
+			<div style="color: red">
+				<form:errors path="manager" class="help-inline" />
+			</div>
 		</div>
 	</div>
 
@@ -67,5 +67,24 @@
 			href="<c:url value='/listprojects' />" class="btn btn-danger">Cancel</a>
 	</div>
 
-
 </form:form>
+
+<form method="POST" action="${pageContext.request.contextPath}/addbuild"
+	class="form-horizontal">
+	<div class="form-group">
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" /> <input type="hidden" name="project"
+			value="${project.id}" /> <label class="col-sm-2 control-label">New
+			build</label>
+		<div class="col-sm-6">
+			<input type="text" name="name" class="form-control"
+				placeholder="Enter the name" />
+			<div style="color: red">
+				<form:errors path="name" class="help-inline" />
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<input type="submit" value="Add new build" class="btn btn-success" />
+		</div>
+	</div>
+</form>

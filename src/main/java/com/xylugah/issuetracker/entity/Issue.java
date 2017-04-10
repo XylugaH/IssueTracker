@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name="Issue")
 public class Issue extends AbstractEntity{
@@ -22,6 +24,7 @@ public class Issue extends AbstractEntity{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name="createDate")
 	@Temporal(TemporalType.DATE)
 	private Date createDate;
@@ -30,6 +33,7 @@ public class Issue extends AbstractEntity{
 	@JoinColumn(name = "create_user_id")
 	private User createdBy = new User();
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name="modifyDate")
 	@Temporal(TemporalType.DATE)
 	private Date modifyDate;

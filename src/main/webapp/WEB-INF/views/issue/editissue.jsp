@@ -19,9 +19,8 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Create date</label>
 			<div class="col-sm-6">
-				<form:label path="createDate" class="form-control">
-					${issue.createDate}
-				</form:label>
+				<form:input type="text" path="createDate" id="createDate"
+					class="form-control" readonly="true" />
 				<div style="color: red">
 					<form:errors path="createDate" class="error" />
 				</div>
@@ -43,9 +42,8 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Modify date</label>
 			<div class="col-sm-6">
-				<form:label path="modifyDate" class="form-control">
-					${issue.modifyDate}
-				</form:label>
+				<form:input type="text" path="modifyDate" id="modifyDate"
+					class="form-control" readonly="true" />
 				<div style="color: red">
 					<form:errors path="modifyDate" class="error" />
 				</div>
@@ -128,8 +126,7 @@
 			<div class="col-sm-6">
 				<form:select path="type" class="form-control" id="type">
 					<c:if test="${issue.type == null}">
-						<option selected="selected" disabled>Select the
-							type</option>
+						<option selected="selected" disabled>Select the type</option>
 					</c:if>
 					<c:forEach items="${types}" var="type">
 						<option ${type.id == issue.type.id ? 'selected' : ''}
@@ -147,8 +144,7 @@
 			<div class="col-sm-6">
 				<form:select path="priority" class="form-control" id="priority">
 					<c:if test="${issue.priority == null}">
-						<option selected="selected" disabled>Select the
-							priority</option>
+						<option selected="selected" disabled>Select the priority</option>
 					</c:if>
 					<c:forEach items="${priorities}" var="priority">
 						<option ${priority.id == issue.priority.id ? 'selected' : ''}
@@ -164,10 +160,9 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Project</label>
 			<div class="col-sm-6">
-				<form:select path="priority" class="form-control" id="priority">
+				<form:select path="project" class="form-control" id="project">
 					<c:if test="${issue.project == null}">
-						<option selected="selected" disabled>Select the
-							project</option>
+						<option selected="selected" disabled>Select the project</option>
 					</c:if>
 					<c:forEach items="${projects}" var="project">
 						<option ${project.id == issue.project.id ? 'selected' : ''}
@@ -185,8 +180,7 @@
 			<div class="col-sm-6">
 				<form:select path="priority" class="form-control" id="priority">
 					<c:if test="${issue.assignee == null}">
-						<option selected="selected" disabled>Select the
-							assignee</option>
+						<option selected="selected" disabled>Select the assignee</option>
 					</c:if>
 					<c:forEach items="${users}" var="user">
 						<option ${user.id == issue.assignee.id ? 'selected' : ''}

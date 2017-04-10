@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.xylugah.issuetracker.entity.Build;
 import com.xylugah.issuetracker.entity.Project;
 import com.xylugah.issuetracker.entity.User;
+import com.xylugah.issuetracker.service.BuildService;
 import com.xylugah.issuetracker.service.ProjectService;
 import com.xylugah.issuetracker.service.UserService;
 import com.xylugah.issuetracker.validator.ProjectValidator;
@@ -27,9 +29,12 @@ public class ProjectController {
 
 	@Autowired
 	private ProjectValidator projectValidator;
-	
+		
 	@Resource(name = "ProjectService")
 	private ProjectService projectService;
+	
+	@Resource(name = "BuildService")
+	private BuildService buildService;
 
 	@Resource(name = "UserService")
 	private UserService userService;
@@ -71,10 +76,40 @@ public class ProjectController {
 	public String editProject(@PathVariable int id, ModelMap model) {
 		Project project = projectService.getById(id);
 		List<User> userList = userService.getAll();
-		System.out.println(project.getBuilds());
 		model.addAttribute("project", project);
 		model.addAttribute("users", userList);
-		return "project";
+		return "editproject";
+	}
+	
+	@RequestMapping(value = { "/updateproject" }, method = RequestMethod.POST)
+	public String updateProject(@ModelAttribute("project") Project project, BindingResult result, ModelMap model) {
+		projectValidator.validate(project, result);
+
+		if (result.hasErrors()) {
+			List<User> userList = userService.getAll();
+			model.addAttribute("users", userList);
+			return "editproject";
+		}
+		
+		projectService.add(project);
+
+		return "redirect:/listprojects";
 	}
 
+	@RequestMapping(value = "/addbuild", method = RequestMethod.POST)
+	public String addBuild(@ModelAttribute("build") Build build, ModelMap model, BindingResult result) {
+		
+		if (result.hasErrors()) {
+			Project project = build.getProject();
+			List<User> userList = userService.getAll();
+			model.addAttribute("project", project);
+			model.addAttribute("users", userList);
+			return "editproject";
+		}
+		
+		buildService.add(build);
+
+		return "redirect:/editproject/"+build.getProject().getId();
+	}
+	
 }

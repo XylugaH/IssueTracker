@@ -14,42 +14,17 @@ CREATE TABLE  user (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO user VALUES (1,"guest","guest","guest","guest",1);
-INSERT INTO  user VALUES (2,"admin","admin","$2a$11$MmNXphksqwYLE.eMGXW60eQgUnxlc6BtrvLeSYhrK42BkwJpJXcWC","admin@admin.com",3);
+INSERT INTO  user VALUES (1,"admin","admin","$2a$11$MmNXphksqwYLE.eMGXW60eQgUnxlc6BtrvLeSYhrK42BkwJpJXcWC","admin@admin.com",2);
 
 CREATE TABLE  role (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(45) NOT NULL,
-  issueView TINYINT(1) NULL DEFAULT 0,
-  issueEdit TINYINT(1) NULL DEFAULT 0,
-  issueClose TINYINT(1) NULL DEFAULT 0,
-  issueReopen TINYINT(1) NULL DEFAULT 0,
-  issueAssignment TINYINT(1) NULL DEFAULT 0,
-  issueFind TINYINT(1) NULL DEFAULT 0,
-  userAdd TINYINT(1) NULL DEFAULT 0,
-  userFind TINYINT(1) NULL DEFAULT 0,
-  userEdit TINYINT(1) NULL DEFAULT 0,
-  userViewAllData TINYINT(1) NULL DEFAULT 0,
-  userEditAllData TINYINT(1) NULL DEFAULT 0,
-  projectAdd TINYINT(1) NULL DEFAULT 0,
-  projectEdit TINYINT(1) NULL DEFAULT 0,
-  statustEdit TINYINT(1) NULL DEFAULT 0,
-  resolutionAdd TINYINT(1) NULL DEFAULT 0,
-  resolucinEdit TINYINT(1) NULL DEFAULT 0,
-  priorityAdd TINYINT(1) NULL DEFAULT 0,
-  priorityEdit TINYINT(1) NULL DEFAULT 0,
-  typeAdd TINYINT(1) NULL DEFAULT 0,
-  typeEdit TINYINT(1) NULL DEFAULT 0,
-  messageGet TINYINT(1) NULL DEFAULT 0,
-  commentAdd TINYINT(1) NULL DEFAULT 0,
-  fileAdd TINYINT(1) NULL DEFAULT 0
+  name VARCHAR(45) NOT NULL
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-INSERT INTO  role VALUES (1,"GUEST",1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
-INSERT INTO  role VALUES (2,"USER",1,1,1,1,1,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,1);
-INSERT INTO  role VALUES (3,"ADMINISTRATOR",1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+INSERT INTO  role VALUES (1,"ROLE_USER");
+INSERT INTO  role VALUES (2,"ROLE_ADMIN");
 
 CREATE TABLE  status (
   id INT NOT NULL AUTO_INCREMENT,
@@ -123,8 +98,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-INSERT INTO issue VALUES
-(1,"04.04.2017",1,"04.04.2017",2,"testsum","test description",2,3,2,3,1,1);
 
 CREATE TABLE project (
   id INT NOT NULL AUTO_INCREMENT ,
@@ -136,10 +109,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-INSERT INTO issuetrackerdb.project
-(id,name,description,manager_user_id)
-VALUES
-(1,"testProject","It is the first test project",2);
 
 CREATE TABLE build (
   id INT NOT NULL AUTO_INCREMENT ,
@@ -152,12 +121,3 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-INSERT INTO build
-(id,name,project_id)
-VALUES
-(1,"1.0v",1);
-
-INSERT INTO issuetrackerdb.build
-(id,name,project_id)
-VALUES
-(2,"1.12v",1);

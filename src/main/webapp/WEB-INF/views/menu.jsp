@@ -65,6 +65,7 @@
 <ul class="nav nav-pills nav-stacked">
 	<li class="${current == 'issue' ? 'active' : ''}"><a
 		href="${contextPath}/listissues">Issues</a></li>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
 	<li class="${current == 'status' ? 'active' : ''}"><a
 		href="${contextPath}/liststatus">Statuses</a></li>
 	<li class="${current == 'type' ? 'active' : ''}"><a
@@ -77,5 +78,6 @@
 		href="${contextPath}/listprojects">Projects</a></li>
 	<li class="${current == 'user' ? 'active' : ''}"><a
 		href="${contextPath}/listusers">Users</a></li>
+		</sec:authorize>
 </ul>
 <br>
