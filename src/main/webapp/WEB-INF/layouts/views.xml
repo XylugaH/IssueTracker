@@ -42,7 +42,7 @@
 	<definition name="changepassword" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/user/changepassword.jsp" />
-		<put-attribute name="current" value="user" cascade="true" />
+		<put-attribute name="current" value="changepassword" cascade="true" />
 	</definition>
 
 	<definition name="listStatus" extends="DefaultTemplate">

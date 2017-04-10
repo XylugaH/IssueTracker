@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,9 +20,11 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.xylugah.issuetracker.entity.Role;
 import com.xylugah.issuetracker.entity.User;
+import com.xylugah.issuetracker.entity.util.Password;
 import com.xylugah.issuetracker.service.RoleService;
 import com.xylugah.issuetracker.service.SecurityService;
 import com.xylugah.issuetracker.service.UserService;
+import com.xylugah.issuetracker.validator.PasswordValidator;
 import com.xylugah.issuetracker.validator.UserValidator;
 
 @Controller
@@ -37,7 +41,8 @@ public class UserController {
     private UserValidator userValidator;
 	
 	@Autowired
-    private SecurityService securityService;
+    private PasswordValidator passwordValidator;
+	
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(ModelMap model) {
@@ -137,17 +142,27 @@ public class UserController {
 		return "redirect:/listusers";
 	}
 
-	@RequestMapping(value = "/changePassword/{id}", method = RequestMethod.GET)
-	public String changePassword(@PathVariable int id, ModelMap model) {
-		User user = userService.getById(id);
-		model.addAttribute("user", user);
+	@RequestMapping(value = "/changepassword", method = RequestMethod.GET)
+	public String changePassword(ModelMap model) {
+		Password password = new Password();
+		model.addAttribute("password", password);
 		return "changepassword";
 	}
 	
-	@RequestMapping(value = "/savepassword", method = RequestMethod.GET)
-	public String savePassword(@PathVariable int id, ModelMap model) {
-		User user = userService.getById(id);
-		model.addAttribute("user", user);
-		return "changepassword";
+	@RequestMapping(value = "/savepassword", method = RequestMethod.POST)
+	public String savePassword(@ModelAttribute("password") Password password, BindingResult result, ModelMap model) {
+		passwordValidator.validate(password, result);
+		
+		if (result.hasErrors()) {
+			return "changepassword";
+		}
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User user = userService.getByEmail(auth.getName());
+		user.setPassword(password.getPassword());
+		
+		userService.edit(user);
+		
+		return "redirect:/listissues";
 	}
 }

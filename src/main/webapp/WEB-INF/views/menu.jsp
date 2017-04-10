@@ -22,9 +22,9 @@
 
 <sec:authorize access="isAuthenticated()">
 	<ul class="nav nav-pills nav-stacked">
-		<li class="${current == 'issue' ? 'active' : ''}"><a
+		<li class="${current == 'editprofile' ? 'active' : ''}"><a
 			href="${contextPath}/editprofile">Edit profile</a></li>
-		<li class="${current == 'status' ? 'active' : ''}"><a
+		<li class="${current == 'changepassword' ? 'active' : ''}"><a
 			href="${contextPath}/changepassword">Change password</a></li>
 	</ul>
 </sec:authorize>
