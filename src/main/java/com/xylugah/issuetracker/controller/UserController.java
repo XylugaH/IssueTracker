@@ -43,7 +43,7 @@ public class UserController {
 	public String login(ModelMap model) {
 		System.out.println("weeew");
 		
-		return "redirect:/listissues";
+		return "listissues";
 	}
 	
 /*	@RequestMapping(value = "/login", method = RequestMethod.POST)

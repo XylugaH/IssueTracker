@@ -3,11 +3,13 @@ package com.xylugah.issuetracker.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,11 +19,15 @@ import com.xylugah.issuetracker.entity.Project;
 import com.xylugah.issuetracker.entity.User;
 import com.xylugah.issuetracker.service.ProjectService;
 import com.xylugah.issuetracker.service.UserService;
+import com.xylugah.issuetracker.validator.ProjectValidator;
 
 @Controller
 @SessionAttributes("currentUser")
 public class ProjectController {
 
+	@Autowired
+	private ProjectValidator projectValidator;
+	
 	@Resource(name = "ProjectService")
 	private ProjectService projectService;
 
@@ -45,8 +51,11 @@ public class ProjectController {
 	}
 
 	@RequestMapping(value = { "/saveproject" }, method = RequestMethod.POST)
-	public String saveProject(@Valid Project project, BindingResult result, ModelMap model) {
-		System.out.println(project);
+	public String saveProject(@ModelAttribute("project") Project project, BindingResult result, ModelMap model) {
+		projectValidator.validate(project, result);
+		if(project.getBuilds().get(0).getName().isEmpty()){
+			result.rejectValue("builds", "Required");
+		}
 		if (result.hasErrors()) {
 			List<User> userList = userService.getAll();
 			model.addAttribute("users", userList);

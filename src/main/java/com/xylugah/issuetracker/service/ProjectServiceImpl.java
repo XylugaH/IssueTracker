@@ -1,6 +1,5 @@
 package com.xylugah.issuetracker.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xylugah.issuetracker.dao.ProjectDAO;
-import com.xylugah.issuetracker.entity.Build;
 import com.xylugah.issuetracker.entity.Project;
 
 @Service("ProjectService")
@@ -52,10 +50,6 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	public Project getEmptyProject() {
 		Project project = new Project();
-		Build build = new Build();
-		List<Build> builds = new ArrayList<>();
-		builds.add(build);
-		project.setBuilds(builds);
 		return project;
 	}
 

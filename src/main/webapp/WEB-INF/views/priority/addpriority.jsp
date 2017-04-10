@@ -15,7 +15,7 @@
 	<form:input type="hidden" path="id" id="id" />
 
 	<div class="form-group">
-		<label class="col-sm-2 control-label">First Name</label>
+		<label class="col-sm-2 control-label">Name</label>
 		<div class="col-sm-6">
 			<form:input type="text" path="name" id="name" class="form-control"
 				placeholder="Enter the name" />

@@ -1,15 +1,14 @@
 package com.xylugah.issuetracker.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,10 +16,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.*;
 import com.xylugah.issuetracker.service.*;
+import com.xylugah.issuetracker.validator.IssueValidator;
 
 @Controller
 @SessionAttributes("currentUser")
 public class IssueController {
+	
+	@Autowired
+	private IssueValidator issueValidator;
 	
 	@Resource(name ="IssueService")
 	private IssueService issueService;
@@ -69,10 +72,23 @@ public class IssueController {
 	}
 	
 	@RequestMapping(value = { "/saveissue" }, method = RequestMethod.POST)
-	public String saveIssue(@Valid Issue issue, BindingResult result, ModelMap model) {
-//		if (result.hasErrors()) {
-	//		return "addissue";
-		//}
+	public String saveIssue(@ModelAttribute("issue") Issue issue, BindingResult result, ModelMap model) {
+		issueValidator.validate(issue, result);
+		
+		if (result.hasErrors()) {
+			List<Status> statuses = statusService.getAll();
+			List<Type> types = typeService.getAll();
+			List<Priority> priorities = priorityService.getAll();
+			List<Project> projects = projectService.getAll();
+			List<User> users = userService.getAll();
+			model.addAttribute("issue", issue);
+			model.addAttribute("statuses", statuses);
+			model.addAttribute("types", types);
+			model.addAttribute("priorities", priorities);
+			model.addAttribute("projects", projects);
+			model.addAttribute("users", users);
+			return "addissue";
+		}
 		issue.setCreatedBy(userService.getById(1));
 		issue.setModifiedBy(userService.getById(1));
 		issueService.add(issue);
@@ -103,9 +119,23 @@ public class IssueController {
 	}
 	
 	@RequestMapping(value = { "/updateissue" }, method = RequestMethod.POST)
-	public String updateIssue(@Valid Issue issue, BindingResult result, ModelMap model) {
+	public String updateIssue(@ModelAttribute("issue") Issue issue, BindingResult result, ModelMap model) {
+		issueValidator.validate(issue, result);
 		
 		if (result.hasErrors()) {
+			List<Status> statuses = statusService.getAll();
+			List<Type> types = typeService.getAll();
+			List<Priority> priorities = priorityService.getAll();
+			List<Project> projects = projectService.getAll();
+			List<User> users = userService.getAll();
+			List<Resolution> resolutions = resolutionService.getAll();
+			model.addAttribute("issue", issue);
+			model.addAttribute("statuses", statuses);
+			model.addAttribute("resolutions", resolutions);
+			model.addAttribute("types", types);
+			model.addAttribute("priorities", priorities);
+			model.addAttribute("projects", projects);
+			model.addAttribute("users", users);
 			return "editissueissue";
 		}
 

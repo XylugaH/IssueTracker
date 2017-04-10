@@ -40,9 +40,9 @@
 		<label class="col-sm-2 control-label">Build</label>
 		<div class="col-sm-6">
 			<form:input type="text" path="builds[0].name" id="builds[0].name"
-				class="form-control" placeholder="Enter the description" rows="3" />
+				class="form-control" placeholder="Enter the build"/>
 			<div style="color: red">
-				<form:errors path="builds[0].name" class="help-inline" />
+				<form:errors path="builds" class="help-inline" />
 			</div>
 		</div>
 	</div>
