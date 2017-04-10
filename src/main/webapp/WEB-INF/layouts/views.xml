@@ -127,4 +127,11 @@
 			value="/WEB-INF/views/project/addproject.jsp" />
 		<put-attribute name="current" value="project" cascade="true" />
 	</definition>
+	
+	<definition name="page403" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/error/page403.jsp" />
+		<put-attribute name="current" value="issue" cascade="true" />
+	</definition>
+	
 </tiles-definitions>

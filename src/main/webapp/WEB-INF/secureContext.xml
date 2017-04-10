@@ -1,35 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/security
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http auto-config="true">
-        <intercept-url pattern="/" access="permitAll"/>
-        <intercept-url pattern="/listissues" access="permitAll"/>
-        <!-- 
-        <intercept-url pattern="/liststatus" access="hasRole('ADMINISTRATOR')"/>
- -->
-        <form-login login-page="/listissues" default-target-url="/listissues" authentication-failure-url="/login?error"
-                    username-parameter="username" password-parameter="password"/>
+	<http auto-config="true">
+		<access-denied-handler ref="page403" />
 
-        <logout logout-success-url="/login?logout"/>
-    </http>
+		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/listissues" access="permitAll" />
 
-    <authentication-manager alias="authenticationManager">
-        <authentication-provider user-service-ref="userDetailsServiceImpl">
-            <password-encoder ref="encoder"></password-encoder>
-        </authentication-provider>
-    </authentication-manager>
+		<intercept-url pattern="/editprofile" access="isAuthenticated()" />
+		<intercept-url pattern="/changepassword" access="isAuthenticated()" />
+		<intercept-url pattern="/logout" access="isAuthenticated()" />
+		
+		
+		<intercept-url pattern="/liststatus" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/listtypes" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/listresolutions" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/listpriorities" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/listprojects" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/listusers" access="hasRole('ROLE_ADMIN')" />
+ 
+		<form-login login-page="/listissues" default-target-url="/listissues"
+			authentication-failure-url="/login?error" username-parameter="username"
+			password-parameter="password" />
 
-    <beans:bean id="userDetailsServiceImpl"
-                class="com.xylugah.issuetracker.service.UserDetailsServiceImpl"></beans:bean>
+		
+		<logout logout-success-url="/logout" />
+	</http>
 
-    <beans:bean id="encoder"
-                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-        <beans:constructor-arg name="strength" value="11"/>
-    </beans:bean>
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailsServiceImpl">
+			<password-encoder ref="encoder"></password-encoder>
+		</authentication-provider>
+	</authentication-manager>
+
+	<beans:bean id="userDetailsServiceImpl"
+		class="com.xylugah.issuetracker.service.UserDetailsServiceImpl"></beans:bean>
+
+	<beans:bean id="encoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<beans:constructor-arg name="strength" value="11" />
+	</beans:bean>
+
+	<beans:bean id="page403"
+		class="com.xylugah.issuetracker.exception.AccessDeniedHandlerImpl">
+		<beans:property name="errorPage" value="page403" />
+	</beans:bean>
 </beans:beans>

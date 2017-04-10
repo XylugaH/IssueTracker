@@ -70,11 +70,8 @@ public class UserController {
 		return "redirect:/listissues";
 	}*/
 
-	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public String logout(SessionStatus status, ModelMap model) {
-		status.setComplete();
-		
-		model.addAttribute("currentUser", userService.getGuestUser());
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout() {
 		return "redirect:/listissues";
 	}
 	

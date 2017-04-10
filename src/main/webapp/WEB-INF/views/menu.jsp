@@ -19,7 +19,16 @@
 
 <h3></h3>
 <hr color="red" size="10">
-<sec:authentication property="principal" />
+
+<sec:authorize access="isAuthenticated()">
+	<ul class="nav nav-pills nav-stacked">
+		<li class="${current == 'issue' ? 'active' : ''}"><a
+			href="${contextPath}/editprofile">Edit profile</a></li>
+		<li class="${current == 'status' ? 'active' : ''}"><a
+			href="${contextPath}/changepassword">Change password</a></li>
+	</ul>
+</sec:authorize>
+
 <sec:authorize access="!isAuthenticated()">
 	<form method="POST" action="${contextPath}/login"
 		class="form-horizontal">
@@ -65,19 +74,19 @@
 <ul class="nav nav-pills nav-stacked">
 	<li class="${current == 'issue' ? 'active' : ''}"><a
 		href="${contextPath}/listissues">Issues</a></li>
-		<sec:authorize access="hasRole('ROLE_ADMIN')">
-	<li class="${current == 'status' ? 'active' : ''}"><a
-		href="${contextPath}/liststatus">Statuses</a></li>
-	<li class="${current == 'type' ? 'active' : ''}"><a
-		href="${contextPath}/listtypes">Types</a></li>
-	<li class="${current == 'resolution' ? 'active' : ''}"><a
-		href="${contextPath}/listresolutions">Resolutions</a></li>
-	<li class="${current == 'priority' ? 'active' : ''}"><a
-		href="${contextPath}/listpriorities">Priorities</a></li>
-	<li class="${current == 'project' ? 'active' : ''}"><a
-		href="${contextPath}/listprojects">Projects</a></li>
-	<li class="${current == 'user' ? 'active' : ''}"><a
-		href="${contextPath}/listusers">Users</a></li>
-		</sec:authorize>
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<li class="${current == 'status' ? 'active' : ''}"><a
+			href="${contextPath}/liststatus">Statuses</a></li>
+		<li class="${current == 'type' ? 'active' : ''}"><a
+			href="${contextPath}/listtypes">Types</a></li>
+		<li class="${current == 'resolution' ? 'active' : ''}"><a
+			href="${contextPath}/listresolutions">Resolutions</a></li>
+		<li class="${current == 'priority' ? 'active' : ''}"><a
+			href="${contextPath}/listpriorities">Priorities</a></li>
+		<li class="${current == 'project' ? 'active' : ''}"><a
+			href="${contextPath}/listprojects">Projects</a></li>
+		<li class="${current == 'user' ? 'active' : ''}"><a
+			href="${contextPath}/listusers">Users</a></li>
+	</sec:authorize>
 </ul>
 <br>

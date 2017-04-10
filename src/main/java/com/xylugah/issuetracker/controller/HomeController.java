@@ -11,4 +11,10 @@ public class HomeController {
 	public String home() {
 		return "redirect:/listissues";
 	}
+	
+	@RequestMapping(value = "/page403", method = RequestMethod.GET)
+	public String accessDenied() {		
+		return "page403";
+	}
+	
 }
