@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.*;
 import com.xylugah.issuetracker.service.*;
-import com.xylugah.issuetracker.validator.IssueValidator;
+import com.xylugah.issuetracker.validator.IssueValidatorAddForm;
 
 @Controller
 @SessionAttributes("currentUser")
 public class IssueController {
 	
 	@Autowired
-	private IssueValidator issueValidator;
+	private IssueValidatorAddForm issueValidatorAddForm;
 	
 	@Resource(name ="IssueService")
 	private IssueService issueService;
@@ -68,7 +68,7 @@ public class IssueController {
 	
 	@RequestMapping(value = { "/saveissue" }, method = RequestMethod.POST)
 	public String saveIssue(@ModelAttribute("issue") Issue issue, BindingResult result, ModelMap model) {
-		issueValidator.validate(issue, result);
+		issueValidatorAddForm.validate(issue, result);
 		
 		if (result.hasErrors()) {
 			getModelAttributes(model);
@@ -97,7 +97,7 @@ public class IssueController {
 	
 	@RequestMapping(value = { "/updateissue" }, method = RequestMethod.POST)
 	public String updateIssue(@ModelAttribute("issue") Issue issue, BindingResult result, ModelMap model) {
-		issueValidator.validate(issue, result);
+		//issueValidator.validate(issue, result);
 		
 		if (result.hasErrors()) {
 			getModelAttributes(model);
@@ -118,12 +118,14 @@ public class IssueController {
 		List<Project> projects = projectService.getAll();
 		List<User> users = userService.getAll();
 		List<Resolution> resolutions = resolutionService.getAll();
+		List<Build> builds = buildService.getAll();
 		model.addAttribute("statuses", statuses);
 		model.addAttribute("resolutions", resolutions);
 		model.addAttribute("types", types);
 		model.addAttribute("priorities", priorities);
 		model.addAttribute("projects", projects);
 		model.addAttribute("users", users);
+		model.addAttribute("builds", builds);
 	}
 	
 	private User getAuthenticationUser(){

@@ -203,7 +203,7 @@
 		</div>
 
 		<div class="text-right">
-			<input type="submit" value="Save" class="btn btn-success" /> <a
+			<input type="submit" value="Update" class="btn btn-success" /> <a
 				href="<c:url value='/listissues' />" class="btn btn-danger">Cancel</a>
 		</div>
 	</div>

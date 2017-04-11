@@ -26,24 +26,29 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
-    		<label class="col-sm-2 control-label">Description</label>
-    		<div class="col-sm-6">
-      			<form:textarea path="description" id="description" class="form-control" placeholder="Enter the description" rows="3"/>
-      			<div style="color: red">
-					<form:errors path="description" class="help-inline"/>
+			<label class="col-sm-2 control-label">Description</label>
+			<div class="col-sm-6">
+				<form:textarea path="description" id="description"
+					class="form-control" placeholder="Enter the description" rows="3" />
+				<div style="color: red">
+					<form:errors path="description" class="help-inline" />
 				</div>
-    		</div>
-  		</div>
- 
+			</div>
+		</div>
+
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Status</label>
 			<div class="col-sm-6">
 				<form:select path="status" class="form-control" id="status">
 					<option selected="selected" disabled>Select the status</option>
 					<c:forEach items="${statuses}" var="status">
-						<option value="${status.id}">${status.name}</option>
+						<c:if
+							test="${(status.name == 'New' || status.name == 'Assigned')}">
+							<option ${status.id == issue.status.id ? 'selected' : ''}
+								value="${status.id}">${status.name}</option>
+						</c:if>
 					</c:forEach>
 				</form:select>
 				<div style="color: red">
@@ -51,14 +56,15 @@
 				</div>
 			</div>
 		</div>
- 
- 		<div class="form-group">
+
+		<div class="form-group">
 			<label class="col-sm-2 control-label">Type</label>
 			<div class="col-sm-6">
 				<form:select path="type" class="form-control" id="type">
 					<option selected="selected" disabled>Select the type</option>
 					<c:forEach items="${types}" var="type">
-						<option value="${type.id}">${type.name}</option>
+						<option ${type.id == issue.type.id ? 'selected' : ''}
+							value="${type.id}">${type.name}</option>
 					</c:forEach>
 				</form:select>
 				<div style="color: red">
@@ -66,14 +72,15 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Priority</label>
 			<div class="col-sm-6">
 				<form:select path="priority" class="form-control" id="priority">
-				    <option selected="selected" disabled>Select the priority</option>
+					<option selected="selected" disabled>Select the priority</option>
 					<c:forEach items="${priorities}" var="priority">
-						<option value="${priority.id}">${priority.name}</option>
+						<option ${priority.id == issue.priority.id ? 'selected' : ''}
+							value="${priority.id}">${priority.name}</option>
 					</c:forEach>
 				</form:select>
 				<div style="color: red">
@@ -81,14 +88,15 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Project</label>
 			<div class="col-sm-6">
 				<form:select path="project" class="form-control" id="project">
 					<option selected="selected" disabled>Select the project</option>
 					<c:forEach items="${projects}" var="project">
-						<option value="${project.id}">${project.name}</option>
+						<option ${project.id == issue.project.id ? 'selected' : ''}
+							value="${project.id}">${project.name}</option>
 					</c:forEach>
 				</form:select>
 				<div style="color: red">
@@ -96,14 +104,15 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Build</label>
 			<div class="col-sm-6">
 				<form:select path="build" class="form-control" id="build">
 					<option selected="selected" disabled>Select the build</option>
 					<c:forEach items="${builds}" var="build">
-						<option value="${build.id}">${build.name}</option>
+						<option ${build.id == issue.build.id ? 'selected' : ''}
+							value="${build.id}">${build.name}</option>
 					</c:forEach>
 				</form:select>
 				<div style="color: red">
@@ -111,14 +120,15 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Assignee</label>
 			<div class="col-sm-6">
 				<form:select path="assignee" class="form-control" id="assignee">
-					<option selected="selected" disabled>Select the assignee</option>
+					<option selected="selected">Select the assignee</option>
 					<c:forEach items="${users}" var="user">
-						<option value="${user.id}">${user.firstName}</option>
+						<option ${user.id == issue.assignee.id ? 'selected' : ''}
+							value="${user.id}">${user.firstName}</option>
 					</c:forEach>
 				</form:select>
 				<div style="color: red">
@@ -126,9 +136,9 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="text-right">
-			<input type="submit" value="Save" class="btn btn-success" /> <a
+			<input type="submit" value="Add" class="btn btn-success" /> <a
 				href="<c:url value='/listissues' />" class="btn btn-danger">Cancel</a>
 		</div>
 	</div>

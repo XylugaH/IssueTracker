@@ -16,11 +16,10 @@ public class Status extends AbstractEntity{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="name", nullable=false)
+	@Column(name="Name")
 	private String name;
 	
 	public Status() {
-		super();
 	}
 
 	public Status(final String name) {
