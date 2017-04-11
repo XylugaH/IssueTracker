@@ -59,19 +59,8 @@ public class IssueController {
 	@RequestMapping(value = "/addissue", method = RequestMethod.GET)
 	public String newIssue(ModelMap model) {
 		Issue issue = issueService.getEmptyIssue();
-		List<Status> statuses = statusService.getAll();
-		List<Type> types = typeService.getAll();
-		List<Priority> priorities = priorityService.getAll();
-		List<Project> projects = projectService.getAll();
-		List<User> users = userService.getAll();
-		List<Build> builds = buildService.getAll();
+		getModelAttributes(model);
 		model.addAttribute("issue", issue);
-		model.addAttribute("statuses", statuses);
-		model.addAttribute("types", types);
-		model.addAttribute("priorities", priorities);
-		model.addAttribute("projects", projects);
-		model.addAttribute("builds", builds);
-		model.addAttribute("users", users);
 		return "addissue";
 	}
 	
@@ -80,17 +69,8 @@ public class IssueController {
 		issueValidator.validate(issue, result);
 		
 		if (result.hasErrors()) {
-			List<Status> statuses = statusService.getAll();
-			List<Type> types = typeService.getAll();
-			List<Priority> priorities = priorityService.getAll();
-			List<Project> projects = projectService.getAll();
-			List<User> users = userService.getAll();
+			getModelAttributes(model);
 			model.addAttribute("issue", issue);
-			model.addAttribute("statuses", statuses);
-			model.addAttribute("types", types);
-			model.addAttribute("priorities", priorities);
-			model.addAttribute("projects", projects);
-			model.addAttribute("users", users);
 			return "addissue";
 		}
 
@@ -107,19 +87,9 @@ public class IssueController {
 		if (issue == null) {
 			return "redirect:/listissues";
 		}
-		List<Status> statuses = statusService.getAll();
-		List<Type> types = typeService.getAll();
-		List<Priority> priorities = priorityService.getAll();
-		List<Project> projects = projectService.getAll();
-		List<User> users = userService.getAll();
-		List<Resolution> resolutions = resolutionService.getAll();
+		getModelAttributes(model);
 		model.addAttribute("issue", issue);
-		model.addAttribute("statuses", statuses);
-		model.addAttribute("resolutions", resolutions);
-		model.addAttribute("types", types);
-		model.addAttribute("priorities", priorities);
-		model.addAttribute("projects", projects);
-		model.addAttribute("users", users);
+
 		return "editissue";
 	}
 	
@@ -128,25 +98,29 @@ public class IssueController {
 		issueValidator.validate(issue, result);
 		
 		if (result.hasErrors()) {
-			List<Status> statuses = statusService.getAll();
-			List<Type> types = typeService.getAll();
-			List<Priority> priorities = priorityService.getAll();
-			List<Project> projects = projectService.getAll();
-			List<User> users = userService.getAll();
-			List<Resolution> resolutions = resolutionService.getAll();
+			getModelAttributes(model);
 			model.addAttribute("issue", issue);
-			model.addAttribute("statuses", statuses);
-			model.addAttribute("resolutions", resolutions);
-			model.addAttribute("types", types);
-			model.addAttribute("priorities", priorities);
-			model.addAttribute("projects", projects);
-			model.addAttribute("users", users);
 			return "editissue";
 		}
 
 		issueService.edit(issue);
 
 		return "redirect:/listissues";
+	}
+	
+	private void getModelAttributes(final ModelMap model){
+		List<Status> statuses = statusService.getAll();
+		List<Type> types = typeService.getAll();
+		List<Priority> priorities = priorityService.getAll();
+		List<Project> projects = projectService.getAll();
+		List<User> users = userService.getAll();
+		List<Resolution> resolutions = resolutionService.getAll();
+		model.addAttribute("statuses", statuses);
+		model.addAttribute("resolutions", resolutions);
+		model.addAttribute("types", types);
+		model.addAttribute("priorities", priorities);
+		model.addAttribute("projects", projects);
+		model.addAttribute("users", users);
 	}
 	
 }
