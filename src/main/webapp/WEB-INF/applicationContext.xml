@@ -29,6 +29,7 @@
 				<bean class="com.xylugah.issuetracker.converter.StatusIdToStatusConverter" />
 				<bean class="com.xylugah.issuetracker.converter.UserIdToUserConverter" />
 				<bean class="com.xylugah.issuetracker.converter.TypeIdToTypeConverter" />
+				<bean class="com.xylugah.issuetracker.converter.BuildIdToBuildConverter" />
 			</list>
 		</property>
 	</bean>
