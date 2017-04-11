@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -74,8 +76,8 @@ public class IssueController {
 			return "addissue";
 		}
 
-		issue.setCreatedBy(userService.getById(1));
-		issue.setModifiedBy(userService.getById(1));
+		issue.setCreatedBy(getAuthenticationUser());
+		issue.setModifiedBy(getAuthenticationUser());
 		issueService.add(issue);
 
 		return "redirect:/listissues";
@@ -103,6 +105,7 @@ public class IssueController {
 			return "editissue";
 		}
 
+		issue.setModifiedBy(getAuthenticationUser());
 		issueService.edit(issue);
 
 		return "redirect:/listissues";
@@ -121,6 +124,11 @@ public class IssueController {
 		model.addAttribute("priorities", priorities);
 		model.addAttribute("projects", projects);
 		model.addAttribute("users", users);
+	}
+	
+	private User getAuthenticationUser(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return userService.getByEmail(auth.getName());
 	}
 	
 }

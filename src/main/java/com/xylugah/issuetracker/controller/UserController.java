@@ -142,9 +142,7 @@ public class UserController {
 		if (result.hasErrors()) {
 			return "changepassword";
 		}
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.getByEmail(auth.getName());
+		User user = getAuthenticationUser();		
 		user.setPassword(password.getPassword());
 		
 		userService.edit(user);
@@ -154,8 +152,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/editprofile", method = RequestMethod.GET)
 	public String editProfile(ModelMap model) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.getByEmail(auth.getName());
+		User user = getAuthenticationUser();
 		UserProfile userProfile = new UserProfile();
 		userProfile.setFirstName(user.getFirstName());
 		userProfile.setLastName(user.getLastName());
@@ -171,9 +168,7 @@ public class UserController {
 		if (result.hasErrors()) {
 			return "editprofile";
 		}
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User user = userService.getByEmail(auth.getName());
+		User user = getAuthenticationUser();		
 		user.setFirstName(userProfile.getFirstName());
 		user.setLastName(userProfile.getLastName());
 		user.setEmail(userProfile.getEmail());
@@ -181,6 +176,11 @@ public class UserController {
 		userService.edit(user);
 		
 		return "redirect:/listissues";
+	}
+	
+	private User getAuthenticationUser(){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return userService.getByEmail(auth.getName());
 	}
 	
 }
