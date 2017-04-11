@@ -14,8 +14,17 @@
 			</div>
 		</div>
 
-		<form:input type="hidden" path="id" id="id" />
-
+		<div class="form-group">
+			<label class="col-sm-2 control-label">Id</label>
+			<div class="col-sm-6">
+				<form:input type="text" path="id" id="id"
+					class="form-control" readonly="true" />
+				<div style="color: red">
+					<form:errors path="id" class="error" />
+				</div>
+			</div>
+		</div>
+		
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Create date</label>
 			<div class="col-sm-6">

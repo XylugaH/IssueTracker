@@ -14,16 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 
 import com.xylugah.issuetracker.entity.Role;
 import com.xylugah.issuetracker.entity.User;
 import com.xylugah.issuetracker.entity.util.Password;
 import com.xylugah.issuetracker.entity.util.UserProfile;
 import com.xylugah.issuetracker.service.RoleService;
-import com.xylugah.issuetracker.service.SecurityService;
 import com.xylugah.issuetracker.service.UserService;
 import com.xylugah.issuetracker.validator.PasswordValidator;
 import com.xylugah.issuetracker.validator.UserProfileValidator;
@@ -50,35 +47,18 @@ public class UserController {
 	
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(ModelMap model) {
-		System.out.println("weeew");
+	public String login(ModelMap model, String error, String logout) {
+		
+		if (error != null) {
+            model.addAttribute("error", "Username or password is incorrect.");
+        }
+
+        if (logout != null) {
+            model.addAttribute("message", "Logged out successfully.");
+        }
 		
 		return "listissues";
 	}
-	
-/*	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@RequestParam("password") String password, @RequestParam("email") String email,
-			ModelMap model) {
-		String errorMessage="Incorrect email or password";
-		if (password.isEmpty() || email.isEmpty()) {
-			model.addAttribute("errorOut", errorMessage);
-			return "redirect:/listissues";
-		}
-		User user = userService.getByEmail(email);
-		if (user == null){
-			model.addAttribute("errorOut", errorMessage+"1");
-			return "redirect:/listissues";
-		}
-		
-		if (!user.getPassword().equals(password)){
-			model.addAttribute("errorOut", errorMessage+"2");
-			return "redirect:/listissues";
-		}
-
-		model.addAttribute("currentUser", user);
-		
-		return "redirect:/listissues";
-	}*/
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout() {

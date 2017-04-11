@@ -98,6 +98,21 @@
 		</div>
 		
 		<div class="form-group">
+			<label class="col-sm-2 control-label">Build</label>
+			<div class="col-sm-6">
+				<form:select path="build" class="form-control" id="build">
+					<option selected="selected" disabled>Select the build</option>
+					<c:forEach items="${builds}" var="build">
+						<option value="${build.id}">${build.name}</option>
+					</c:forEach>
+				</form:select>
+				<div style="color: red">
+					<form:errors path="build" class="help-inline" />
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
 			<label class="col-sm-2 control-label">Assignee</label>
 			<div class="col-sm-6">
 				<form:select path="assignee" class="form-control" id="assignee">

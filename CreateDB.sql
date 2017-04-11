@@ -91,6 +91,7 @@ CREATE TABLE issue (
   type_id INT NULL ,
   priority_id INT NULL ,
   project_id INT NULL ,
+  build_id INT NULL ,
   assignee_user_id INT NULL ,
   PRIMARY KEY (id)  ,
   UNIQUE INDEX id_UNIQUE (id ASC)  )

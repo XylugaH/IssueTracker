@@ -46,6 +46,8 @@ public class IssueController {
 	@Resource(name ="ResolutionService")
 	private ResolutionService resolutionService;
 	
+	@Resource(name ="BuildService")
+	private BuildService buildService;
 	
 	@RequestMapping(value = "/listissues", method = RequestMethod.GET)
 	public String issueList(ModelMap model){
@@ -62,11 +64,13 @@ public class IssueController {
 		List<Priority> priorities = priorityService.getAll();
 		List<Project> projects = projectService.getAll();
 		List<User> users = userService.getAll();
+		List<Build> builds = buildService.getAll();
 		model.addAttribute("issue", issue);
 		model.addAttribute("statuses", statuses);
 		model.addAttribute("types", types);
 		model.addAttribute("priorities", priorities);
 		model.addAttribute("projects", projects);
+		model.addAttribute("builds", builds);
 		model.addAttribute("users", users);
 		return "addissue";
 	}

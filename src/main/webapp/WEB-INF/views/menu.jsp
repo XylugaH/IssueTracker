@@ -16,10 +16,6 @@
 	</div>
 </div>
 
-
-<h3></h3>
-<hr color="red" size="10">
-
 <sec:authorize access="isAuthenticated()">
 	<ul class="nav nav-pills nav-stacked">
 		<li class="${current == 'editprofile' ? 'active' : ''}"><a
@@ -35,12 +31,16 @@
 
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
-		<div class="form-group">
+		<div style="color: red; text-align: center;">${error}</div>
+
+		<div class="form-group" ${error != null ? 'has-error' : ''}>
 			<label class="col-sm-4 control-label">E-mail:</label>
+
 			<div class="col-sm-8">
 				<input type="text" name='username' class="form-control"
 					placeholder="Enter the E-mail" />
 			</div>
+
 		</div>
 
 		<div class="form-group">
@@ -50,8 +50,6 @@
 					placeholder="Enter the E-mail" />
 			</div>
 		</div>
-
-		<div style="color: red; text-align: center;">${errorOut}</div>
 
 		<div style="text-align: right;">
 			<input type="submit" value="Sign in" class="btn btn-success" />
@@ -65,9 +63,14 @@
 		class="form-horizontal">
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
-		<div style="text-align: right;">
-			<input type="submit" value="Sign out" class="btn btn-success" />
+		<h2></h2>
+		<div class="form-group">
+			<label class="col-sm-8 control-label"><sec:authentication property="principal.username" /></label>
+			<div class="col-sm-4">
+				<input type="submit" value="Sign out" class="btn btn-success" />
+			</div>
 		</div>
+
 	</form>
 </sec:authorize>
 
