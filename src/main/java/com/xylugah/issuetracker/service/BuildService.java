@@ -7,6 +7,8 @@ import com.xylugah.issuetracker.entity.Build;
 public interface BuildService {
 
 	Build getById(int id);
+	
+	List<Build> getAll();
 
 	List<Build> getByProjectId(int id);
 

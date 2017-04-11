@@ -8,6 +8,8 @@ public interface BuildDAO {
 	
 	Build getById(int id);
 	
+	List<Build> getAll();
+	
 	List<Build> getByProjectId(int id);
 	
 	void add(Build build);

@@ -24,6 +24,13 @@ public class BuildServiceImpl implements BuildService{
 
 	@Transactional
 	@Override
+	public List<Build> getAll() {
+		List<Build> builds = dao.getAll();
+		return builds;
+	}
+	
+	@Transactional
+	@Override
 	public List<Build> getByProjectId(int id) {
 		List<Build> builds = dao.getByProjectId(id);
 		return builds;

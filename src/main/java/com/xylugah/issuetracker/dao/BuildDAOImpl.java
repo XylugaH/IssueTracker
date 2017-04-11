@@ -17,6 +17,13 @@ public class BuildDAOImpl extends AbstractDAO<Integer, Issue> implements BuildDA
 		return build;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Build> getAll(){
+		List<Build> buildList = (List<Build>)getSession().createQuery("from Build").list();
+		return buildList;
+	}
+	
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<Build> getByProjectId(int id) {
