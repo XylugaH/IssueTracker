@@ -36,7 +36,6 @@ public class IssueServiceImpl implements IssueService{
 		Date date = new Date();
 		issue.setCreateDate(date);
 		issue.setModifyDate(date);
-		System.out.println(issue);
 		dao.add(issue);
 	}
 
@@ -49,6 +48,8 @@ public class IssueServiceImpl implements IssueService{
 	@Transactional
 	@Override
 	public Issue edit(Issue issue) {
+		Date date = new Date();
+		issue.setModifyDate(date);
 		return dao.edit(issue);
 	}
 
