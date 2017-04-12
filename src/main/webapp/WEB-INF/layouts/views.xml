@@ -18,9 +18,14 @@
 		<put-attribute name="body" value="/WEB-INF/views/issue/addissue.jsp" />
 		<put-attribute name="current" value="issue" cascade="true" />
 	</definition>
-	
+
 	<definition name="editissue" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/issue/editissue.jsp" />
+		<put-attribute name="current" value="issue" cascade="true" />
+	</definition>
+
+	<definition name="viewissue" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/issue/viewissue.jsp" />
 		<put-attribute name="current" value="issue" cascade="true" />
 	</definition>
 
@@ -42,15 +47,17 @@
 	<definition name="changepassword" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/user/changepassword.jsp" />
-		<put-attribute name="current" value="changepassword" cascade="true" />
+		<put-attribute name="current" value="changepassword"
+			cascade="true" />
 	</definition>
 
 	<definition name="editprofile" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/user/editprofile.jsp" />
-		<put-attribute name="current" value="editprofile" cascade="true" />
+		<put-attribute name="current" value="editprofile"
+			cascade="true" />
 	</definition>
-	
+
 	<definition name="listStatus" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/status/liststatus.jsp" />
@@ -58,7 +65,8 @@
 	</definition>
 
 	<definition name="editstatus" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/status/editstatus.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/status/editstatus.jsp" />
 		<put-attribute name="current" value="status" cascade="true" />
 	</definition>
 
@@ -133,11 +141,10 @@
 			value="/WEB-INF/views/project/addproject.jsp" />
 		<put-attribute name="current" value="project" cascade="true" />
 	</definition>
-	
+
 	<definition name="page403" extends="DefaultTemplate">
-		<put-attribute name="body"
-			value="/WEB-INF/views/error/page403.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/error/page403.jsp" />
 		<put-attribute name="current" value="issue" cascade="true" />
 	</definition>
-	
+
 </tiles-definitions>

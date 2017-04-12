@@ -69,12 +69,9 @@
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
 		<h2></h2>
-		<div class="form-group">
-			<div class="col-sm-4">
-				<input type="submit" value="Sign out" class="btn btn-success" />
-			</div>
+		<div style="text-align: right;">
+			<input type="submit" value="Sign out" class="btn btn-success" />
 		</div>
-
 	</form>
 </sec:authorize>
 

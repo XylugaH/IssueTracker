@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
+
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <title>Issues</title>
@@ -14,10 +17,10 @@
 			</div>
 			<div style="width: 35%; float: left; margin-left: 15px;">
 				<div class="input-group">
-				<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
-					<input name = "crit" type="text" class="form-control" placeholder="Search issue">
-					<span class="input-group-btn">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" /> <input name="crit" type="text"
+						class="form-control" placeholder="Search issue"> <span
+						class="input-group-btn">
 						<button class="btn btn-default" type="submit">
 							&nbsp;&nbsp;&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;&nbsp;&nbsp;
 						</button>
@@ -43,8 +46,14 @@
 	<tbody>
 		<c:forEach items="${issues}" var="issue">
 			<tr>
-				<td><a href="<c:url value='/editissue/${issue.id}' />"><span
-						class="badge">${issue.id}</span></a></td>
+				<sec:authorize access="isAuthenticated()">
+					<td><a href="<c:url value='/editissue/${issue.id}' />"><span
+							class="badge">${issue.id}</span></a></td>
+				</sec:authorize>
+				<sec:authorize access="!isAuthenticated()">
+					<td><a href="<c:url value='/viewissue/${issue.id}' />"><span
+							class="badge">${issue.id}</span></a></td>
+				</sec:authorize>
 				<td>${issue.priority.name}</td>
 				<td>${issue.assignee.firstName}</td>
 				<td>${issue.type.name}</td>
