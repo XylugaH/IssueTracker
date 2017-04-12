@@ -30,9 +30,12 @@ public class Comment extends AbstractEntity{
 	@Temporal(TemporalType.DATE)
 	private Date createDate;
 	
+	@Column(name = "comment")
+	private String comment;
+	
 	@OneToOne
 	@JoinColumn(name = "create_user_id")
-	private User createdBy = new User();
+	private User createdBy;
 	
 	@ManyToOne
 	@JoinColumn(name = "issue_id")
@@ -52,6 +55,15 @@ public class Comment extends AbstractEntity{
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public User getCreatedBy() {
