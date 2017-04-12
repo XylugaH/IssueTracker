@@ -17,8 +17,8 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Id</label>
 			<div class="col-sm-6">
-				<form:input type="text" path="id" id="id"
-					class="form-control" readonly="true" />
+				<input type="text" class="form-control" readonly="readonly"
+					value="${issue.id}" />
 				<div style="color: red">
 					<form:errors path="id" class="error" />
 				</div>
@@ -28,8 +28,8 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Create date</label>
 			<div class="col-sm-6">
-				<form:input type="text" path="createDate" id="createDate"
-					class="form-control" readonly="true" />
+				<input type="text" class="form-control" readonly="readonly"
+					value="${issue.createDate}" />
 				<div style="color: red">
 					<form:errors path="createDate" class="error" />
 				</div>
@@ -39,9 +39,8 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Created by</label>
 			<div class="col-sm-6">
-				<form:label path="createdBy" class="form-control">
-					${issue.createdBy.firstName}
-				</form:label>
+				<input type="text" class="form-control" readonly="readonly"
+					value="${issue.createdBy.firstName}" />
 				<div style="color: red">
 					<form:errors path="createdBy" class="error" />
 				</div>
@@ -51,8 +50,8 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Modify date</label>
 			<div class="col-sm-6">
-				<form:input type="text" path="modifyDate" id="modifyDate"
-					class="form-control" readonly="true" />
+				<input type="text" class="form-control" readonly="readonly"
+					value="${issue.modifyDate}" />
 				<div style="color: red">
 					<form:errors path="modifyDate" class="error" />
 				</div>
@@ -62,9 +61,8 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Modified by</label>
 			<div class="col-sm-6">
-				<form:label path="modifiedBy" class="form-control">
-					${issue.modifiedBy.firstName}
-				</form:label>
+				<input type="text" class="form-control" readonly="readonly"
+					value="${issue.modifiedBy.firstName}" />
 				<div style="color: red">
 					<form:errors path="modifiedBy" class="error" />
 				</div>

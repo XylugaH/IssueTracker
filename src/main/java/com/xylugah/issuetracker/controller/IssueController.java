@@ -58,6 +58,20 @@ public class IssueController {
 		return "listissues";
 	}
 	
+	@RequestMapping(value = "/viewissue/{id}", method = RequestMethod.GET)
+	public String viewIssue(@PathVariable int id, ModelMap model) {
+		Issue issue = issueService.getById(id);
+		
+		if (issue == null) {
+			return "redirect:/listissues";
+		}
+		
+		getModelAttributes(model);
+		model.addAttribute("issue", issue);
+
+		return "viewissue";
+	}
+	
 	@RequestMapping(value = "/addissue", method = RequestMethod.GET)
 	public String newIssue(ModelMap model) {
 		Issue issue = issueService.getEmptyIssue();
