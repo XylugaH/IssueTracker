@@ -8,6 +8,8 @@ public interface IssueDAO {
 	
 	Issue getById(int id);
 	
+	List<Issue> getByName(String name);
+	
 	List<Issue> getAll();
 	
 	void add(Issue issue);

@@ -1,13 +1,17 @@
 package com.xylugah.issuetracker.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -16,7 +20,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "Issue")
+@Table(name = "issues")
 public class Issue extends AbstractEntity {
 
 	@Id
@@ -76,6 +80,9 @@ public class Issue extends AbstractEntity {
 	@JoinColumn(name = "assignee_user_id")
 	private User assignee;
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "issue", cascade = CascadeType.ALL)
+	private List<Comment> comments;
+	
 	public int getId() {
 		return id;
 	}
@@ -186,6 +193,15 @@ public class Issue extends AbstractEntity {
 
 	public void setAssignee(User assignee) {
 		this.assignee = assignee;
+	}
+
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 
 	@Override

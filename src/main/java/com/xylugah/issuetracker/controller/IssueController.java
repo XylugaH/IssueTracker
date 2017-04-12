@@ -111,6 +111,16 @@ public class IssueController {
 		return "redirect:/listissues";
 	}
 	
+	@RequestMapping(value = { "/search" }, method = RequestMethod.POST)
+	public String searchIssue(@ModelAttribute("crit") String crit, ModelMap model) {
+		System.out.println(crit);
+		List<Issue> issueList = issueService.getAll();
+		model.addAttribute("issues", issueList);
+
+		return "listissues";
+	}
+	
+	
 	private void getModelAttributes(final ModelMap model){
 		List<Status> statuses = statusService.getAll();
 		List<Type> types = typeService.getAll();
