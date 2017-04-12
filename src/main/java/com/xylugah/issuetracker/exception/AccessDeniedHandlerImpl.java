@@ -32,7 +32,6 @@ public class AccessDeniedHandlerImpl implements AccessDeniedHandler{
 	@Override
 	public void handle(HttpServletRequest paramHttpServletRequest, HttpServletResponse paramHttpServletResponse,
 			AccessDeniedException paramAccessDeniedException) throws IOException, ServletException {
-		System.out.println("111");
 		paramHttpServletResponse.sendRedirect(errorPage);
 	}
 

@@ -6,10 +6,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.xylugah.issuetracker.entity.Build;
-import com.xylugah.issuetracker.entity.Issue;
 
 @Repository("BuildDAO")
-public class BuildDAOImpl extends AbstractDAO<Integer, Issue> implements BuildDAO {
+public class BuildDAOImpl extends AbstractDAO<Integer, Build> implements BuildDAO {
 
 	@Override
 	public Build getById(int id) {

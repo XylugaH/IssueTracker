@@ -11,6 +11,7 @@
 
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/listissues" access="permitAll" />
+		<intercept-url pattern="/search" access="permitAll" />
 		<intercept-url pattern="/login" access="isAnonymous()" />
 		<intercept-url pattern="/logout" access="isAuthenticated()" />
 

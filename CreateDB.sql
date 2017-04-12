@@ -78,8 +78,8 @@ INSERT INTO  type VALUES (2,"Bug");
 INSERT INTO  type VALUES (3,"Feature");
 INSERT INTO  type VALUES (4,"Performance");
 
-CREATE TABLE issue (
-  id INT NOT NULL AUTO_INCREMENT ,
+CREATE TABLE issues (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   createDate DATE NOT NULL ,
   create_user_id INT NOT NULL ,
   modifyDate DATE NOT NULL ,
@@ -93,8 +93,21 @@ CREATE TABLE issue (
   project_id INT NULL ,
   build_id INT NULL ,
   assignee_user_id INT NULL ,
-  PRIMARY KEY (id)  ,
-  UNIQUE INDEX id_UNIQUE (id ASC)  )
+  UNIQUE INDEX id_UNIQUE (id ASC)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+CREATE TABLE comments (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  issue_id INT NOT NULL ,
+  createDate DATE NOT NULL ,
+  create_user_id INT NOT NULL ,
+  comment LONGTEXT NULL ,
+  KEY fk_issue (issue_id),
+  CONSTRAINT fk_issue FOREIGN KEY (issue_id) REFERENCES issues (id)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;

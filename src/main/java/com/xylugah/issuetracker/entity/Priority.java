@@ -45,8 +45,6 @@ public class Priority extends AbstractEntity{
 
 	@Override
 	public String toString() {
-		return "Status [name=" + name + "]";
+		return "Priority [id=" + id + ", name=" + name + "]";
 	}	
-	
-
 }

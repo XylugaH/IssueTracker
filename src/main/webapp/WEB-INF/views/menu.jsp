@@ -17,6 +17,11 @@
 </div>
 
 <sec:authorize access="isAuthenticated()">
+	<div class="panel panel-info">
+		<div class="panel-heading">Welcome: 
+			<sec:authentication property="principal.username" />
+		</div>
+	</div>
 	<ul class="nav nav-pills nav-stacked">
 		<li class="${current == 'editprofile' ? 'active' : ''}"><a
 			href="${contextPath}/editprofile">Edit profile</a></li>
@@ -65,7 +70,6 @@
 			value="${_csrf.token}" />
 		<h2></h2>
 		<div class="form-group">
-			<label class="col-sm-8 control-label"><sec:authentication property="principal.username" /></label>
 			<div class="col-sm-4">
 				<input type="submit" value="Sign out" class="btn btn-success" />
 			</div>
