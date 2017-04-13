@@ -25,9 +25,9 @@ public class StatusServiceImpl implements StatusService {
 	
 	@Transactional
 	@Override
-	public Status getByName(String name) {
-		Status status = dao.getByName(name);
-		return status;
+	public List<Status> getByName(String name) {
+		List<Status> statuses = dao.getByName(name);
+		return statuses;
 	}
 	
 	@Transactional

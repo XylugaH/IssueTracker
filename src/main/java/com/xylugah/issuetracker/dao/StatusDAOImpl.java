@@ -3,6 +3,7 @@ package com.xylugah.issuetracker.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -17,12 +18,12 @@ public class StatusDAOImpl extends AbstractDAO<Integer,Status> implements Status
 		return status;
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
-	public Status getByName(String name){
+	public List<Status> getByName(String name){
 		Criteria criteria = getSession().createCriteria(Status.class);
-		Status status = (Status) criteria.add(Restrictions.eq("name", name)).uniqueResult();
-		return status;
+		List<Status> statuses = (List<Status>) criteria.add(Restrictions.ilike("name", name, MatchMode.ANYWHERE)).list();
+		return statuses;
 	}
 	
 	@SuppressWarnings({ "unchecked", "deprecation" })

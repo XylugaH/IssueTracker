@@ -116,7 +116,7 @@ public class IssueController {
 	@RequestMapping(value = { "/updateissue" }, method = RequestMethod.POST)
 	public String updateIssue(@ModelAttribute("issue") Issue issue, BindingResult result, ModelMap model) {
 		Issue newIssue = issueService.getById(issue.getId());
-		
+
 		if (newIssue != null) {
 			issue.setTempStatus(newIssue.getTempStatus());
 			issue.setCreateDate(newIssue.getCreateDate());
@@ -124,10 +124,10 @@ public class IssueController {
 			issue.setModifyDate(newIssue.getModifyDate());
 			issue.setModifiedBy(newIssue.getModifiedBy());
 			issueValidatorEditForm.validate(issue, result);
-		}else{
+		} else {
 			result.rejectValue("id", "Invalid.issue.id");
 		}
-	
+
 		if (result.hasErrors()) {
 			getModelAttributes(model);
 			model.addAttribute("issue", issue);
@@ -145,26 +145,52 @@ public class IssueController {
 		newIssue.setAssignee(issue.getAssignee());
 		newIssue.setModifiedBy(getAuthenticationUser());
 		newIssue.setTempStatus(newIssue.getStatus());
-		
+
 		issueService.edit(newIssue);
 
 		getModelAttributes(model);
 		model.addAttribute("issue", newIssue);
-		
+
 		return "editissue";
 	}
 
 	@RequestMapping(value = { "/search" }, method = RequestMethod.POST)
-	public String searchIssue(@ModelAttribute("crit") String crit, @ModelAttribute("param") String param,
+	public String searchIssue(@ModelAttribute("param") Integer param, @ModelAttribute("crit") String crit,
 			ModelMap model) {
-		System.out.println(crit);
-		System.out.println(param);
-		List<Issue> issueList = issueService.getAll();
+
+		List<Issue> issueList = getIssueByCriteria(param,crit);
+
 		model.addAttribute("issues", issueList);
 
 		return "listissues";
 	}
 
+	private List<Issue> getIssueByCriteria(final Integer param, final String crit){
+		
+		//if(crit.isEmpty()){
+		//	return issueService.getAll();
+		//}
+		
+		switch (param) {
+		case 1:
+			System.out.println(userService.getByName(crit));
+			break;
+
+		case 2:
+			System.out.println(projectService.getByName(crit));
+			break;
+		case 3:
+			System.out.println(statusService.getByName(crit));
+			break;
+		case 4:
+
+			break;
+		default:
+			break;
+		}
+		return issueService.getAll();
+	}
+	
 	private void getModelAttributes(final ModelMap model) {
 		List<Status> statuses = statusService.getAll();
 		List<Type> types = typeService.getAll();

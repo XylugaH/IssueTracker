@@ -10,6 +10,8 @@ public interface ProjectDAO {
 	
 	List<Project> getAll();
 	
+	List<Project> getByName(String name);
+	
 	void add(Project project);
 	
 	void delete(int id);

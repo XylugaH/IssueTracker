@@ -11,6 +11,8 @@ public interface UserService {
 	
 	User getByEmail(String email);
 	
+	List<User> getByName(String name);
+	
 	List<User> getAll();
 	
 	void add(User user);

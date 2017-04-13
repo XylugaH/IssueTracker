@@ -3,6 +3,7 @@ package com.xylugah.issuetracker.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +24,8 @@ public class UserDAOImpl extends AbstractDAO<Integer,User> implements UserDAO{
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<User> getAll() {
-		List<User> userList = getSession().createCriteria(User.class).list();
-		return userList;
+		List<User> users = getSession().createCriteria(User.class).list();
+		return users;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -35,6 +36,13 @@ public class UserDAOImpl extends AbstractDAO<Integer,User> implements UserDAO{
 		return user;
 	}
 
+	@SuppressWarnings({ "deprecation", "unchecked" })
+	public List<User> getByName(String name){
+		Criteria criteria = getSession().createCriteria(User.class);
+		List<User> users = (List<User>) criteria.add(Restrictions.ilike("firstName", name, MatchMode.ANYWHERE)).list();
+		return users;
+	}
+	
 	@Override
 	public void add(User user) {
 		getSession().saveOrUpdate(user);		

@@ -25,10 +25,17 @@ public class ProjectServiceImpl implements ProjectService{
 	@Transactional
 	@Override
 	public List<Project> getAll() {
-		List<Project> projectList = dao.getAll();
-		return projectList;
+		List<Project> projects = dao.getAll();
+		return projects;
 	}
 
+	@Transactional
+	@Override
+	public List<Project> getByName(String name){
+		List<Project> projects = dao.getByName(name);
+		return projects;
+	}
+	
 	@Transactional
 	@Override
 	public void add(Project project) {
