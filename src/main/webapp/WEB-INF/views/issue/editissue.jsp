@@ -17,14 +17,14 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Id</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" readonly="readonly"
-					value="${issue.id}" />
+				<form:input type="text" path="id" id="id" class="form-control"
+					readonly="true" />
 				<div style="color: red">
 					<form:errors path="id" class="error" />
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Create date</label>
 			<div class="col-sm-6">
@@ -95,12 +95,56 @@
 			<label class="col-sm-2 control-label">Status</label>
 			<div class="col-sm-6">
 				<form:select path="status" class="form-control" id="status">
-					<c:if test="${issue.status == null}">
-						<option selected="selected" disabled>Select the status</option>
-					</c:if>
 					<c:forEach items="${statuses}" var="status">
+						<c:if test="${(issue.tempStatus.name == 'New')}">
+							<c:if
+								test="${(status.name == 'New' || status.name == 'Assigned')}">
+								<option ${status.id == issue.status.id ? 'selected' : ''}
+									value="${status.id}">${status.name}</option>
+							</c:if>
+						</c:if>
+
+						<c:if test="${(issue.tempStatus.name == 'Assigned')}">
+							<c:if
+								test="${(status.name == 'Assigned' || status.name == 'In Progress')}">
+								<option ${status.id == issue.status.id ? 'selected' : ''}
+									value="${status.id}">${status.name}</option>
+							</c:if>
+						</c:if>
+
+						<c:if test="${(issue.tempStatus.name == 'In Progress')}">
+							<c:if
+								test="${(status.name == 'In Progress' || status.name == 'Resolved' || status.name == 'Closed')}">
+								<option ${status.id == issue.status.id ? 'selected' : ''}
+									value="${status.id}">${status.name}</option>
+							</c:if>
+						</c:if>
+
+						<c:if test="${(issue.tempStatus.name == 'Resolved')}">
+							<c:if
+								test="${(status.name == 'Resolved' || status.name == 'Closed')}">
+								<option ${status.id == issue.status.id ? 'selected' : ''}
+									value="${status.id}">${status.name}</option>
+							</c:if>
+						</c:if>
+
+						<c:if test="${(issue.tempStatus.name == 'Closed')}">
+							<c:if
+								test="${(status.name == 'Closed' || status.name == 'Reopened')}">
+								<option ${status.id == issue.status.id ? 'selected' : ''}
+									value="${status.id}">${status.name}</option>
+							</c:if>
+						</c:if>
+
+						<c:if test="${(issue.tempStatus.name == 'Reopened')}">
+							<c:if
+								test="${(status.name == 'Assigned' || status.name == 'In Progress' || status.name == 'Reopened')}">
+								<option ${status.id == issue.status.id ? 'selected' : ''}
+									value="${status.id}">${status.name}</option>
+							</c:if>
+						</c:if>
 						<option ${status.id == issue.status.id ? 'selected' : ''}
-							value="${status.id}">${status.name}</option>
+									value="${status.id}">${status.name}</option>
 					</c:forEach>
 				</form:select>
 				<div style="color: red">
@@ -183,9 +227,25 @@
 		</div>
 
 		<div class="form-group">
+			<label class="col-sm-2 control-label">Build</label>
+			<div class="col-sm-6">
+				<form:select path="build" class="form-control" id="build">
+					<option selected="selected" disabled>Select the build</option>
+					<c:forEach items="${builds}" var="build">
+						<option ${build.id == issue.build.id ? 'selected' : ''}
+							value="${build.id}">${build.name}</option>
+					</c:forEach>
+				</form:select>
+				<div style="color: red">
+					<form:errors path="build" class="help-inline" />
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
 			<label class="col-sm-2 control-label">Assignee</label>
 			<div class="col-sm-6">
-				<form:select path="priority" class="form-control" id="priority">
+				<form:select path="assignee" class="form-control" id="assignee">
 					<c:if test="${issue.assignee == null}">
 						<option selected="selected" disabled>Select the assignee</option>
 					</c:if>
