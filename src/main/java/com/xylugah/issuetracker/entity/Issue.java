@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -56,6 +57,9 @@ public class Issue extends AbstractEntity {
 	@JoinColumn(name = "status_id")
 	private Status status;
 
+	@Transient
+	private Status tempStatus;
+	
 	@OneToOne
 	@JoinColumn(name = "resolution_id")
 	private Resolution resolution;
@@ -145,6 +149,14 @@ public class Issue extends AbstractEntity {
 
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public Status getTempStatus() {
+		return tempStatus;
+	}
+
+	public void setTempStatus(Status tempStatus) {
+		this.tempStatus = tempStatus;
 	}
 
 	public Resolution getResolution() {

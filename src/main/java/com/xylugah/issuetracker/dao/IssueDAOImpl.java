@@ -13,22 +13,23 @@ public class IssueDAOImpl extends AbstractDAO<Integer, Issue> implements IssueDA
 	@Override
 	public Issue getById(int id) {
 		Issue issue = (Issue) getSession().get(Issue.class, id);
+		if (issue != null) {
+			issue.setTempStatus(issue.getStatus());
+		}
 		return issue;
 	}
 
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
-	public List<Issue> getByName(String name){
-		List<Issue> issues = getSession().createCriteria(Issue.class)
-			    .add(Restrictions.like("summary", name))
-			    .list();
+	public List<Issue> getByName(String name) {
+		List<Issue> issues = getSession().createCriteria(Issue.class).add(Restrictions.like("summary", name)).list();
 		return issues;
 	}
-	
-	@SuppressWarnings({ "unchecked"})
+
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	public List<Issue> getAll() {
-		List<Issue> issueList = (List<Issue>)getSession().createQuery("from Issue").list();
+		List<Issue> issueList = (List<Issue>) getSession().createQuery("from Issue").list();
 		return issueList;
 	}
 
@@ -40,7 +41,7 @@ public class IssueDAOImpl extends AbstractDAO<Integer, Issue> implements IssueDA
 	@Override
 	public void delete(int id) {
 		Issue issue = getById(id);
-		if (issue!=null){
+		if (issue != null) {
 			getSession().delete(issue);
 		}
 	}
