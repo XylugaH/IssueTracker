@@ -36,7 +36,7 @@ public class Issue extends AbstractEntity {
 
 	@OneToOne
 	@JoinColumn(name = "create_user_id")
-	private User createdBy = new User();
+	private User createdBy;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "modifyDate")
@@ -45,7 +45,7 @@ public class Issue extends AbstractEntity {
 
 	@OneToOne
 	@JoinColumn(name = "modify_user_id")
-	private User modifiedBy = new User();
+	private User modifiedBy;
 
 	@Column(name = "summary", nullable = false)
 	private String summary;

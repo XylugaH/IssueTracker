@@ -81,6 +81,15 @@ public class IssueValidatorEditForm implements Validator {
 				}
 			}
 			
+			if (issue.getStatus().getName().equals("Resolved") || issue.getStatus().getName().equals("Closed")){
+				ValidationUtils.rejectIfEmptyOrWhitespace(errors, "resolution", "Required");
+			}	
+		}
+		
+		if (issue.getResolution()!=null){
+			if (!issue.getStatus().getName().equals("Resolved") && !issue.getStatus().getName().equals("Closed")) {
+				errors.rejectValue("resolution", "Invalid.issue.resolution");
+			}	
 		}
 	}
 }

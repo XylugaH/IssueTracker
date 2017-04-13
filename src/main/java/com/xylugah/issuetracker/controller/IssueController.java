@@ -119,11 +119,15 @@ public class IssueController {
 		
 		if (newIssue != null) {
 			issue.setTempStatus(newIssue.getTempStatus());
+			issue.setCreateDate(newIssue.getCreateDate());
+			issue.setCreatedBy(newIssue.getCreatedBy());
+			issue.setModifyDate(newIssue.getModifyDate());
+			issue.setModifiedBy(newIssue.getModifiedBy());
 			issueValidatorEditForm.validate(issue, result);
 		}else{
 			result.rejectValue("id", "Invalid.issue.id");
 		}
-
+	
 		if (result.hasErrors()) {
 			getModelAttributes(model);
 			model.addAttribute("issue", issue);
@@ -140,10 +144,14 @@ public class IssueController {
 		newIssue.setBuild(issue.getBuild());
 		newIssue.setAssignee(issue.getAssignee());
 		newIssue.setModifiedBy(getAuthenticationUser());
-
+		newIssue.setTempStatus(newIssue.getStatus());
+		
 		issueService.edit(newIssue);
 
-		return "redirect:/listissues";
+		getModelAttributes(model);
+		model.addAttribute("issue", newIssue);
+		
+		return "editissue";
 	}
 
 	@RequestMapping(value = { "/search" }, method = RequestMethod.POST)
