@@ -3,6 +3,58 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script type="text/javascript"
+	src="<c:url value="resources/js/jquery-1.6.1.min.js" />"></script>
+
+<c:url var="findBuilds" value="/builds" />
+
+<script type="text/javascript">
+$(document).ready(function() { 
+	$('#project').change(
+			function() {
+				$.getJSON('${findBuilds}', {
+					projectId : $(this).val(),
+					ajax : 'true'
+				}, function(data) {
+					var html = '<option value="" selected="selected" disabled>Select the build</option>';
+					var len = data.length;
+					for ( var i = 0; i < len; i++) {
+						html += '<option value="' + data[i].id + '">'
+								+ data[i].name + '</option>';
+					}
+					html += '</option>';
+
+					$('#build').html(html);
+				});
+			});
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(
+			function() {
+				$.getJSON('${findBuilds}', {
+					projectId : $('#project').val(),
+					ajax : 'true'
+				}, function(data) {
+					var selected = $("#build option:selected");
+					var html = '<option value="" selected="selected" disabled>Select the build</option>';
+					var len = data.length;
+					for ( var i = 0; i < len; i++) {
+						if(selected.val() == data[i].id){
+							html += '<option selected="selected" value="' + data[i].id + '">'
+									+ data[i].name + '</option>';
+						}else{
+							html += '<option value="' + data[i].id + '">'
+							+ data[i].name + '</option>';
+						}
+					}
+					html += '</option>';
+
+					$('#build').html(html);
+				});
+			});
+</script>
 
 <form:form method="POST"
 	action="${pageContext.request.contextPath}/updateissue"
@@ -272,12 +324,8 @@
 					</c:when>
 					<c:otherwise>
 						<form:select path="build" class="form-control" id="build">
-							<option selected="selected" disabled>Select the build</option>
-							<c:forEach items="${builds}" var="build">
-								<option ${build.id == issue.build.id ? 'selected' : ''}
-									value="${build.id}">${build.name}</option>
-							</c:forEach>
-
+							<option selected="selected"	
+								value="${build.id}">${build.name}</option>
 						</form:select>
 					</c:otherwise>
 				</c:choose>
