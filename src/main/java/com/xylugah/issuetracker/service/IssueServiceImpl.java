@@ -8,11 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.xylugah.issuetracker.dao.IssueDAO;
+import com.xylugah.issuetracker.entity.AbstractEntity;
 import com.xylugah.issuetracker.entity.Issue;
 
 @Service("IssueService")
-public class IssueServiceImpl implements IssueService{
-	
+public class IssueServiceImpl implements IssueService {
+
 	@Autowired
 	private IssueDAO dao;
 
@@ -32,6 +33,12 @@ public class IssueServiceImpl implements IssueService{
 
 	@Transactional
 	@Override
+	public List<Issue> search(String field, List<? extends AbstractEntity> list) {
+		return dao.search(field, list);
+	}
+
+	@Transactional
+	@Override
 	public void add(Issue issue) {
 		Date date = new Date();
 		issue.setCreateDate(date);
@@ -42,7 +49,7 @@ public class IssueServiceImpl implements IssueService{
 	@Transactional
 	@Override
 	public void delete(int id) {
-		dao.delete(id);		
+		dao.delete(id);
 	}
 
 	@Transactional

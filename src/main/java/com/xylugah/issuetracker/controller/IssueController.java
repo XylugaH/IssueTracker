@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.*;
@@ -166,6 +168,13 @@ public class IssueController {
 		return "listissues";
 	}
 
+	@RequestMapping(value = "/builds", method = RequestMethod.GET)
+	public @ResponseBody List<Build> citiesForState(
+			@RequestParam(value = "projectId", required = true) Project project) {
+		System.out.println(project);
+		return this.buildService.getByProject(project);
+	}
+
 	private List<Issue> getIssueByCriteria(final Integer param, final String value) {
 
 		if (value.isEmpty()) {
@@ -173,28 +182,34 @@ public class IssueController {
 		}
 
 		List<Issue> issues = new ArrayList<Issue>();
-		
+
 		switch (param) {
 		case 1:
 			List<User> users = userService.getByPartName(value);
-			if(users.isEmpty()){
-				break;
-			}else{
-				issues = issueService.getAll(); 
+			if (!users.isEmpty()) {
+				issues = issueService.search("assignee", users);
 			}
-			
 			break;
 		case 2:
-			System.out.println(projectService.getByPartName(value));
+			List<Project> projects = projectService.getByPartName(value);
+			if (!projects.isEmpty()) {
+				issues = issueService.search("project", projects);
+			}
 			break;
 		case 3:
-			System.out.println(statusService.getByPartName(value));
+			List<Status> statuses = statusService.getByPartName(value);
+			if (!statuses.isEmpty()) {
+				issues = issueService.search("status", statuses);
+			}
 			break;
 		case 4:
-			System.out.println(priorityService.getByPartName(value));
+			List<Priority> priorities = priorityService.getByPartName(value);
+			if (!priorities.isEmpty()) {
+				issues = issueService.search("priority", priorities);
+			}
 			break;
 		default:
-			return issueService.getAll();
+			issues = issueService.getAll();
 		}
 		return issues;
 	}
@@ -206,14 +221,12 @@ public class IssueController {
 		List<Project> projects = projectService.getAll();
 		List<User> users = userService.getAll();
 		List<Resolution> resolutions = resolutionService.getAll();
-		List<Build> builds = buildService.getAll();
 		model.addAttribute("statuses", statuses);
 		model.addAttribute("resolutions", resolutions);
 		model.addAttribute("types", types);
 		model.addAttribute("priorities", priorities);
 		model.addAttribute("projects", projects);
 		model.addAttribute("users", users);
-		model.addAttribute("builds", builds);
 	}
 
 	private User getAuthenticationUser() {
