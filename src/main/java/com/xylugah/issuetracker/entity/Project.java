@@ -79,10 +79,12 @@ public class Project extends AbstractEntity{
 
 	@Override
 	public String toString() {
-		return "Project [id=" + id + ", name=" + name + ", description=" + description + ", builds=" + builds
-				+ ", manager=" + manager + "]";
+		StringBuilder sb = new StringBuilder();
+		sb.append("Project [ ");
+		sb.append("id=").append(this.id).append(',');
+		sb.append("name=").append(this.name).append(' ');
+		sb.append("]");
+		return sb.toString();
 	}
-
-
 	
 }
