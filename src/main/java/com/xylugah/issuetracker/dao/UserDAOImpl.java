@@ -37,7 +37,7 @@ public class UserDAOImpl extends AbstractDAO<Integer,User> implements UserDAO{
 	}
 
 	@SuppressWarnings({ "deprecation", "unchecked" })
-	public List<User> getByName(String name){
+	public List<User> getByPartName(String name){
 		Criteria criteria = getSession().createCriteria(User.class);
 		List<User> users = (List<User>) criteria.add(Restrictions.ilike("firstName", name, MatchMode.ANYWHERE)).list();
 		return users;

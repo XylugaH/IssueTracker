@@ -1,0 +1,11 @@
+.d-block {
+    display: block !important;
+}
+
+.text-gray {
+    color: #586069 !important;
+}
+
+.has-error {
+    color: #ff0000
+}

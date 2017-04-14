@@ -10,6 +10,8 @@ public interface PriorityDAO {
 	
 	Priority getByName(String name);
 	
+	List<Priority> getByPartName(String name);
+	
 	List<Priority> getAll();
 	
 	void add(Priority priority);

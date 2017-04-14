@@ -8,7 +8,7 @@ public interface StatusService {
 	
 	Status getById(int id);
 	
-	List<Status> getByName(String name);
+	List<Status> getByPartName(String name);
 	
 	List<Status> getAll();
 	

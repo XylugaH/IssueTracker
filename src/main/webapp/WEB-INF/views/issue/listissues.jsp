@@ -5,18 +5,15 @@
 	prefix="sec"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <title>Issues</title>
-<form method="POST" action="${contextPath}/search"
+<form method="POST" action="${contextPath}/searchissue"
 	class="form-horizontal">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<div style="width: 100%; height: 1px; clear: both;"></div>
 			<div style="width: 50%; float: left; margin-left: 15px;">
-				<h4>Issue</h4>
+				<h4>Issues</h4>
 			</div>
 			<div style="float: left; margin-left: 0px;">
 				<select id="param" name="param" class="form-control">
@@ -30,7 +27,7 @@
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />
 				<div class="input-group">
-					<input name="crit" type="text" class="form-control"
+					<input name="value" type="text" class="form-control"
 						placeholder="Search issue"> <span class="input-group-btn">
 						<button class="btn btn-default" type="submit">
 							&nbsp;&nbsp;&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;&nbsp;&nbsp;
@@ -42,6 +39,7 @@
 		</div>
 	</div>
 </form>
+
 
 <table class="table table-hover">
 	<thead>
@@ -75,3 +73,7 @@
 	</tbody>
 </table>
 
+
+<c:if test="${empty issues}">
+<em>No issues found</em>
+</c:if>

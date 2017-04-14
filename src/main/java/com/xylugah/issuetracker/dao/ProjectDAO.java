@@ -10,7 +10,7 @@ public interface ProjectDAO {
 	
 	List<Project> getAll();
 	
-	List<Project> getByName(String name);
+	List<Project> getByPartName(String name);
 	
 	void add(Project project);
 	

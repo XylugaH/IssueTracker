@@ -3,6 +3,7 @@ package com.xylugah.issuetracker.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +24,13 @@ public class PriorityDAOImpl extends AbstractDAO<Integer, Priority> implements P
 		Criteria criteria = getSession().createCriteria(Priority.class);
 		Priority priority = (Priority) criteria.add(Restrictions.eq("name", name)).uniqueResult();
 		return priority;
+	}
+	
+	@SuppressWarnings({ "deprecation", "unchecked" })
+	public List<Priority> getByPartName(String name){
+		Criteria criteria = getSession().createCriteria(Priority.class);
+		List<Priority> priorities = (List<Priority>) criteria.add(Restrictions.ilike("name", name, MatchMode.ANYWHERE)).list();
+		return priorities;
 	}
 	
 	@SuppressWarnings({ "unchecked", "deprecation" })

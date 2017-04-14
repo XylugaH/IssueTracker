@@ -1,5 +1,6 @@
 package com.xylugah.issuetracker.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -154,43 +155,50 @@ public class IssueController {
 		return "editissue";
 	}
 
-	@RequestMapping(value = { "/search" }, method = RequestMethod.POST)
-	public String searchIssue(@ModelAttribute("param") Integer param, @ModelAttribute("crit") String crit,
+	@RequestMapping(value = { "/searchissue" }, method = RequestMethod.POST)
+	public String searchIssue(@ModelAttribute("param") Integer param, @ModelAttribute("value") String value,
 			ModelMap model) {
 
-		List<Issue> issueList = getIssueByCriteria(param,crit);
+		List<Issue> issueList = getIssueByCriteria(param, value);
 
 		model.addAttribute("issues", issueList);
 
 		return "listissues";
 	}
 
-	private List<Issue> getIssueByCriteria(final Integer param, final String crit){
-		
-		//if(crit.isEmpty()){
-		//	return issueService.getAll();
-		//}
+	private List<Issue> getIssueByCriteria(final Integer param, final String value) {
+
+		if (value.isEmpty()) {
+			return issueService.getAll();
+		}
+
+		List<Issue> issues = new ArrayList<Issue>();
 		
 		switch (param) {
 		case 1:
-			System.out.println(userService.getByName(crit));
+			List<User> users = userService.getByPartName(value);
+			if(users.isEmpty()){
+				break;
+			}else{
+				issues = issueService.getAll(); 
+			}
+			
 			break;
-
 		case 2:
-			System.out.println(projectService.getByName(crit));
+			System.out.println(projectService.getByPartName(value));
 			break;
 		case 3:
-			System.out.println(statusService.getByName(crit));
+			System.out.println(statusService.getByPartName(value));
 			break;
 		case 4:
-
+			System.out.println(priorityService.getByPartName(value));
 			break;
 		default:
-			break;
+			return issueService.getAll();
 		}
-		return issueService.getAll();
+		return issues;
 	}
-	
+
 	private void getModelAttributes(final ModelMap model) {
 		List<Status> statuses = statusService.getAll();
 		List<Type> types = typeService.getAll();

@@ -20,7 +20,7 @@ public class StatusDAOImpl extends AbstractDAO<Integer,Status> implements Status
 
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	@Override
-	public List<Status> getByName(String name){
+	public List<Status> getByPartName(String name){
 		Criteria criteria = getSession().createCriteria(Status.class);
 		List<Status> statuses = (List<Status>) criteria.add(Restrictions.ilike("name", name, MatchMode.ANYWHERE)).list();
 		return statuses;

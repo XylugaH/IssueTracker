@@ -31,8 +31,8 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Transactional
 	@Override
-	public List<Project> getByName(String name){
-		List<Project> projects = dao.getByName(name);
+	public List<Project> getByPartName(String name){
+		List<Project> projects = dao.getByPartName(name);
 		return projects;
 	}
 	

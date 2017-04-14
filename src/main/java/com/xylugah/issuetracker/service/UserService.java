@@ -11,7 +11,7 @@ public interface UserService {
 	
 	User getByEmail(String email);
 	
-	List<User> getByName(String name);
+	List<User> getByPartName(String name);
 	
 	List<User> getAll();
 	

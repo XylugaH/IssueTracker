@@ -52,7 +52,7 @@ public class StatusController {
 
 		statusValidator.validate(status, result);
 	
-		if (statusService.getByName(status.getName()) != null) {
+		if (statusService.getByPartName(status.getName()) != null) {
 			result.rejectValue("name", "Duplicate.status");
 		}
 		
