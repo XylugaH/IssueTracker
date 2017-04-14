@@ -17,7 +17,6 @@
 		<servlet.version>2.5</servlet.version>
 		<jsp.version>2.2</jsp.version>
 
-
 		<!-- Jslt -->
 		<jstl.version>1.2</jstl.version>
 
@@ -41,6 +40,10 @@
 
 		<!-- Apache tiles -->
 		<apachetiles.version>3.0.7</apachetiles.version>
+		
+		<!-- Jackson -->
+		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+		<jackson-databind.version>2.8.7</jackson-databind.version>
 
 	</properties>
 
@@ -58,10 +61,17 @@
 	</dependencyManagement>
 
 	<dependencies>
+
 		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson-mapper-asl.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson-databind.version}</version>
 		</dependency>
 
 		<!-- Servlet -->
@@ -174,7 +184,7 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring-security.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
