@@ -11,7 +11,7 @@
 
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/listissues" access="permitAll" />
-		<intercept-url pattern="/search" access="permitAll" />
+		<intercept-url pattern="/searchissue" access="permitAll" />
 		<intercept-url pattern="/login" access="isAnonymous()" />
 		<intercept-url pattern="/logout" access="isAuthenticated()" />
 
@@ -19,6 +19,12 @@
 		<intercept-url pattern="/saveprofile" access="isAuthenticated()" />
 		<intercept-url pattern="/changepassword" access="isAuthenticated()" />
 		<intercept-url pattern="/savepassword" access="isAuthenticated()" />
+		
+		<intercept-url pattern="/addissue" access="isAuthenticated()" />
+		<intercept-url pattern="/editissue/*" access="isAuthenticated()" />
+		<intercept-url pattern="/saveissue" access="isAuthenticated()" />
+		<intercept-url pattern="/updateissue" access="isAuthenticated()" />
+		<intercept-url pattern="/builds" access="isAuthenticated()" />
 		
 		<intercept-url pattern="/listusers" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/edituser/*" access="hasRole('ROLE_ADMIN')" />
