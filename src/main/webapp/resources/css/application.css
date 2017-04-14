@@ -1,11 +1,12 @@
-.d-block {
-    display: block !important;
+.text-gray {
+	font-size: 18px;
+	color: #586069;
 }
 
-.text-gray {
-    color: #586069 !important;
+.text-align-center {
+	text-align: center;	
 }
 
 .has-error {
-    color: #ff0000
+	color: #ff0000
 }
