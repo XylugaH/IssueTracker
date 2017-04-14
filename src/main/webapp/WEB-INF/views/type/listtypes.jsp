@@ -28,3 +28,9 @@
 
 	</tbody>
 </table>
+
+<c:if test="${empty listtypes}">
+	<div class="text-align-center">
+		<em class="text-gray">No types found</em>
+	</div>
+</c:if>

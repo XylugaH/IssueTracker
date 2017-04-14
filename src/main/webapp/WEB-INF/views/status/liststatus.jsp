@@ -25,3 +25,9 @@
 		</c:forEach>
 	</tbody>
 </table>
+
+<c:if test="${empty listStatus}">
+	<div class="text-align-center">
+		<em class="text-gray">No statuses found</em>
+	</div>
+</c:if>

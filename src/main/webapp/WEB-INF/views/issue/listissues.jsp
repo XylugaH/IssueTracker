@@ -40,6 +40,12 @@
 	</div>
 </form>
 
+<sec:authorize access="isAuthenticated()">
+	<div class="text-right">
+		<a href="<c:url value='/addissue' />" class="btn btn-success">Add
+			issue</a>
+	</div>
+</sec:authorize>
 
 <table class="table table-hover">
 	<thead>
@@ -73,7 +79,8 @@
 	</tbody>
 </table>
 
-
 <c:if test="${empty issues}">
-<em>No issues found</em>
+	<div class="text-align-center">
+		<em class="text-gray">No issues found</em>
+	</div>
 </c:if>

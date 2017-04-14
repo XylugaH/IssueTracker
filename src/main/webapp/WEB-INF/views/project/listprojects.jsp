@@ -33,3 +33,9 @@
 		</c:forEach>
 	</tbody>
 </table>
+
+<c:if test="${empty listprojects}">
+	<div class="text-align-center">
+		<em class="text-gray">No projects found</em>
+	</div>
+</c:if>

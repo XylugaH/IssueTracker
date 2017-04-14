@@ -31,3 +31,9 @@
 		</c:forEach>
 	</tbody>
 </table>
+
+<c:if test="${empty users}">
+	<div class="text-align-center">
+		<em class="text-gray">No users found</em>
+	</div>
+</c:if>

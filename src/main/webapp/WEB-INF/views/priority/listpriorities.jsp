@@ -27,3 +27,9 @@
 		</c:forEach>
 	</tbody>
 </table>
+
+<c:if test="${empty listpriorities}">
+	<div class="text-align-center">
+		<em class="text-gray">No priorities found</em>
+	</div>
+</c:if>
