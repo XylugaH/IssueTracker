@@ -3,6 +3,7 @@ package com.xylugah.issuetracker.service;
 import java.util.List;
 
 import com.xylugah.issuetracker.entity.Build;
+import com.xylugah.issuetracker.entity.Project;
 
 public interface BuildService {
 
@@ -10,7 +11,7 @@ public interface BuildService {
 	
 	List<Build> getAll();
 
-	List<Build> getByProjectId(int id);
+	List<Build> getByProject(Project project);
 
 	void add(Build build);
 

@@ -6,6 +6,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.xylugah.issuetracker.entity.Build;
+import com.xylugah.issuetracker.entity.Project;
 
 @Repository("BuildDAO")
 public class BuildDAOImpl extends AbstractDAO<Integer, Build> implements BuildDAO {
@@ -25,9 +26,9 @@ public class BuildDAOImpl extends AbstractDAO<Integer, Build> implements BuildDA
 	
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
-	public List<Build> getByProjectId(int id) {
+	public List<Build> getByProject(Project project) {
 		List<Build> builds = getSession().createCriteria(Build.class)
-			    .add(Restrictions.eq("project_id", id))
+			    .add(Restrictions.eq("project", project))
 			    .list();
 		return builds;
 	}

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xylugah.issuetracker.dao.BuildDAO;
 import com.xylugah.issuetracker.entity.Build;
+import com.xylugah.issuetracker.entity.Project;
 
 @Service("BuildService")
 public class BuildServiceImpl implements BuildService{
@@ -31,8 +32,8 @@ public class BuildServiceImpl implements BuildService{
 	
 	@Transactional
 	@Override
-	public List<Build> getByProjectId(int id) {
-		List<Build> builds = dao.getByProjectId(id);
+	public List<Build> getByProject(Project project) {
+		List<Build> builds = dao.getByProject(project);
 		return builds;
 	}
 
