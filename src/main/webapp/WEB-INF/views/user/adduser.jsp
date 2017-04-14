@@ -21,7 +21,7 @@
 			<div class="col-sm-6">
 				<form:input type="text" path="firstName" id="firstName"
 					class="form-control" placeholder="Enter the first name" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="firstName" class="error" />
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 			<div class="col-sm-6">
 				<form:input type="text" path="lastName" id="lastName"
 					class="form-control" placeholder="Enter the last name" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="lastName" class="help-inline" />
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 			<div class="col-sm-6">
 				<form:input type="text" path="email" id="email" class="form-control"
 					placeholder="Enter the E-mail" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="email" class="help-inline" />
 				</div>
 			</div>
@@ -54,7 +54,7 @@
 			<div class="col-sm-6">
 				<form:input type="password" path="password" id="password"
 					class="form-control" placeholder="Enter the password" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="password" class="help-inline" />
 				</div>
 			</div>
@@ -66,7 +66,7 @@
 				<form:input type="password" path="passwordConfirm"
 					id="passwordConfirm" class="form-control"
 					placeholder="Confirm the password" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="passwordConfirm" class="error" />
 				</div>
 			</div>
@@ -82,7 +82,7 @@
 							value="${role.id}">${role.name}</option>
 					</c:forEach>
 				</form:select>
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="role" class="help-inline" />
 				</div>
 			</div>

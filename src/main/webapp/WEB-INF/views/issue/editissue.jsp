@@ -19,7 +19,7 @@
 			<div class="col-sm-6">
 				<form:input type="text" path="id" id="id" class="form-control"
 					readonly="true" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="id" class="error" />
 				</div>
 			</div>
@@ -30,7 +30,7 @@
 			<div class="col-sm-6">
 				<input type="text" class="form-control" readonly="readonly"
 					value="${issue.createDate}" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="createDate" class="error" />
 				</div>
 			</div>
@@ -41,7 +41,7 @@
 			<div class="col-sm-6">
 				<input type="text" class="form-control" readonly="readonly"
 					value="${issue.createdBy.firstName}" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="createdBy" class="error" />
 				</div>
 			</div>
@@ -52,7 +52,7 @@
 			<div class="col-sm-6">
 				<input type="text" class="form-control" readonly="readonly"
 					value="${issue.modifyDate}" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="modifyDate" class="error" />
 				</div>
 			</div>
@@ -63,7 +63,7 @@
 			<div class="col-sm-6">
 				<input type="text" class="form-control" readonly="readonly"
 					value="${issue.modifiedBy.firstName}" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="modifiedBy" class="error" />
 				</div>
 			</div>
@@ -75,7 +75,7 @@
 				<form:input readonly="${issue.tempStatus.name == 'Closed'}"
 					type="text" path="summary" id="summary" class="form-control"
 					placeholder="Enter the summary" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="summary" class="error" />
 				</div>
 			</div>
@@ -87,7 +87,7 @@
 				<form:textarea readonly="${issue.tempStatus.name == 'Closed'}"
 					path="description" id="description" class="form-control"
 					placeholder="Enter the description" rows="3" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="description" class="help-inline" />
 				</div>
 			</div>
@@ -142,7 +142,7 @@
 						</c:if>
 					</c:forEach>
 				</form:select>
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="status" class="help-inline" />
 				</div>
 			</div>
@@ -173,7 +173,7 @@
 						</form:select>
 					</c:otherwise>
 				</c:choose>
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="resolution" class="help-inline" />
 				</div>
 			</div>
@@ -200,7 +200,7 @@
 						</form:select>
 					</c:otherwise>
 				</c:choose>
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="type" class="help-inline" />
 				</div>
 			</div>
@@ -228,7 +228,7 @@
 						</form:select>
 					</c:otherwise>
 				</c:choose>
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="priority" class="help-inline" />
 				</div>
 			</div>
@@ -255,7 +255,7 @@
 						</form:select>
 					</c:otherwise>
 				</c:choose>
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="project" class="help-inline" />
 				</div>
 			</div>
@@ -281,7 +281,7 @@
 						</form:select>
 					</c:otherwise>
 				</c:choose>
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="build" class="help-inline" />
 				</div>
 			</div>
@@ -309,7 +309,7 @@
 						</form:select>
 					</c:otherwise>
 				</c:choose>
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="assignee" class="help-inline" />
 				</div>
 			</div>

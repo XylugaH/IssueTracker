@@ -18,7 +18,7 @@
 			<div class="col-sm-6">
 				<form:input type="text" path="firstName" id="firstName"
 					class="form-control" placeholder="Enter the first name" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="firstName" class="error" />
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 			<div class="col-sm-6">
 				<form:input type="text" path="lastName" id="lastName"
 					class="form-control" placeholder="Enter the last name" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="lastName" class="help-inline" />
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 			<div class="col-sm-6">
 				<form:input type="text" path="email" id="email" class="form-control"
 					placeholder="Enter the E-mail" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="email" class="help-inline" />
 				</div>
 			</div>

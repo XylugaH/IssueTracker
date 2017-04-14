@@ -19,7 +19,7 @@
 		<div class="col-sm-6">
 			<form:input type="text" path="name" id="name1" class="form-control"
 				placeholder="Enter the name" />
-			<div style="color: red">
+			<div class="has-error">
 				<form:errors path="name" class="help-inline" />
 			</div>
 		</div>
@@ -30,7 +30,7 @@
 		<div class="col-sm-6">
 			<form:textarea path="description" id="description"
 				class="form-control" placeholder="Enter the description" rows="3" />
-			<div style="color: red">
+			<div class="has-error">
 				<form:errors path="description" class="help-inline" />
 			</div>
 		</div>
@@ -56,7 +56,7 @@
 						value="${user.id}">${user.firstName}</option>
 				</c:forEach>
 			</form:select>
-			<div style="color: red">
+			<div class="has-error">
 				<form:errors path="manager" class="help-inline" />
 			</div>
 		</div>
@@ -79,7 +79,7 @@
 		<div class="col-sm-6">
 			<input type="text" name="name" class="form-control"
 				placeholder="Enter the name" />
-			<div style="color: red">
+			<div class="has-error">
 				<form:errors path="name" class="help-inline" />
 			</div>
 		</div>

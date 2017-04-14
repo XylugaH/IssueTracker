@@ -19,7 +19,7 @@
 		<div class="col-sm-6">
 			<form:input type="text" path="name" id="name" class="form-control"
 				placeholder="Enter the name" />
-			<div style="color: red">
+			<div class="has-error">
 				<form:errors path="name" class="error" />
 			</div>
 		</div>

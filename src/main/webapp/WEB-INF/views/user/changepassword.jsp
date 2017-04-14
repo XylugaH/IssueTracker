@@ -18,7 +18,7 @@
 			<div class="col-sm-6">
 				<form:input type="password" path="password" id="password"
 					class="form-control" placeholder="Enter the password" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="password" class="help-inline" />
 				</div>
 			</div>
@@ -30,7 +30,7 @@
 				<form:input type="password" path="passwordConfirm"
 					id="passwordConfirm" class="form-control"
 					placeholder="Confirm the password" />
-				<div style="color: red">
+				<div class="has-error">
 					<form:errors path="passwordConfirm" class="error" />
 				</div>
 			</div>
