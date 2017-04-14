@@ -3,9 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script type="text/javascript"
-	src="<c:url value="resources/js/jquery-1.6.1.min.js" />"></script>
-
 <c:url var="findBuilds" value="/builds" />
 
 <script type="text/javascript">

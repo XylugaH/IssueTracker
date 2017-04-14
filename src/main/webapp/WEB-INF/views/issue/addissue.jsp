@@ -3,9 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script type="text/javascript"
-	src="<c:url value="resources/js/jquery-1.6.1.min.js" />"></script>
-
 <c:url var="findBuilds" value="/builds" />
 
 <script type="text/javascript">
@@ -160,10 +157,10 @@ $(document).ready(
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Build</label>
 			<div class="col-sm-6">
-					<form:select path="build" class="form-control" id="build">
-						<option selected="selected"	
-							value="${build.id}">${build.name}</option>
-					</form:select>
+				<form:select path="build" class="form-control" id="build">
+					<option selected="selected"	
+						value="${build.id}">${build.name}</option>
+				</form:select>
 				<div class="has-error">
 					<form:errors path="build" class="help-inline" />
 				</div>
