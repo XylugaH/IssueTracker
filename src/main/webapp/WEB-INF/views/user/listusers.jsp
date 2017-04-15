@@ -2,11 +2,33 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<h4>Users</h4>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
+<title>Users</title>
+<form method="POST" action="${contextPath}/searchusers"
+	class="form-horizontal">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<div style="width: 100%; height: 1px; clear: both;"></div>
+			<div style="width: 60%; float: left; margin-left: 15px;">
+				<h4>Users</h4>
+			</div>
+			<div style="width: 35%; float: left; margin-left: 5px;">
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+				<div class="input-group">
+					<input name="value" type="text" class="form-control"
+						placeholder="Search users"> <span class="input-group-btn">
+						<button class="btn btn-default" type="submit">
+							&nbsp;&nbsp;&nbsp;<i class="glyphicon glyphicon-search"></i>&nbsp;&nbsp;&nbsp;
+						</button>
+					</span>
+				</div>
+			</div>
+			<div style="width: 100%; height: 1px; clear: both;"></div>
+		</div>
 	</div>
-</div>
+</form>
 
 <table class="table table-hover">
 	<thead>

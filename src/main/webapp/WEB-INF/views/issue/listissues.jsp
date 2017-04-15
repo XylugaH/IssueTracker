@@ -62,11 +62,11 @@
 		<c:forEach items="${issues}" var="issue">
 			<tr>
 				<sec:authorize access="isAuthenticated()">
-					<td><a href="<c:url value='/editissue/${issue.id}' />"><span
+					<td><a href="<c:url value='/editissue?id=${issue.id}' />"><span
 							class="badge">${issue.id}</span></a></td>
 				</sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
-					<td><a href="<c:url value='/viewissue/${issue.id}' />"><span
+					<td><a href="<c:url value='/viewissue?id=${issue.id}' />"><span
 							class="badge">${issue.id}</span></a></td>
 				</sec:authorize>
 				<td>${issue.priority.name}</td>

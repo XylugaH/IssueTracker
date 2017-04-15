@@ -34,17 +34,11 @@ $(document).ready(
 					projectId : $('#project').val(),
 					ajax : 'true'
 				}, function(data) {
-					var selected = $("#build option:selected");
 					var html = '<option value="" selected="selected" disabled>Select the build</option>';
 					var len = data.length;
 					for ( var i = 0; i < len; i++) {
-						if(selected.val() == data[i].id){
-							html += '<option selected="selected" value="' + data[i].id + '">'
-									+ data[i].name + '</option>';
-						}else{
 							html += '<option value="' + data[i].id + '">'
 							+ data[i].name + '</option>';
-						}
 					}
 					html += '</option>';
 
@@ -310,6 +304,7 @@ $(document).ready(
 			</div>
 		</div>
 
+
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Build</label>
 			<div class="col-sm-6">
@@ -365,4 +360,16 @@ $(document).ready(
 				href="<c:url value='/listissues' />" class="btn btn-danger">Cancel</a>
 		</div>
 	</div>
+	<div class="generic-container">
+		<c:forEach items="${issue.comments}" var="comment">
+			<div class="form-group">
+				<div class="col-sm-2">
+					<div><label class="control-label">${comment.createDate}</label></div>
+					<div>${comment.createdBy.firstName}</div>
+				</div>
+				<div class="col-sm-6">${comment.comment}</div>
+			</div>
+		</c:forEach>
+	</div>
 </form:form>
+

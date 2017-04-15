@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,8 +64,8 @@ public class IssueController {
 		return "listissues";
 	}
 
-	@RequestMapping(value = "/viewissue/{id}", method = RequestMethod.GET)
-	public String viewIssue(@PathVariable int id, ModelMap model) {
+	@RequestMapping(value = "/viewissue", method = RequestMethod.GET)
+	public String viewIssue(@RequestParam int id, ModelMap model) {
 		Issue issue = issueService.getById(id);
 
 		if (issue == null) {
@@ -104,8 +103,8 @@ public class IssueController {
 		return "redirect:/listissues";
 	}
 
-	@RequestMapping(value = "/editissue/{id}", method = RequestMethod.GET)
-	public String editIssue(@PathVariable int id, ModelMap model) {
+	@RequestMapping(value = "/editissue", method = RequestMethod.GET)
+	public String editIssue(@RequestParam int id, ModelMap model) {
 		Issue issue = issueService.getById(id);
 		if (issue == null) {
 			return "redirect:/listissues";
