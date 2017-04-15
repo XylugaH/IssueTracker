@@ -28,7 +28,9 @@ public class ProjectDAOImpl extends AbstractDAO<Integer, Project> implements Pro
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	public List<Project> getByPartName(String name){
 		Criteria criteria = getSession().createCriteria(Project.class);
-		List<Project> projects = (List<Project>) criteria.add(Restrictions.ilike("name", name, MatchMode.ANYWHERE)).list();
+		criteria.add(Restrictions.ilike("name", name, MatchMode.ANYWHERE));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		List<Project> projects = (List<Project>) criteria.list();
 		return projects;		
 	}
 	

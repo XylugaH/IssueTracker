@@ -2,6 +2,7 @@ package com.xylugah.issuetracker.dao;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +24,10 @@ public class IssueDAOImpl extends AbstractDAO<Integer, Issue> implements IssueDA
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public List<Issue> search(String field, List<? extends AbstractEntity> list) {
-		List<Issue> issues = getSession().createCriteria(Issue.class).add(Restrictions.in(field, list.toArray()))
-				.list();
+		Criteria criteria = getSession().createCriteria(Issue.class);
+		criteria.add(Restrictions.in(field, list.toArray()));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		List<Issue> issues = criteria.list();
 		return issues;
 	}
 
