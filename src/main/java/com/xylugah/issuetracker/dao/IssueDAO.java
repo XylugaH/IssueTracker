@@ -2,14 +2,14 @@ package com.xylugah.issuetracker.dao;
 
 import java.util.List;
 
-import com.xylugah.issuetracker.entity.AbstractEntity;
 import com.xylugah.issuetracker.entity.Issue;
+import com.xylugah.issuetracker.entity.util.SearchBody;
 
 public interface IssueDAO {
 	
 	Issue getById(int id);
 	
-	List<Issue> search(String field, List<? extends AbstractEntity> list);
+	List<Issue> search(SearchBody searchBody);
 	
 	List<Issue> getAll();
 	

@@ -2,8 +2,8 @@ package com.xylugah.issuetracker.service;
 
 import java.util.List;
 
-import com.xylugah.issuetracker.entity.AbstractEntity;
 import com.xylugah.issuetracker.entity.Issue;
+import com.xylugah.issuetracker.entity.util.SearchBody;
 
 public interface IssueService {
 	
@@ -11,7 +11,7 @@ public interface IssueService {
 	
 	List<Issue> getAll();
 	
-	List<Issue> search(String field, List<? extends AbstractEntity> list);
+	List<Issue> search(SearchBody searchBody);
 	
 	void add(Issue issue);
 	

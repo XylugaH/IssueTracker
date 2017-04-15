@@ -1,6 +1,5 @@
 package com.xylugah.issuetracker.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.*;
+import com.xylugah.issuetracker.entity.util.SearchBody;
 import com.xylugah.issuetracker.service.*;
 import com.xylugah.issuetracker.validator.IssueValidatorAddForm;
 import com.xylugah.issuetracker.validator.IssueValidatorEditForm;
@@ -57,6 +57,9 @@ public class IssueController {
 	@Resource(name = "BuildService")
 	private BuildService buildService;
 
+	@Resource(name = "SearchService")
+	private SearchService searchService;
+	
 	@RequestMapping(value = "/listissues", method = RequestMethod.GET)
 	public String issueList(ModelMap model) {
 		List<Issue> issueList = issueService.getAll();
@@ -157,10 +160,10 @@ public class IssueController {
 	}
 
 	@RequestMapping(value = { "/searchissue" }, method = RequestMethod.POST)
-	public String searchIssue(@ModelAttribute("param") Integer param, @ModelAttribute("value") String value,
+	public String searchIssue(@ModelAttribute("value") String value,
 			ModelMap model) {
 
-		List<Issue> issueList = getIssueByCriteria(param, value);
+		List<Issue> issueList = getIssueByCriteria(value);
 
 		model.addAttribute("issues", issueList);
 
@@ -174,42 +177,13 @@ public class IssueController {
 		return this.buildService.getByProject(project);
 	}
 
-	private List<Issue> getIssueByCriteria(final Integer param, final String value) {
+	private List<Issue> getIssueByCriteria(final String value) {
 
 		if (value.isEmpty()) {
-			return issueService.getAll();
+			return this.issueService.getAll();
 		}
-
-		List<Issue> issues = new ArrayList<Issue>();
-
-		switch (param) {
-		case 1:
-			List<User> users = userService.getByPartName(value);
-			if (!users.isEmpty()) {
-				issues = issueService.search("assignee", users);
-			}
-			break;
-		case 2:
-			List<Project> projects = projectService.getByPartName(value);
-			if (!projects.isEmpty()) {
-				issues = issueService.search("project", projects);
-			}
-			break;
-		case 3:
-			List<Status> statuses = statusService.getByPartName(value);
-			if (!statuses.isEmpty()) {
-				issues = issueService.search("status", statuses);
-			}
-			break;
-		case 4:
-			List<Priority> priorities = priorityService.getByPartName(value);
-			if (!priorities.isEmpty()) {
-				issues = issueService.search("priority", priorities);
-			}
-			break;
-		default:
-			issues = issueService.getAll();
-		}
+		SearchBody searchBody = searchService.getSearchBody(value);
+		List<Issue> issues = this.issueService.search(searchBody);
 		return issues;
 	}
 

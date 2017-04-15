@@ -12,17 +12,10 @@
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<div style="width: 100%; height: 1px; clear: both;"></div>
-			<div style="width: 50%; float: left; margin-left: 15px;">
+			<div style="width: 60%; float: left; margin-left: 15px;">
 				<h4>Issues</h4>
 			</div>
-			<div style="float: left; margin-left: 0px;">
-				<select id="param" name="param" class="form-control">
-					<option selected value="1">Assignee</option>
-					<option value="2">Project</option>
-					<option value="3">Status</option>
-					<option value="4">Priority</option>
-				</select>
-			</div>
+
 			<div style="width: 35%; float: left; margin-left: 5px;">
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" />

@@ -11,7 +11,9 @@ public interface UserService {
 	
 	User getByEmail(String email);
 	
-	List<User> getByPartName(String name);
+	List<User> getByPartOfFirstName(String name);
+	
+	List<User> getByPartOfAllFields(String name);
 	
 	List<User> getAll();
 	
@@ -22,7 +24,5 @@ public interface UserService {
 	User edit(User user);
 	
 	User getEmptyUser();
-	
-	User getGuestUser();
-	
+		
 }

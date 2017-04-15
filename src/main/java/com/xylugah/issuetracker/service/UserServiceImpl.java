@@ -37,8 +37,15 @@ public class UserServiceImpl implements UserService{
 	
 	@Override
 	@Transactional
-	public List<User> getByPartName(String name){
-		List<User> users = dao.getByPartName(name);
+	public List<User> getByPartOfFirstName(String name){
+		List<User> users = dao.getByPartOfFirstName(name);
+		return users;
+	}
+	
+	@Override
+	@Transactional
+	public List<User> getByPartOfAllFields(String name){
+		List<User> users = dao.getByPartOfAllFields(name);
 		return users;
 	}
 	
@@ -75,12 +82,4 @@ public class UserServiceImpl implements UserService{
 		return user;
 	}
 
-	@Override
-	@Transactional
-	public User getGuestUser() {
-		User user = dao.getById(1);
-		return user;
-	}
-
-	
 }

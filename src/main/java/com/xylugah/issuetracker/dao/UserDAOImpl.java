@@ -15,7 +15,7 @@ import com.xylugah.issuetracker.entity.User;
 public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO {
 
 	@Override
-	public User getById(int id) {
+	public User getById(final int id) {
 		User user = (User) getSession().get(User.class, id);
 		if (user != null) {
 			user.setPasswordConfirm(user.getPassword());
@@ -32,14 +32,23 @@ public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public User getByEmail(String email) {
+	public User getByEmail(final String email) {
 		Criteria criteria = getSession().createCriteria(User.class);
 		User user = (User) criteria.add(Restrictions.eq("email", email)).uniqueResult();
 		return user;
 	}
 
 	@SuppressWarnings({ "deprecation", "unchecked" })
-	public List<User> getByPartName(String name) {
+	public List<User> getByPartOfFirstName(final String name){
+		Criteria criteria = getSession().createCriteria(User.class);
+		criteria.add(Restrictions.ilike("firstName", name, MatchMode.ANYWHERE));
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		List<User> users = criteria.list();
+		return users;
+	}
+	
+	@SuppressWarnings({ "deprecation", "unchecked" })
+	public List<User> getByPartOfAllFields(final String name) {
 		Criteria criteria = getSession().createCriteria(User.class);
 		Criterion rest1 = Restrictions.ilike("firstName", name, MatchMode.ANYWHERE);
 		Criterion rest2 = Restrictions.ilike("lastName", name, MatchMode.ANYWHERE);
@@ -52,12 +61,12 @@ public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO {
 	}
 
 	@Override
-	public void add(User user) {
+	public void add(final User user) {
 		getSession().saveOrUpdate(user);
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(final int id) {
 		User user = getById(id);
 		if (user != null) {
 			getSession().delete(user);
@@ -65,7 +74,7 @@ public class UserDAOImpl extends AbstractDAO<Integer, User> implements UserDAO {
 	}
 
 	@Override
-	public User edit(User user) {
+	public User edit(final User user) {
 		getSession().update(user);
 		return user;
 	}

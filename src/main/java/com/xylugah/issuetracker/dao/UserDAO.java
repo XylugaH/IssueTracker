@@ -12,7 +12,9 @@ public interface UserDAO {
 	
 	User getByEmail(String email);
 	
-	List<User> getByPartName(String name);
+	List<User> getByPartOfFirstName(String name);
+	
+	List<User> getByPartOfAllFields(String name);
 	
 	void add(User user);
 	

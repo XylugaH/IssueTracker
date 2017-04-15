@@ -3,11 +3,17 @@ package com.xylugah.issuetracker.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.xylugah.issuetracker.entity.AbstractEntity;
 import com.xylugah.issuetracker.entity.Issue;
+import com.xylugah.issuetracker.entity.Priority;
+import com.xylugah.issuetracker.entity.Project;
+import com.xylugah.issuetracker.entity.Status;
+import com.xylugah.issuetracker.entity.User;
+import com.xylugah.issuetracker.entity.util.SearchBody;
 
 @Repository("IssueDAO")
 public class IssueDAOImpl extends AbstractDAO<Integer, Issue> implements IssueDAO {
@@ -23,11 +29,40 @@ public class IssueDAOImpl extends AbstractDAO<Integer, Issue> implements IssueDA
 
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
-	public List<Issue> search(String field, List<? extends AbstractEntity> list) {
+	public List<Issue> search(SearchBody searchBody) {
 		Criteria criteria = getSession().createCriteria(Issue.class);
-		criteria.add(Restrictions.in(field, list.toArray()));
+		Disjunction disjunction = Restrictions.disjunction();
+		
+		String value = searchBody.getValue();
+		if (!value.isEmpty()){
+			disjunction.add(Restrictions.ilike("summary", value, MatchMode.ANYWHERE));
+			disjunction.add(Restrictions.ilike("description", value, MatchMode.ANYWHERE));
+		}
+		
+		List<User> users = searchBody.getUsers();
+		if(!users.isEmpty()){
+			disjunction.add(Restrictions.in("assignee", users.toArray()));
+		}
+
+		List<Project> projects = searchBody.getProjects();
+		if(!projects.isEmpty()){
+			disjunction.add(Restrictions.in("project", projects.toArray()));
+		}
+		
+		List<Priority> priorities = searchBody.getPriorities();
+		if(!priorities.isEmpty()){
+			disjunction.add(Restrictions.in("priority", priorities.toArray()));
+		}
+		
+		List<Status> statuses = searchBody.getStatuses();
+		if(!statuses.isEmpty()){
+			disjunction.add(Restrictions.in("status", statuses.toArray()));
+		}
+		
+		criteria.add(disjunction);
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Issue> issues = criteria.list();
+		
 		return issues;
 	}
 
