@@ -4,7 +4,7 @@
 
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		<h4>List of priorities</h4>
+		<h4>Priorities</h4>
 	</div>
 </div>
 

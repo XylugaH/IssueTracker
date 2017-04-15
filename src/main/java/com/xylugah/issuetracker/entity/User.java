@@ -157,9 +157,13 @@ public class User extends AbstractEntity{
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password
-				+ ", passwordConfirm=" + passwordConfirm + ", email=" + email + ", role=" + role + "]";
-	}	
-	
-	
+		StringBuilder sb = new StringBuilder();
+		sb.append("User [ ");
+		sb.append("id=").append(this.id).append(',');
+		sb.append("firstName=").append(this.firstName).append(' ');
+		sb.append("lastName=").append(this.lastName).append(' ');
+		sb.append("email=").append(this.email).append(' ');
+		sb.append("]");
+		return sb.toString();
+	}
 }

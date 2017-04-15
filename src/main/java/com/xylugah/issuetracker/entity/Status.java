@@ -44,7 +44,12 @@ public class Status extends AbstractEntity{
 
 	@Override
 	public String toString() {
-		return "Status [name=" + name + "]";
-	}	
+		StringBuilder sb = new StringBuilder();
+		sb.append("Status [ ");
+		sb.append("id=").append(this.id).append(',');
+		sb.append("name=").append(this.name).append(' ');
+		sb.append("]");
+		return sb.toString();
+	}
 	
 }

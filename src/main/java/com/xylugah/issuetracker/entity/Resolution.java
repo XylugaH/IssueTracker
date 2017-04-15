@@ -45,8 +45,11 @@ public class Resolution extends AbstractEntity{
 
 	@Override
 	public String toString() {
-		return "Resolucion [name=" + name + "]";
-	}
-	
-	
+		StringBuilder sb = new StringBuilder();
+		sb.append("Resolution [ ");
+		sb.append("id=").append(this.id).append(',');
+		sb.append("name=").append(this.name).append(' ');
+		sb.append("]");
+		return sb.toString();
+	}	
 }

@@ -35,5 +35,13 @@ public class Role extends AbstractEntity{
 		this.name = name;
 	}
 	
-	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Role [ ");
+		sb.append("id=").append(this.id).append(',');
+		sb.append("name=").append(this.name).append(' ');
+		sb.append("]");
+		return sb.toString();
+	}
 }

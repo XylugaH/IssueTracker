@@ -82,5 +82,15 @@ public class Comment extends AbstractEntity{
 		this.issue = issue;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Comment [ ");
+		sb.append("id=").append(this.id).append(',');
+		sb.append("date=").append(this.createDate.toString()).append(' ');
+		sb.append("user=").append(this.createdBy.getFirstName()).append(' ');
+		sb.append("]");
+		return sb.toString();
+	}
 	
 }

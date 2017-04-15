@@ -45,6 +45,11 @@ public class Priority extends AbstractEntity{
 
 	@Override
 	public String toString() {
-		return "Priority [id=" + id + ", name=" + name + "]";
-	}	
+		StringBuilder sb = new StringBuilder();
+		sb.append("Priority [ ");
+		sb.append("id=").append(this.id).append(',');
+		sb.append("name=").append(this.name).append(' ');
+		sb.append("]");
+		return sb.toString();
+	}
 }
