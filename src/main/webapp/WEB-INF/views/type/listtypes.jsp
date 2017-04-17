@@ -17,11 +17,11 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${listtypes}" var="listtypes">
+		<c:forEach items="${listtypes}" var="type">
 			<tr>
-				<td>${listtypes.name}</td>
+				<td>${type.name}</td>
 				<td align="right"><a
-					href="<c:url value='/edittype/${listtypes.id}' />"
+					href="<c:url value='/edittype?id=${type.id}' />"
 					class="btn btn-success">edit</a></td>
 			</tr>
 		</c:forEach>

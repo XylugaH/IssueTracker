@@ -144,7 +144,12 @@
 
 	<definition name="page403" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/error/page403.jsp" />
-		<put-attribute name="current" value="issue" cascade="true" />
+		<put-attribute name="current" value="" cascade="true" />
 	</definition>
 
+	<definition name="page404" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/error/page404.jsp" />
+		<put-attribute name="current" value="" cascade="true" />
+	</definition>
+	
 </tiles-definitions>

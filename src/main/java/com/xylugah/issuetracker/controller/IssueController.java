@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.*;
 import com.xylugah.issuetracker.entity.util.SearchBody;
+import com.xylugah.issuetracker.exception.IssueNotFoundException;
 import com.xylugah.issuetracker.service.*;
 import com.xylugah.issuetracker.validator.IssueValidatorAddForm;
 import com.xylugah.issuetracker.validator.IssueValidatorEditForm;
@@ -118,16 +119,18 @@ public class IssueController {
 		if (logger.isInfoEnabled()) {
 			logger.info(getAuthenticationUser() + " save " + issue);
 		}
-		
+
 		return "redirect:/listissues";
 	}
 
 	@RequestMapping(value = "/editissue", method = RequestMethod.GET)
 	public String editIssue(@RequestParam int id, ModelMap model) {
 		Issue issue = issueService.getById(id);
+
 		if (issue == null) {
-			return "redirect:/listissues";
+			throw new IssueNotFoundException(id);
 		}
+
 		getModelAttributes(model);
 		model.addAttribute("issue", issue);
 
@@ -138,16 +141,16 @@ public class IssueController {
 	public String updateIssue(@ModelAttribute("issue") Issue issue, BindingResult result, ModelMap model) {
 		Issue newIssue = issueService.getById(issue.getId());
 
-		if (newIssue != null) {
-			issue.setTempStatus(newIssue.getTempStatus());
-			issue.setCreateDate(newIssue.getCreateDate());
-			issue.setCreatedBy(newIssue.getCreatedBy());
-			issue.setModifyDate(newIssue.getModifyDate());
-			issue.setModifiedBy(newIssue.getModifiedBy());
-			issueValidatorEditForm.validate(issue, result);
-		} else {
-			result.rejectValue("id", "Invalid.issue.id");
+		if (newIssue == null) {
+			throw new IssueNotFoundException(issue.getId());
 		}
+
+		issue.setTempStatus(newIssue.getTempStatus());
+		issue.setCreateDate(newIssue.getCreateDate());
+		issue.setCreatedBy(newIssue.getCreatedBy());
+		issue.setModifyDate(newIssue.getModifyDate());
+		issue.setModifiedBy(newIssue.getModifiedBy());
+		issueValidatorEditForm.validate(issue, result);
 
 		if (result.hasErrors()) {
 			getModelAttributes(model);
@@ -172,7 +175,7 @@ public class IssueController {
 		if (logger.isInfoEnabled()) {
 			logger.info(getAuthenticationUser() + " update " + issue);
 		}
-		
+
 		getModelAttributes(model);
 		model.addAttribute("issue", newIssue);
 
@@ -193,6 +196,11 @@ public class IssueController {
 	public String addBuild(@RequestParam(value = "issueid") Integer issueid,
 			@RequestParam(value = "comment") String comment, ModelMap model) {
 		Issue issue = issueService.getById(issueid);
+		
+		if (issue == null) {
+			throw new IssueNotFoundException(issueid);
+		}
+		
 		Comment newComment = new Comment();
 		newComment.setIssue(issue);
 		newComment.setComment(comment);
@@ -203,7 +211,7 @@ public class IssueController {
 		if (logger.isInfoEnabled()) {
 			logger.info(getAuthenticationUser() + " add " + newComment);
 		}
-		
+
 		return "redirect:/editissue?id=" + issue.getId();
 	}
 

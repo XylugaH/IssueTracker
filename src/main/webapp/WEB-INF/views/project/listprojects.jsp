@@ -21,13 +21,13 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${listprojects}" var="listprojects">
+		<c:forEach items="${listprojects}" var="project">
 			<tr>
-				<td>${listprojects.name}</td>
-				<td>${listprojects.manager.firstName}</td>
-				<td>${listprojects.description}</td>
+				<td>${project.name}</td>
+				<td>${project.manager.firstName}</td>
+				<td>${project.description}</td>
 				<td align="right"><a
-					href="<c:url value='/editproject/${listprojects.id}' />"
+					href="<c:url value='/editproject?id=${project.id}' />"
 					class="btn btn-success">edit</a></td>
 			</tr>
 		</c:forEach>

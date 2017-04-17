@@ -13,15 +13,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.Role;
 import com.xylugah.issuetracker.entity.User;
 import com.xylugah.issuetracker.entity.util.Password;
 import com.xylugah.issuetracker.entity.util.UserProfile;
+import com.xylugah.issuetracker.exception.UserNotFoundException;
 import com.xylugah.issuetracker.service.RoleService;
 import com.xylugah.issuetracker.service.UserService;
 import com.xylugah.issuetracker.validator.PasswordValidator;
@@ -33,7 +34,7 @@ import com.xylugah.issuetracker.validator.UserValidator;
 public class UserController {
 
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-	
+
 	@Resource(name = "UserService")
 	private UserService userService;
 
@@ -70,15 +71,20 @@ public class UserController {
 
 	@RequestMapping(value = "/listusers", method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
-		List<User> users = this.userService.getAll();
+		List<User> users = userService.getAll();
 		model.addAttribute("users", users);
 		return "listusers";
 	}
 
-	@RequestMapping(value = "/edituser/{id}", method = RequestMethod.GET)
-	public String editUser(@PathVariable int id, ModelMap model) {
-		User user = this.userService.getById(id);
-		List<Role> roles = this.roleService.getAll();
+	@RequestMapping(value = "/edituser", method = RequestMethod.GET)
+	public String editUser(@RequestParam int id, ModelMap model) {
+		User user = userService.getById(id);
+		
+		if (user == null) {
+			throw new UserNotFoundException(id);
+		}
+		
+		List<Role> roles = roleService.getAll();
 		model.addAttribute("roles", roles);
 		model.addAttribute("user", user);
 		return "edituser";
@@ -86,8 +92,8 @@ public class UserController {
 
 	@RequestMapping(value = "/adduser", method = RequestMethod.GET)
 	public String newUser(ModelMap model) {
-		User user = this.userService.getEmptyUser();
-		List<Role> roles = this.roleService.getAll();
+		User user = userService.getEmptyUser();
+		List<Role> roles = roleService.getAll();
 		model.addAttribute("user", user);
 		model.addAttribute("roles", roles);
 		return "adduser";
@@ -95,20 +101,20 @@ public class UserController {
 
 	@RequestMapping(value = { "/saveuser" }, method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("user") User user, BindingResult result, ModelMap model) {
-		this.userValidator.validate(user, result);
+		userValidator.validate(user, result);
 
-		if (this.userService.getByEmail(user.getEmail()) != null || this.userService.getById(user.getId()) != null) {
+		if (userService.getByEmail(user.getEmail()) != null || userService.getById(user.getId()) != null) {
 			result.rejectValue("email", "Duplicate.user.email");
 		}
 
 		if (result.hasErrors()) {
-			List<Role> roleList = this.roleService.getAll();
+			List<Role> roleList = roleService.getAll();
 			model.addAttribute("roles", roleList);
 			return "adduser";
 		}
 
-		this.userService.add(user);
-		
+		userService.add(user);
+
 		if (logger.isInfoEnabled()) {
 			logger.info(getAuthenticationUser() + " add " + user);
 		}
@@ -119,16 +125,20 @@ public class UserController {
 	@RequestMapping(value = { "/updateuser" }, method = RequestMethod.POST)
 	public String updateUser(@ModelAttribute("user") User user, BindingResult result, ModelMap model) {
 
-		this.userValidator.validate(user, result);
+		userValidator.validate(user, result);
 
 		if (result.hasErrors()) {
-			List<Role> roleList = this.roleService.getAll();
+			List<Role> roleList = roleService.getAll();
 			model.addAttribute("roles", roleList);
 			return "edituser";
 		}
 
-		this.userService.edit(user);
+		if (userService.getById(user.getId()) == null) {
+			throw new UserNotFoundException(user.getId());
+		}
 		
+		userService.edit(user);
+
 		if (logger.isInfoEnabled()) {
 			logger.info(getAuthenticationUser() + " update " + user);
 		}
@@ -145,20 +155,21 @@ public class UserController {
 
 	@RequestMapping(value = "/savepassword", method = RequestMethod.POST)
 	public String savePassword(@ModelAttribute("password") Password password, BindingResult result, ModelMap model) {
-		this.passwordValidator.validate(password, result);
+		passwordValidator.validate(password, result);
 
 		if (result.hasErrors()) {
 			return "changepassword";
 		}
+		
 		User user = getAuthenticationUser();
 		user.setPassword(password.getPassword());
 
-		this.userService.edit(user);
+		userService.edit(user);
 
 		if (logger.isInfoEnabled()) {
 			logger.info(getAuthenticationUser() + " update " + user);
 		}
-		
+
 		return "redirect:/listissues";
 	}
 
@@ -176,22 +187,27 @@ public class UserController {
 	@RequestMapping(value = "/saveprofile", method = RequestMethod.POST)
 	public String saveProfile(@ModelAttribute("userprofile") UserProfile userProfile, BindingResult result,
 			ModelMap model) {
-		this.userProfileValidator.validate(userProfile, result);
+		userProfileValidator.validate(userProfile, result);
 
 		if (result.hasErrors()) {
 			return "editprofile";
 		}
+		
 		User user = getAuthenticationUser();
 		user.setFirstName(userProfile.getFirstName());
 		user.setLastName(userProfile.getLastName());
 		user.setEmail(userProfile.getEmail());
 
-		this.userService.edit(user);
+		if (userService.getById(user.getId()) == null) {
+			throw new UserNotFoundException(user.getId());
+		}
+		
+		userService.edit(user);
 
 		if (logger.isInfoEnabled()) {
 			logger.info(getAuthenticationUser() + " update " + user);
 		}
-		
+
 		return "redirect:/listissues";
 	}
 
@@ -204,15 +220,14 @@ public class UserController {
 
 		return "listusers";
 	}
-	
 
 	private List<User> getUsersByCriteria(String value) {
-		return this.userService.getByPartOfAllFields(value);
+		return userService.getByPartOfAllFields(value);
 	}
 
 	private User getAuthenticationUser() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		return this.userService.getByEmail(auth.getName());
+		return userService.getByEmail(auth.getName());
 	}
 
 }

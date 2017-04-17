@@ -13,13 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.Priority;
 import com.xylugah.issuetracker.entity.User;
+import com.xylugah.issuetracker.exception.PriorityNotFoundException;
 import com.xylugah.issuetracker.service.PriorityService;
 import com.xylugah.issuetracker.service.UserService;
 import com.xylugah.issuetracker.validator.PriorityValidator;
@@ -75,12 +76,14 @@ public class PriorityController {
 		return "redirect:/listpriorities";
 	}
 
-	@RequestMapping(value = "/editpriority/{id}", method = RequestMethod.GET)
-	public String editPriority(@PathVariable int id, ModelMap model) {
+	@RequestMapping(value = "/editpriority", method = RequestMethod.GET)
+	public String editPriority(@RequestParam int id, ModelMap model) {
 		Priority priority = priorityService.getById(id);
+		
 		if (priority == null) {
-			return "redirect:/listpriorities";
+			throw new PriorityNotFoundException(id);
 		}
+		
 		model.addAttribute("priority", priority);
 		return "editpriority";
 	}
@@ -88,14 +91,14 @@ public class PriorityController {
 	@RequestMapping(value = { "/updatepriority" }, method = RequestMethod.POST)
 	public String updatePriority(@ModelAttribute("priority") Priority priority, BindingResult result, ModelMap model) {
 
+		if (priorityService.getById(priority.getId()) == null) {
+			throw new PriorityNotFoundException(priority.getId());
+		}
+		
 		priorityValidator.validate(priority, result);
 
 		if (priorityService.getByName(priority.getName()) != null) {
 			result.rejectValue("name", "Duplicate.priority");
-		}
-
-		if (priorityService.getById(priority.getId()) == null) {
-			result.rejectValue("name", "NotFound.priority");
 		}
 
 		if (result.hasErrors()) {

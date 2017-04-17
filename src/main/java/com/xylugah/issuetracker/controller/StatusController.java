@@ -13,13 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.Status;
 import com.xylugah.issuetracker.entity.User;
+import com.xylugah.issuetracker.exception.StatusNotFoundException;
 import com.xylugah.issuetracker.service.StatusService;
 import com.xylugah.issuetracker.service.UserService;
 import com.xylugah.issuetracker.validator.StatusValidator;
@@ -41,17 +42,17 @@ public class StatusController {
 
 	@RequestMapping(value = "/liststatus", method = RequestMethod.GET)
 	public String listStatus(ModelMap model) {
-		List<Status> listStatus = statusService.getAll();
-		model.addAttribute("listStatus", listStatus);
+		List<Status> statuses = statusService.getAll();
+		model.addAttribute("listStatus", statuses);
 		return "listStatus";
 	}
 
-	@RequestMapping(value = "/editstatus/{id}", method = RequestMethod.GET)
-	public String editStatus(@PathVariable int id, ModelMap model) {
+	@RequestMapping(value = "/editstatus", method = RequestMethod.GET)
+	public String editStatus(@RequestParam int id, ModelMap model) {
 		Status status = statusService.getById(id);
 
 		if (status == null) {
-			return "redirect:/listStatus";
+			throw new StatusNotFoundException(id);
 		}
 		
 		model.addAttribute("status", status);
@@ -61,20 +62,20 @@ public class StatusController {
 	@RequestMapping(value = { "/updatestatus" }, method = RequestMethod.POST)
 	public String saveStatus(@ModelAttribute("status") Status status, BindingResult result, ModelMap model) {
 
+		if (statusService.getById(status.getId()) == null) {
+			throw new StatusNotFoundException(status.getId());
+		}
+		
 		statusValidator.validate(status, result);
 	
 		if (statusService.getByPartName(status.getName()) != null) {
 			result.rejectValue("name", "Duplicate.status");
 		}
-		
-		if (statusService.getById(status.getId()) == null) {
-			result.rejectValue("name", "NotFound.status");
-		}
-		
+				
 		if (result.hasErrors()) {
 			return "editstatus";
 		}
-
+				
 		statusService.edit(status);
 
 		if (logger.isInfoEnabled()) {

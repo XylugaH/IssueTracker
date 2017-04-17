@@ -47,7 +47,7 @@
 				<td>${user.lastName}</td>
 				<td>${user.email}</td>
 				<td align="right"><a
-					href="<c:url value='/edituser/${user.id}' />"
+					href="<c:url value='/edituser?id=${user.id}' />"
 					class="btn btn-success">edit</a></td>
 			</tr>
 		</c:forEach>

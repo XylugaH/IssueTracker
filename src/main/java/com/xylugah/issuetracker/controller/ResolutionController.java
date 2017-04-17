@@ -13,13 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.Resolution;
 import com.xylugah.issuetracker.entity.User;
+import com.xylugah.issuetracker.exception.ResolutionNotFoundException;
 import com.xylugah.issuetracker.service.ResolutionService;
 import com.xylugah.issuetracker.service.UserService;
 import com.xylugah.issuetracker.validator.ResolutionValidator;
@@ -46,12 +47,14 @@ public class ResolutionController {
 		return "listresolutions";
 	}
 
-	@RequestMapping(value = "/editresolution/{id}", method = RequestMethod.GET)
-	public String editResolution(@PathVariable int id, ModelMap model) {
+	@RequestMapping(value = "/editresolution", method = RequestMethod.GET)
+	public String editResolution(@RequestParam int id, ModelMap model) {
 		Resolution resolution = resolutionService.getById(id);
+		
 		if (resolution == null) {
-			return "redirect:/listresolutions";
+			throw new ResolutionNotFoundException(id);
 		}
+		
 		model.addAttribute("resolution", resolution);
 		return "editresolution";
 	}
@@ -91,14 +94,14 @@ public class ResolutionController {
 	public String updateResolution(@ModelAttribute("resolution") Resolution resolution, BindingResult result,
 			ModelMap model) {
 
+		if (resolutionService.getById(resolution.getId()) == null) {
+			throw new ResolutionNotFoundException(resolution.getId());
+		}
+		
 		resolutionValidator.validate(resolution, result);
 
 		if (resolutionService.getByName(resolution.getName()) != null) {
 			result.rejectValue("name", "Duplicate.resolution");
-		}
-
-		if (resolutionService.getById(resolution.getId()) == null) {
-			result.rejectValue("name", "NotFound.resolution");
 		}
 
 		if (result.hasErrors()) {

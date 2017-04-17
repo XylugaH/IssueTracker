@@ -16,11 +16,11 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${listresolutions}" var="listresolutions">
+		<c:forEach items="${listresolutions}" var="resolution">
 			<tr>
-				<td>${listresolutions.name}</td>
+				<td>${resolution.name}</td>
 				<td align="right"><a
-					href="<c:url value='/editresolution/${listresolutions.id}' />"
+					href="<c:url value='/editresolution?id=${resolution.id}' />"
 					class="btn btn-success">edit</a></td>
 			</tr>
 		</c:forEach>

@@ -28,7 +28,7 @@
 		<intercept-url pattern="/addcomment" access="isAuthenticated()" />
 		
 		<intercept-url pattern="/listusers" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/edituser/*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/edituser" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/adduser" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/saveuser" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/updateuser" access="hasRole('ROLE_ADMIN')" />
@@ -86,7 +86,7 @@
 	</beans:bean>
 
 	<beans:bean id="page403"
-		class="com.xylugah.issuetracker.exception.AccessDeniedHandlerImpl">
+		class="com.xylugah.issuetracker.exception.handler.AccessDeniedHandlerImpl">
 		<beans:property name="errorPage" value="page403" />
 	</beans:bean>
 </beans:beans>

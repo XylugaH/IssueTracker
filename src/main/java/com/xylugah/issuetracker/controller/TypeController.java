@@ -13,13 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.Type;
 import com.xylugah.issuetracker.entity.User;
+import com.xylugah.issuetracker.exception.TypeNotFoundException;
 import com.xylugah.issuetracker.service.TypeService;
 import com.xylugah.issuetracker.service.UserService;
 import com.xylugah.issuetracker.validator.TypeValidator;
@@ -41,17 +42,19 @@ public class TypeController {
 	
 	@RequestMapping(value = "/listtypes", method = RequestMethod.GET)
 	public String listTypes(ModelMap model){
-		List<Type> listTypes = typeService.getAll();
-		model.addAttribute("listtypes", listTypes);
+		List<Type> types = typeService.getAll();
+		model.addAttribute("listtypes", types);
 		return "listtypes";
 	}
 	
-	@RequestMapping(value = "/edittype/{id}", method = RequestMethod.GET)
-	public String editType(@PathVariable int id, ModelMap model) {
+	@RequestMapping(value = "/edittype", method = RequestMethod.GET)
+	public String editType(@RequestParam int id, ModelMap model) {
 		Type type = typeService.getById(id);
+		
 		if (type == null){
-			return "redirect:/listtypes";
+			throw new TypeNotFoundException(id);
 		}
+		
 		model.addAttribute("type", type);
 		return "edittype";
 	}
@@ -90,16 +93,16 @@ public class TypeController {
 	public String updateType(@ModelAttribute("type") Type type, BindingResult result,
 			ModelMap model) {
 
+		if (typeService.getById(type.getId())== null){
+			throw new TypeNotFoundException(type.getId());
+		}
+		
 		typeValidator.validate(type, result);
 		
 		if (typeService.getByName(type.getName()) != null) {
 			result.rejectValue("name", "Duplicate.type");
 		}
-		
-		if (typeService.getById(type.getId()) == null) {
-			result.rejectValue("name", "NotFound.type");
-		}
-		
+			
 		if (result.hasErrors()) {
 			return "edittype";
 		}

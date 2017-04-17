@@ -16,10 +16,10 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${listStatus}" var="listStatus">
+		<c:forEach items="${listStatus}" var="status">
 			<tr>
-				<td>${listStatus.name}</td>
-				<td><a href="<c:url value='/editstatus/${listStatus.id}' />"
+				<td>${status.name}</td>
+				<td><a href="<c:url value='/editstatus?id=${status.id}' />"
 					class="btn btn-success custom-width">edit</a></td>
 			</tr>
 		</c:forEach>

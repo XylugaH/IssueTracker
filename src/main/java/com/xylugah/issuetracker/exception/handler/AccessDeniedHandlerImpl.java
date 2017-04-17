@@ -1,4 +1,4 @@
-package com.xylugah.issuetracker.exception;
+package com.xylugah.issuetracker.exception.handler;
 
 import java.io.IOException;
 
