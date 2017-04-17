@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:url var="findBuilds" value="/builds" />
 
 <script type="text/javascript">
@@ -48,7 +49,7 @@ $(document).ready(
 </script>
 
 <form:form method="POST"
-	action="${pageContext.request.contextPath}/updateissue"
+	action="${contextPath}/updateissue"
 	modelAttribute="issue" class="form-horizontal">
 	<div class="generic-container">
 		<div class="panel panel-primary">
@@ -360,6 +361,7 @@ $(document).ready(
 				href="<c:url value='/listissues' />" class="btn btn-danger">Cancel</a>
 		</div>
 	</div>
+	
 	<div class="generic-container">
 		<c:forEach items="${issue.comments}" var="comment">
 			<div class="form-group">
@@ -373,3 +375,20 @@ $(document).ready(
 	</div>
 </form:form>
 
+<form method="POST" action="${contextPath}/addcomment"
+	class="form-horizontal">
+	<div class="form-group">
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" /> <input type="hidden" name="issueid"
+			value="${issue.id}" /> <label class="col-sm-2 control-label"></label>
+		<div class="col-sm-6">
+		<textarea rows="5" name="comment" class="form-control" placeholder="Enter the comment"></textarea>
+			<div class="has-error">
+				<form:errors path="name" class="help-inline" />
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<input type="submit" value="Add comment" class="btn btn-success" />
+		</div>
+	</div>
+</form>

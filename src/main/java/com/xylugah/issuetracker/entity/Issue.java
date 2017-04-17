@@ -225,7 +225,6 @@ public class Issue extends AbstractEntity {
 		sb.append("modifyDate=").append(this.modifyDate.toString()).append(' ');
 		sb.append("modifiedBy=").append(this.modifiedBy.getEmail()).append(' ');
 		sb.append("status=").append(this.status.getName()).append(' ');
-		sb.append("resolution=").append(this.resolution.getName()).append(' ');
 		sb.append("type=").append(this.type.getName()).append(' ');
 		sb.append("priority=").append(this.priority.getName()).append(' ');
 		sb.append("project=").append(this.project.getName()).append(' ');

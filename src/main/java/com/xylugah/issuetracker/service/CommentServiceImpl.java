@@ -1,5 +1,6 @@
 package com.xylugah.issuetracker.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class CommentServiceImpl implements CommentService{
 	@Transactional
 	@Override
 	public void add(Comment comment) {
+		comment.setCreateDate(new Date());
 		dao.add(comment);
 	}
 

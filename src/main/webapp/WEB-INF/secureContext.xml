@@ -25,6 +25,7 @@
 		<intercept-url pattern="/saveissue" access="isAuthenticated()" />
 		<intercept-url pattern="/updateissue" access="isAuthenticated()" />
 		<intercept-url pattern="/builds" access="isAuthenticated()" />
+		<intercept-url pattern="/addcomment" access="isAuthenticated()" />
 		
 		<intercept-url pattern="/listusers" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/edituser/*" access="hasRole('ROLE_ADMIN')" />

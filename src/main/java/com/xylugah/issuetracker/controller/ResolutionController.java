@@ -4,7 +4,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -15,16 +19,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.xylugah.issuetracker.entity.Resolution;
+import com.xylugah.issuetracker.entity.User;
 import com.xylugah.issuetracker.service.ResolutionService;
+import com.xylugah.issuetracker.service.UserService;
 import com.xylugah.issuetracker.validator.ResolutionValidator;
 
 @Controller
 @SessionAttributes("currentUser")
 public class ResolutionController {
 
+	private static final Logger logger = LoggerFactory.getLogger(ResolutionController.class);
+	
 	@Autowired
 	private ResolutionValidator resolutionValidator;
 
+	@Resource(name = "UserService")
+	private UserService userService;
+	
 	@Resource(name = "ResolutionService")
 	private ResolutionService resolutionService;
 
@@ -69,6 +80,10 @@ public class ResolutionController {
 
 		resolutionService.add(resolution);
 
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " add " + resolution);
+		}
+
 		return "redirect:/listresolutions";
 	}
 
@@ -92,7 +107,16 @@ public class ResolutionController {
 
 		resolutionService.edit(resolution);
 
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " update " + resolution);
+		}
+		
 		return "redirect:/listresolutions";
+	}
+	
+	private User getAuthenticationUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return userService.getByEmail(auth.getName());
 	}
 
 }

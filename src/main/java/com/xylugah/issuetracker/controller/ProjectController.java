@@ -4,8 +4,11 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,6 +30,8 @@ import com.xylugah.issuetracker.validator.ProjectValidator;
 @SessionAttributes("currentUser")
 public class ProjectController {
 
+	private static final Logger logger = LoggerFactory.getLogger(ProjectController.class);
+	
 	@Autowired
 	private ProjectValidator projectValidator;
 		
@@ -69,6 +74,10 @@ public class ProjectController {
 		project.getBuilds().get(0).setProject(project);
 		projectService.add(project);
 
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " add " + project);
+		}
+		
 		return "redirect:/listprojects";
 	}
 
@@ -91,8 +100,12 @@ public class ProjectController {
 			return "editproject";
 		}
 		
-		projectService.add(project);
-
+		projectService.edit(project);
+		
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " edit " + project);
+		}
+		
 		return "redirect:/listprojects";
 	}
 
@@ -109,7 +122,15 @@ public class ProjectController {
 		
 		buildService.add(build);
 
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " add " + build);
+		}
+		
 		return "redirect:/editproject/"+build.getProject().getId();
 	}
 	
+	private User getAuthenticationUser() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return userService.getByEmail(auth.getName());
+	}
 }

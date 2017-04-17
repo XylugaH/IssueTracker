@@ -47,6 +47,13 @@ $(document).ready(
 			});
 </script>
 
+<script type="text/javascript">
+function getvalues(){
+	$.getJSON('${findBuilds}'
+}
+</script>
+
+
 <form:form method="POST"
 	action="${pageContext.request.contextPath}/saveissue"
 	modelAttribute="issue" class="form-horizontal">
@@ -180,5 +187,4 @@ $(document).ready(
 				href="<c:url value='/listissues' />" class="btn btn-danger">Cancel</a>
 		</div>
 	</div>
-	
 </form:form>

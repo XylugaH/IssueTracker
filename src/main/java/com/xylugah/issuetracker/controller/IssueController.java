@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +28,8 @@ import com.xylugah.issuetracker.validator.IssueValidatorEditForm;
 @Controller
 @SessionAttributes("currentUser")
 public class IssueController {
+
+	private static final Logger logger = LoggerFactory.getLogger(IssueController.class);
 
 	@Autowired
 	private IssueValidatorAddForm issueValidatorAddForm;
@@ -59,7 +63,10 @@ public class IssueController {
 
 	@Resource(name = "SearchService")
 	private SearchService searchService;
-	
+
+	@Resource(name = "CommentService")
+	private CommentService commentService;
+
 	@RequestMapping(value = "/listissues", method = RequestMethod.GET)
 	public String issueList(ModelMap model) {
 		List<Issue> issueList = issueService.getAll();
@@ -77,6 +84,10 @@ public class IssueController {
 
 		getModelAttributes(model);
 		model.addAttribute("issue", issue);
+
+		if (logger.isInfoEnabled()) {
+			logger.info("View issue " + issue);
+		}
 
 		return "viewissue";
 	}
@@ -101,8 +112,13 @@ public class IssueController {
 
 		issue.setCreatedBy(getAuthenticationUser());
 		issue.setModifiedBy(getAuthenticationUser());
+
 		issueService.add(issue);
 
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " save " + issue);
+		}
+		
 		return "redirect:/listissues";
 	}
 
@@ -153,6 +169,10 @@ public class IssueController {
 
 		issueService.edit(newIssue);
 
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " update " + issue);
+		}
+		
 		getModelAttributes(model);
 		model.addAttribute("issue", newIssue);
 
@@ -160,14 +180,31 @@ public class IssueController {
 	}
 
 	@RequestMapping(value = { "/searchissue" }, method = RequestMethod.POST)
-	public String searchIssue(@ModelAttribute("value") String value,
-			ModelMap model) {
+	public String searchIssue(@ModelAttribute("value") String value, ModelMap model) {
 
 		List<Issue> issueList = getIssueByCriteria(value);
 
 		model.addAttribute("issues", issueList);
 
 		return "listissues";
+	}
+
+	@RequestMapping(value = "/addcomment", method = RequestMethod.POST)
+	public String addBuild(@RequestParam(value = "issueid") Integer issueid,
+			@RequestParam(value = "comment") String comment, ModelMap model) {
+		Issue issue = issueService.getById(issueid);
+		Comment newComment = new Comment();
+		newComment.setIssue(issue);
+		newComment.setComment(comment);
+		newComment.setCreatedBy(getAuthenticationUser());
+
+		commentService.add(newComment);
+
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " add " + newComment);
+		}
+		
+		return "redirect:/editissue?id=" + issue.getId();
 	}
 
 	@RequestMapping(value = "/builds", method = RequestMethod.GET)

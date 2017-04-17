@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +32,8 @@ import com.xylugah.issuetracker.validator.UserValidator;
 @SessionAttributes("currentUser")
 public class UserController {
 
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	@Resource(name = "UserService")
 	private UserService userService;
 
@@ -104,6 +108,10 @@ public class UserController {
 		}
 
 		this.userService.add(user);
+		
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " add " + user);
+		}
 
 		return "redirect:/listusers";
 	}
@@ -120,6 +128,10 @@ public class UserController {
 		}
 
 		this.userService.edit(user);
+		
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " update " + user);
+		}
 
 		return "redirect:/listusers";
 	}
@@ -143,6 +155,10 @@ public class UserController {
 
 		this.userService.edit(user);
 
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " update " + user);
+		}
+		
 		return "redirect:/listissues";
 	}
 
@@ -172,6 +188,10 @@ public class UserController {
 
 		this.userService.edit(user);
 
+		if (logger.isInfoEnabled()) {
+			logger.info(getAuthenticationUser() + " update " + user);
+		}
+		
 		return "redirect:/listissues";
 	}
 
