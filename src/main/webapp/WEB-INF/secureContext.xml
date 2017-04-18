@@ -21,7 +21,7 @@
 		<intercept-url pattern="/savepassword" access="isAuthenticated()" />
 		
 		<intercept-url pattern="/addissue" access="isAuthenticated()" />
-		<intercept-url pattern="/editissue/*" access="isAuthenticated()" />
+		<intercept-url pattern="/editissue" access="isAuthenticated()" />
 		<intercept-url pattern="/saveissue" access="isAuthenticated()" />
 		<intercept-url pattern="/updateissue" access="isAuthenticated()" />
 		<intercept-url pattern="/builds" access="isAuthenticated()" />
@@ -34,17 +34,17 @@
 		<intercept-url pattern="/updateuser" access="hasRole('ROLE_ADMIN')" />
 		
 		<intercept-url pattern="/liststatus" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/editstatus/*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/editstatus" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/updatestatus" access="hasRole('ROLE_ADMIN')" />
 		
 		<intercept-url pattern="/listtypes" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/edittype/*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/edittype" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/addtype" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/savetype" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/updatetype" access="hasRole('ROLE_ADMIN')" />
 		
 		<intercept-url pattern="/listresolutions" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/editresolution/*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/editresolution" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/addresolution" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/saveresolution" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/updateresolution" access="hasRole('ROLE_ADMIN')" />
@@ -52,13 +52,13 @@
 		<intercept-url pattern="/listpriorities" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/addpriority" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/savepriority" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/editpriority/*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/editpriority" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/updatepriority" access="hasRole('ROLE_ADMIN')" />
 		
 		<intercept-url pattern="/listprojects" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/addproject" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/saveproject" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/editproject/*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/editproject" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/updateproject" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/addbuild" access="hasRole('ROLE_ADMIN')" />
 		

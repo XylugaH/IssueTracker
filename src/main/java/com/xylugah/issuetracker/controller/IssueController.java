@@ -70,8 +70,9 @@ public class IssueController {
 
 	@RequestMapping(value = "/listissues", method = RequestMethod.GET)
 	public String issueList(ModelMap model) {
-		List<Issue> issueList = issueService.getAll();
-		model.addAttribute("issues", issueList);
+		SearchBody searchBody = searchService.getSearchBody();
+		List<Issue> issues = this.issueService.search(searchBody);
+		model.addAttribute("issues", issues);
 		return "listissues";
 	}
 
@@ -80,7 +81,7 @@ public class IssueController {
 		Issue issue = issueService.getById(id);
 
 		if (issue == null) {
-			return "redirect:/listissues";
+			throw new IssueNotFoundException(id);
 		}
 
 		getModelAttributes(model);
@@ -184,12 +185,10 @@ public class IssueController {
 
 	@RequestMapping(value = { "/searchissue" }, method = RequestMethod.POST)
 	public String searchIssue(@ModelAttribute("value") String value, ModelMap model) {
+		
+		searchService.SetSeachValue(value);
 
-		List<Issue> issueList = getIssueByCriteria(value);
-
-		model.addAttribute("issues", issueList);
-
-		return "listissues";
+		return "redirect:/listissues";
 	}
 
 	@RequestMapping(value = "/addcomment", method = RequestMethod.POST)
@@ -220,16 +219,6 @@ public class IssueController {
 			@RequestParam(value = "projectId", required = true) Project project) {
 		System.out.println(project);
 		return this.buildService.getByProject(project);
-	}
-
-	private List<Issue> getIssueByCriteria(final String value) {
-
-		if (value.isEmpty()) {
-			return this.issueService.getAll();
-		}
-		SearchBody searchBody = searchService.getSearchBody(value);
-		List<Issue> issues = this.issueService.search(searchBody);
-		return issues;
 	}
 
 	private void getModelAttributes(final ModelMap model) {

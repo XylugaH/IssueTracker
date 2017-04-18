@@ -4,5 +4,7 @@ import com.xylugah.issuetracker.entity.util.SearchBody;
 
 public interface SearchService {
 
-	SearchBody getSearchBody(String value);
+	SearchBody getSearchBody();
+	
+	SearchBody SetSeachValue(String value);
 }
