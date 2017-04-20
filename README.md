@@ -15,6 +15,12 @@
 - JSP
 - MySQL
 
+## Configuration
+- Use IssueTracker/CreateDB.sql to create schema.
+- Use IssueTracker/InitDataDB.sql to insert data.
+- DB configuration: https://github.com/XylugaH/IssueTracker/blob/master/src/main/resources/database.properties
+
+
 ## Running the Application
 - Open the Command Prompt
 - Go to the root project directory
