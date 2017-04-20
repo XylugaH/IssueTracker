@@ -27,8 +27,9 @@
 - Run Tomcat server:  mvn clean tomcat7:run
 - Go to the browser and enter the following URL:  localhost:8080/IssueTracker/
 - Default account:
-...
+
+```
   Login: admin@admin.com
   Password: admin
-...
+```
 
