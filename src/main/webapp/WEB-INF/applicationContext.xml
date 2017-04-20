@@ -38,9 +38,11 @@
         <property name="basenames">
             <list>
                 <value>classpath:validation</value>
+                <value>classpath:exception</value>
             </list>
         </property>
     </bean>
+    
     
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
