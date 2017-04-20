@@ -190,6 +190,14 @@ public class IssueController {
 
 		return "redirect:/listissues";
 	}
+	
+	@RequestMapping(value = "/sortissue", method = RequestMethod.GET)
+	public String sortIssue(@RequestParam String field, ModelMap model) {
+		
+		searchService.SetSortValue(field);
+		
+		return "redirect:/listissues";
+	}
 
 	@RequestMapping(value = "/addcomment", method = RequestMethod.POST)
 	public String addBuild(@RequestParam(value = "issueid") Integer issueid,

@@ -43,12 +43,12 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Id</th>
-			<th>Priority</th>
-			<th>Assignee</th>
-			<th>Type</th>
-			<th>Status</th>
-			<th>Summary</th>
+			<th><a href="<c:url value='/sortissue?field=id'/>">Id</a></th>
+			<th><a href="<c:url value='/sortissue?field=priority' />">Priority</a></th>
+			<th><a href="<c:url value='/sortissue?field=assignee' />">Assignee</a></th>
+			<th><a href="<c:url value='/sortissue?field=type' />">Type</a></th>
+			<th><a href="<c:url value='/sortissue?field=status' />">Status</a></th>
+			<th><a href="<c:url value='/sortissue?field=summary' />">Summary</a></th>
 		</tr>
 	</thead>
 	<tbody>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -32,37 +33,54 @@ public class IssueDAOImpl extends AbstractDAO<Integer, Issue> implements IssueDA
 	public List<Issue> search(SearchBody searchBody) {
 		Criteria criteria = getSession().createCriteria(Issue.class);
 		Disjunction disjunction = Restrictions.disjunction();
-		
+
 		String value = searchBody.getValue();
-		if (!value.isEmpty()){
+		if (!value.isEmpty()) {
 			disjunction.add(Restrictions.ilike("summary", value, MatchMode.ANYWHERE));
 			disjunction.add(Restrictions.ilike("description", value, MatchMode.ANYWHERE));
 		}
-		
+
 		List<User> users = searchBody.getUsers();
-		if(!users.isEmpty()){
+		if (!users.isEmpty()) {
 			disjunction.add(Restrictions.in("assignee", users.toArray()));
 		}
 
 		List<Project> projects = searchBody.getProjects();
-		if(!projects.isEmpty()){
+		if (!projects.isEmpty()) {
 			disjunction.add(Restrictions.in("project", projects.toArray()));
 		}
-		
+
 		List<Priority> priorities = searchBody.getPriorities();
-		if(!priorities.isEmpty()){
+		if (!priorities.isEmpty()) {
 			disjunction.add(Restrictions.in("priority", priorities.toArray()));
 		}
-		
+
 		List<Status> statuses = searchBody.getStatuses();
-		if(!statuses.isEmpty()){
+		if (!statuses.isEmpty()) {
 			disjunction.add(Restrictions.in("status", statuses.toArray()));
 		}
-		
+
 		criteria.add(disjunction);
+
+		if (searchBody.getField() == SearchBody.Field.ID || searchBody.getField() == SearchBody.Field.SUMMARY
+				|| searchBody.getField() == SearchBody.Field.ASSIGNEE) {
+			if (searchBody.getASC()) {
+				criteria.addOrder(Order.asc(searchBody.getField().getName()));
+			} else {
+				criteria.addOrder(Order.desc(searchBody.getField().getName()));
+			}
+		} else {
+			criteria.createAlias(searchBody.getField().getName(), "alias");
+			if (searchBody.getASC()) {
+				criteria.addOrder(Order.asc("alias.name"));
+			} else {
+				criteria.addOrder(Order.desc("alias.name"));
+			}
+		}
+
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		List<Issue> issues = criteria.list();
-		
+
 		return issues;
 	}
 
