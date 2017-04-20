@@ -18,8 +18,6 @@
 ## Running the Application
 - Open the Command Prompt
 - Go to the root project directory
-- Run Tomcat server
-  mvn clean tomcat7:run
-- Go to the browser and enter the following URL:
-  localhost:8080/IssueTracker/
+- Run Tomcat server:  mvn clean tomcat7:run
+- Go to the browser and enter the following URL:  localhost:8080/IssueTracker/
 
