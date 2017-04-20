@@ -7,4 +7,6 @@ public interface SearchService {
 	SearchBody getSearchBody();
 	
 	SearchBody SetSeachValue(String value);
+	
+	SearchBody SetSortValue(String field);
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.xylugah.issuetracker.entity.util.SearchBody;
+import com.xylugah.issuetracker.entity.util.SearchBody.Field;
 
 @Service("SearchService")
 public class SearchServiceImpl implements SearchService {
@@ -48,4 +49,34 @@ public class SearchServiceImpl implements SearchService {
 		return this.searchBody;
 	}
 
+	@Override
+	public SearchBody SetSortValue(String field) {
+		if(field.equals(searchBody.getField().getName())){
+			searchBody.setASC(!searchBody.getASC());
+		}
+		switch (field) {
+		case "id":
+			searchBody.setField(Field.ID);
+			break;
+		case "priority":
+			searchBody.setField(Field.PRIORITY);
+			break;
+		case "assignee":
+			searchBody.setField(Field.ASSIGNEE);
+			break;
+		case "type":
+			searchBody.setField(Field.TYPE);
+			break;
+		case "status":
+			searchBody.setField(Field.STATUS);
+			break;
+		case "summary":
+			searchBody.setField(Field.SUMMARY);
+			break;
+		default:
+			searchBody.setField(Field.ID);
+			break;
+		}
+		return this.searchBody;
+	}
 }

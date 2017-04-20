@@ -16,9 +16,13 @@ import com.xylugah.issuetracker.entity.User;
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class SearchBody {
 
+	private static final Field DEFAULT_SORT_FIELD=Field.ID;
+	
 	private String value;
 
 	private boolean ASC;
+
+	private Field field;
 
 	private List<User> users;
 
@@ -31,6 +35,7 @@ public class SearchBody {
 	public SearchBody() {
 		this.value = "";
 		this.ASC = true;
+		this.field = DEFAULT_SORT_FIELD;
 		this.users = new ArrayList<User>();
 		this.projects = new ArrayList<Project>();
 		this.statuses = new ArrayList<Status>();
@@ -45,12 +50,20 @@ public class SearchBody {
 		this.value = value;
 	}
 
-	public boolean isASC() {
+	public boolean getASC() {
 		return ASC;
 	}
 
 	public void setASC(boolean aSC) {
 		ASC = aSC;
+	}
+
+	public Field getField() {
+		return field;
+	}
+
+	public void setField(Field field) {
+		this.field = field;
 	}
 
 	public List<User> getUsers() {
@@ -84,5 +97,19 @@ public class SearchBody {
 	public void setPriorities(List<Priority> priorities) {
 		this.priorities = priorities;
 	}
+	
+	public enum Field{
+		
+		ID("id"), PRIORITY("priority"), ASSIGNEE("assignee"), TYPE("type"), STATUS ("status"), SUMMARY("summary");
+		
+		private String name;
+		
+		private Field(String name){
+			this.name = name;
+		}
 
+		public String getName() {
+			return name;
+		}
+	}
 }
