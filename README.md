@@ -16,8 +16,8 @@
 - MySQL
 
 ## Configuration
-- Use IssueTracker/CreateDB.sql to create schema.
-- Use IssueTracker/InitDataDB.sql to insert data.
+- Create schema: https://github.com/XylugaH/IssueTracker/blob/master/CreateDB.sql
+- Insert data: https://github.com/XylugaH/IssueTracker/blob/master/InitDataDB.sql
 - DB configuration: https://github.com/XylugaH/IssueTracker/blob/master/src/main/resources/database.properties
 
 
@@ -26,4 +26,7 @@
 - Go to the root project directory
 - Run Tomcat server:  mvn clean tomcat7:run
 - Go to the browser and enter the following URL:  localhost:8080/IssueTracker/
+- Default account:
+- Login: admin@admin.com
+- Password: admin
 
