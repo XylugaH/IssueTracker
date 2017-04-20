@@ -32,7 +32,7 @@ public class IssueController {
 
 	private static final Logger logger = LoggerFactory.getLogger(IssueController.class);
 
-	private static final double MAX_COUNT_RECORD = 10.0;
+	private static final int MAX_COUNT_RECORD = 5;
 	@Autowired
 	private IssueValidatorAddForm issueValidatorAddForm;
 
@@ -74,7 +74,7 @@ public class IssueController {
 		int currentPage;
 		SearchBody searchBody = searchService.getSearchBody();
 		List<Issue> issues = this.issueService.search(searchBody);
-		int pageCount = (int) (Math.ceil(issues.size() / MAX_COUNT_RECORD));
+		int pageCount = (int) (Math.ceil((double) issues.size() / MAX_COUNT_RECORD));
 
 		if (page == null) {
 			currentPage = 1;
@@ -85,14 +85,14 @@ public class IssueController {
 				currentPage = page;
 			}
 		}
-		int firstIndex=(int) (currentPage*MAX_COUNT_RECORD-MAX_COUNT_RECORD);
-		int lastIndex=(int) (currentPage*MAX_COUNT_RECORD);
-		if(lastIndex>issues.size()){
-			issues = issues.subList(firstIndex,issues.size());	
-		}else{
-			issues = issues.subList(firstIndex,lastIndex);
+		int firstIndex = (currentPage * MAX_COUNT_RECORD - MAX_COUNT_RECORD);
+		int lastIndex = (currentPage * MAX_COUNT_RECORD);
+		if (lastIndex > issues.size()) {
+			issues = issues.subList(firstIndex, issues.size());
+		} else {
+			issues = issues.subList(firstIndex, lastIndex);
 		}
-		
+
 		model.addAttribute("currentpage", currentPage);
 		model.addAttribute("pagecount", pageCount);
 		model.addAttribute("issues", issues);

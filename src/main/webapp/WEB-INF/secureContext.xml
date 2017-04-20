@@ -10,6 +10,7 @@
 		<access-denied-handler ref="page403" />
 
 		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/error" access="permitAll" />
 		<intercept-url pattern="/listissues" access="permitAll" />
 		<intercept-url pattern="/searchissue" access="permitAll" />
 		<intercept-url pattern="/sortissue" access="permitAll" />

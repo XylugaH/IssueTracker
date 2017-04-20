@@ -11,5 +11,5 @@
 </div>
 
 <div class="text-align-center">
-	<em class="text-gray">You do not have permission to access this page!!!</em>
+	<em class="text-gray">${message}</em>
 </div>
