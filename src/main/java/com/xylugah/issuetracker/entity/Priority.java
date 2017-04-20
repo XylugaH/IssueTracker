@@ -19,6 +19,9 @@ public class Priority extends AbstractEntity{
 	@Column(name="name", nullable=false)
 	private String name;
 	
+	@Column(name="color", nullable=false)
+	private String color;
+	
 	public Priority() {
 		super();
 	}
@@ -41,6 +44,14 @@ public class Priority extends AbstractEntity{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	@Override

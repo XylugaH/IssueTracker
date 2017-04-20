@@ -40,6 +40,25 @@
 	</div>
 </sec:authorize>
 
+<div style="text-align: center">
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item ${currentpage == 1 ? 'disabled' : ''}">
+      <a class="page-link" href="${contextPath}/listissues?page=${currentpage-1}">Previous</a>
+    </li>
+    <c:forEach begin="1" end="${pagecount}" var="page">
+    	<li class="page-item ${currentpage == page ? 'active' : ''}">
+      		<a class="page-link" href="${contextPath}/listissues?page=${page}">${page}</a>
+    	</li>
+    </c:forEach>
+    
+    <li class="page-item ${currentpage == pagecount ? 'disabled' : ''}">
+      <a class="page-link" href="${contextPath}/listissues?page=${currentpage+1}">Next</a>
+    </li>
+  </ul>
+</nav>
+</div>
+
 <table class="table table-hover">
 	<thead>
 		<tr>
@@ -62,7 +81,7 @@
 					<td><a href="<c:url value='/viewissue?id=${issue.id}' />"><span
 							class="badge">${issue.id}</span></a></td>
 				</sec:authorize>
-				<td>${issue.priority.name}</td>
+				<td style="color: ${issue.priority.color}">${issue.priority.name}</td>
 				<td>${issue.assignee.firstName}</td>
 				<td>${issue.type.name}</td>
 				<td>${issue.status.name}</td>
@@ -77,3 +96,22 @@
 		<em class="text-gray">No issues found</em>
 	</div>
 </c:if>
+
+<div style="text-align: center">
+<nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item ${currentpage == 1 ? 'disabled' : ''}">
+      <a class="page-link" href="${contextPath}/listissues?page=${currentpage-1}">Previous</a>
+    </li>
+    <c:forEach begin="1" end="${pagecount}" var="page">
+    	<li class="page-item ${currentpage == page ? 'active' : ''}">
+      		<a class="page-link" href="${contextPath}/listissues?page=${page}">${page}</a>
+    	</li>
+    </c:forEach>
+    
+    <li class="page-item ${currentpage == pagecount ? 'disabled' : ''}">
+      <a class="page-link" href="${contextPath}/listissues?page=${currentpage+1}">Next</a>
+    </li>
+  </ul>
+</nav>
+</div>

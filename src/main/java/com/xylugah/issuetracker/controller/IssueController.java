@@ -32,6 +32,7 @@ public class IssueController {
 
 	private static final Logger logger = LoggerFactory.getLogger(IssueController.class);
 
+	private static final double MAX_COUNT_RECORD = 10.0;
 	@Autowired
 	private IssueValidatorAddForm issueValidatorAddForm;
 
@@ -69,9 +70,31 @@ public class IssueController {
 	private CommentService commentService;
 
 	@RequestMapping(value = "/listissues", method = RequestMethod.GET)
-	public String issueList(ModelMap model) {
+	public String issueList(@RequestParam(required = false) Integer page, ModelMap model) {
+		int currentPage;
 		SearchBody searchBody = searchService.getSearchBody();
 		List<Issue> issues = this.issueService.search(searchBody);
+		int pageCount = (int) (Math.ceil(issues.size() / MAX_COUNT_RECORD));
+
+		if (page == null) {
+			currentPage = 1;
+		} else {
+			if (page > pageCount || page < 1) {
+				currentPage = 1;
+			} else {
+				currentPage = page;
+			}
+		}
+		int firstIndex=(int) (currentPage*MAX_COUNT_RECORD-MAX_COUNT_RECORD);
+		int lastIndex=(int) (currentPage*MAX_COUNT_RECORD);
+		if(lastIndex>issues.size()){
+			issues = issues.subList(firstIndex,issues.size());	
+		}else{
+			issues = issues.subList(firstIndex,lastIndex);
+		}
+		
+		model.addAttribute("currentpage", currentPage);
+		model.addAttribute("pagecount", pageCount);
 		model.addAttribute("issues", issues);
 		return "listissues";
 	}
@@ -185,17 +208,17 @@ public class IssueController {
 
 	@RequestMapping(value = { "/searchissue" }, method = RequestMethod.POST)
 	public String searchIssue(@ModelAttribute("value") String value, ModelMap model) {
-		
+
 		searchService.SetSeachValue(value);
 
 		return "redirect:/listissues";
 	}
-	
+
 	@RequestMapping(value = "/sortissue", method = RequestMethod.GET)
 	public String sortIssue(@RequestParam String field, ModelMap model) {
-		
+
 		searchService.SetSortValue(field);
-		
+
 		return "redirect:/listissues";
 	}
 
@@ -203,11 +226,11 @@ public class IssueController {
 	public String addBuild(@RequestParam(value = "issueid") Integer issueid,
 			@RequestParam(value = "comment") String comment, ModelMap model) {
 		Issue issue = issueService.getById(issueid);
-		
+
 		if (issue == null) {
 			throw new IssueNotFoundException(issueid);
 		}
-		
+
 		Comment newComment = new Comment();
 		newComment.setIssue(issue);
 		newComment.setComment(comment);

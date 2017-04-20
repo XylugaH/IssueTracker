@@ -15,10 +15,10 @@ INSERT INTO  resolution VALUES (2,"Invalid");
 INSERT INTO  resolution VALUES (3,"Wontfix");
 INSERT INTO  resolution VALUES (4,"Worksforme");
 
-INSERT INTO  priority VALUES (1,"Critical");
-INSERT INTO  priority VALUES (2,"Major");
-INSERT INTO  priority VALUES (3,"Important");
-INSERT INTO  priority VALUES (4,"Minor");
+INSERT INTO  priority VALUES (1,"Critical","Red");
+INSERT INTO  priority VALUES (2,"Major","Orange");
+INSERT INTO  priority VALUES (3,"Important","Blue");
+INSERT INTO  priority VALUES (4,"Minor","Green");
 
 INSERT INTO  type VALUES (1,"Cosmetic");
 INSERT INTO  type VALUES (2,"Bug");

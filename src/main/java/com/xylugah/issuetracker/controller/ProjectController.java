@@ -137,7 +137,7 @@ public class ProjectController {
 			logger.info(getAuthenticationUser() + " add " + build);
 		}
 
-		return "redirect:/editproject/" + build.getProject().getId();
+		return "redirect:/editproject?id=" + build.getProject().getId();
 	}
 
 	private User getAuthenticationUser() {
