@@ -248,7 +248,6 @@ public class IssueController {
 	@RequestMapping(value = "/builds", method = RequestMethod.GET)
 	public @ResponseBody List<Build> citiesForState(
 			@RequestParam(value = "projectId", required = true) Project project) {
-		System.out.println(project);
 		return this.buildService.getByProject(project);
 	}
 
