@@ -37,8 +37,13 @@ $(document).ready(
 					var html = '<option value="" selected="selected" disabled>Select the build</option>';
 					var len = data.length;
 					for ( var i = 0; i < len; i++) {
+						if((${issue.build.id})==data[i].id){
+							html += '<option selected="selected" value="' + data[i].id + '">'
+								+ data[i].name + '</option>';
+						}else{
 							html += '<option value="' + data[i].id + '">'
-							+ data[i].name + '</option>';
+								+ data[i].name + '</option>';
+						}
 					}
 					html += '</option>';
 
@@ -46,13 +51,6 @@ $(document).ready(
 				});
 			});
 </script>
-
-<script type="text/javascript">
-function getvalues(){
-	$.getJSON('${findBuilds}'
-}
-</script>
-
 
 <form:form method="POST"
 	action="${pageContext.request.contextPath}/saveissue"
