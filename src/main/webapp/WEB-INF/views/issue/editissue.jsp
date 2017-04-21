@@ -6,56 +6,11 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:url var="findBuilds" value="/builds" />
 
-<script type="text/javascript">
-$(document).ready(function() { 
-	$('#project').change(
-			function() {
-				$.getJSON('${findBuilds}', {
-					projectId : $(this).val(),
-					ajax : 'true'
-				}, function(data) {
-					var html = '<option value="" selected="selected" disabled>Select the build</option>';
-					var len = data.length;
-					for ( var i = 0; i < len; i++) {
-						html += '<option value="' + data[i].id + '">'
-						+ data[i].name + '</option>';
-					}
-					html += '</option>';
-
-					$('#build').html(html);
-				});
-			});
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(
-			function() {
-				$.getJSON('${findBuilds}', {
-					projectId : $('#project').val(),
-					ajax : 'true'
-				}, function(data) {
-					var html = '<option value="" selected="selected" disabled>Select the build</option>';
-					var len = data.length;
-					for ( var i = 0; i < len; i++) {
-						if((${issue.build.id})==data[i].id){
-							html += '<option selected="selected" value="' + data[i].id + '">'
-								+ data[i].name + '</option>';
-						}else{
-							html += '<option value="' + data[i].id + '">'
-								+ data[i].name + '</option>';
-						}
-					}
-					html += '</option>';
-
-					$('#build').html(html);
-				});
-			});
-</script>
+<script type="text/javascript" src="${contextPath}/resources/js/application.js"></script>
 
 <form:form method="POST"
 	action="${contextPath}/updateissue"
-	modelAttribute="issue" class="form-horizontal">
+	modelAttribute="issue" class="form-horizontal" >
 	<div class="generic-container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
@@ -293,7 +248,7 @@ $(document).ready(
 							value="${issue.project.name}" />
 					</c:when>
 					<c:otherwise>
-						<form:select path="project" class="form-control" id="project">
+						<form:select path="project" class="form-control" id="project" onchange="updateBuilds()">
 							<c:if test="${issue.project == null}">
 								<option selected="selected" disabled>Select the project</option>
 							</c:if>
@@ -323,7 +278,7 @@ $(document).ready(
 					<c:otherwise>
 						<form:select path="build" class="form-control" id="build">
 							<option selected="selected"	
-								value="${build.id}">${build.name}</option>
+								value="${issue.build.id}">${issue.build.name}</option>
 						</form:select>
 					</c:otherwise>
 				</c:choose>

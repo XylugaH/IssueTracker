@@ -3,54 +3,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:url var="findBuilds" value="/builds" />
 
-<script type="text/javascript">
-$(document).ready(function() { 
-	$('#project').change(
-			function() {
-				$.getJSON('${findBuilds}', {
-					projectId : $(this).val(),
-					ajax : 'true'
-				}, function(data) {
-					var html = '<option value="" selected="selected" disabled>Select the build</option>';
-					var len = data.length;
-					for ( var i = 0; i < len; i++) {
-						html += '<option value="' + data[i].id + '">'
-								+ data[i].name + '</option>';
-					}
-					html += '</option>';
-
-					$('#build').html(html);
-				});
-			});
-});
-</script>
-
-<script type="text/javascript">
-$(document).ready(
-			function() {
-				$.getJSON('${findBuilds}', {
-					projectId : $('#project').val(),
-					ajax : 'true'
-				}, function(data) {
-					var html = '<option value="" selected="selected" disabled>Select the build</option>';
-					var len = data.length;
-					for ( var i = 0; i < len; i++) {
-						if((${issue.build.id})==data[i].id){
-							html += '<option selected="selected" value="' + data[i].id + '">'
-								+ data[i].name + '</option>';
-						}else{
-							html += '<option value="' + data[i].id + '">'
-								+ data[i].name + '</option>';
-						}
-					}
-					html += '</option>';
-
-					$('#build').html(html);
-				});
-			});
-</script>
+<script type="text/javascript" src="${contextPath}/resources/js/application.js"></script>
 
 <form:form method="POST"
 	action="${pageContext.request.contextPath}/saveissue"
@@ -140,7 +96,7 @@ $(document).ready(
 		<div class="form-group">
 			<label class="col-sm-2 control-label">Project</label>
 			<div class="col-sm-6">
-				<form:select path="project" class="form-control" id="project">
+				<form:select path="project" class="form-control" id="project" onchange="updateBuilds()">
 					<option selected="selected" disabled>Select the project</option>
 					<c:forEach items="${projects}" var="project">
 						<option ${project.id == issue.project.id ? 'selected' : ''}
@@ -157,6 +113,8 @@ $(document).ready(
 			<label class="col-sm-2 control-label">Build</label>
 			<div class="col-sm-6">
 				<form:select path="build" class="form-control" id="build">
+					<option selected="selected"	
+						value="${issue.build.id}">${issue.build.name}</option>
 				</form:select>
 				<div class="has-error">
 					<form:errors path="build" class="help-inline" />
