@@ -49,8 +49,15 @@
 		<property name="defaultLocale" value="en" />
 	</bean>
 
-	<import resource="hibernateContext.xml" />
 	<import resource="secureContext.xml" />
+	
+	<!-- MySQL DB -->
+	<!-- 
+		<import resource="hibernateContext.xml" />
+	-->
+	
+	<!-- H2 DB -->
+	<import resource="hibernateContextH2.xml" />
 
 	<context:annotation-config />
 </beans>

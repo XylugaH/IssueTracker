@@ -31,8 +31,8 @@
 
 	<jdbc:initialize-database data-source="dataSource"
 		ignore-failures="DROPS">
-		<jdbc:script location="classpath:CreateDB.sql" />
-		<jdbc:script location="classpath:InitDataDB.sql" />
+		<jdbc:script location="classpath:H2/CreateDB.sql" />
+		<jdbc:script location="classpath:H2/InitDataDB.sql" />
 	</jdbc:initialize-database>
 
 	<bean id="transactionManager"
